@@ -1157,12 +1157,14 @@ function renderAIAssistant(){
 function setAITab(tab){ aiTab=tab; renderAIAssistant(); }
 
 function aiGenerateTabHTML(){
+  const modules=getModules();
   return `<div class="card">
-    <h3 style="margin-top:0">Generate questions with AI</h3>
+    <h3 style="margin-top:0">Generate questions with Gemini 3.6 Flash</h3>
+    <p class="mini" style="margin:6px 0 14px">Choose from the modules, subjects and lectures that already exist in your website question bank. Then choose whether Gemini should use its medical knowledge or your website questions as the source.</p>
     <div class="grid three">
-      <div class="field"><label>Module</label><input id="genModule" placeholder="e.g. Cardiology"></div>
-      <div class="field"><label>Subject</label><input id="genSubject" placeholder="e.g. Arrhythmias"></div>
-      <div class="field"><label>Lecture</label><input id="genLecture" placeholder="e.g. Lecture 3: AV Block"></div>
+      <div class="field"><label>Module</label><select id="genModule" onchange="updateAIGeneratorSubjects()"><option value="">Select module</option>${modules.map(m=>`<option value="${attrJs(m)}">${esc(m)}</option>`).join('')}</select></div>
+      <div class="field"><label>Subject</label><select id="genSubject" onchange="updateAIGeneratorLectures()" disabled><option value="">Select subject</option></select></div>
+      <div class="field"><label>Lecture</label><select id="genLecture" disabled><option value="">Select lecture</option></select></div>
     </div>
     <div class="grid three" style="margin-top:10px">
       <div class="field"><label>Difficulty</label><select id="genDifficulty">
@@ -1171,9 +1173,13 @@ function aiGenerateTabHTML(){
         <option value="Medium">Medium</option>
         <option value="Hard">Hard</option>
       </select></div>
-      <div class="field"><label>Number of questions</label><input id="genCount" type="number" min="1" max="20" value="5"></div>
+      <div class="field"><label>Number of questions</label><input id="genCount" type="number" min="1" max="30" value="5"></div>
+      <div class="field"><label>Question source</label><select id="genSourceType" onchange="updateAIGeneratorSourceUI()">
+        <option value="knowledge">Gemini medical knowledge</option>
+        <option value="website">Questions in this website</option>
+      </select></div>
     </div>
-    <div class="field" style="margin-top:10px"><label>Source of information (optional)</label><textarea id="genSource" placeholder="Paste lecture notes or a textbook excerpt to base the questions on. Leave blank to let Gemini use its own medical knowledge for this module/subject/lecture."></textarea></div>
+    <div id="genSourceInfo" class="notice" style="margin-top:12px">Gemini will create original questions using its medical knowledge for the selected module, subject and lecture.</div>
     <div class="actions" style="margin-top:12px">
       <button class="btn primary" id="genBtn" onclick="generateAIQuestions()">Generate questions</button>
       <button class="btn" onclick="go('aiquestions')">View AI Questions</button>
@@ -1181,6 +1187,54 @@ function aiGenerateTabHTML(){
   </div>
   <div id="genResult"></div>`;
 }
+
+function updateAIGeneratorSubjects(){
+  const m=document.getElementById('genModule')?.value||'';
+  const subj=document.getElementById('genSubject');
+  const lect=document.getElementById('genLecture');
+  if(!subj||!lect)return;
+  const subjects=getSubjects(m);
+  subj.disabled=!m;
+  subj.innerHTML='<option value="">Select subject</option>'+subjects.map(s=>`<option value="${attrJs(s)}">${esc(s)}</option>`).join('');
+  lect.disabled=true;
+  lect.innerHTML='<option value="">Select lecture</option>';
+  updateAIGeneratorSourceUI();
+}
+
+function updateAIGeneratorLectures(){
+  const m=document.getElementById('genModule')?.value||'';
+  const s=document.getElementById('genSubject')?.value||'';
+  const lect=document.getElementById('genLecture');
+  if(!lect)return;
+  const lectures=getLectures(m,s);
+  lect.disabled=!m||!s;
+  lect.innerHTML='<option value="">Select lecture</option>'+lectures.map(l=>`<option value="${attrJs(l)}">${esc(l)}</option>`).join('');
+  updateAIGeneratorSourceUI();
+}
+
+function getAIGeneratorPool(){
+  const module=document.getElementById('genModule')?.value||'';
+  const subject=document.getElementById('genSubject')?.value||'';
+  const lecture=document.getElementById('genLecture')?.value||'';
+  return bank.filter(q=>q.module===module&&q.subject===subject&&q.lecture===lecture);
+}
+
+function updateAIGeneratorSourceUI(){
+  const type=document.getElementById('genSourceType')?.value||'knowledge';
+  const box=document.getElementById('genSourceInfo');
+  if(!box)return;
+  const pool=getAIGeneratorPool();
+  if(type==='website') {
+    box.className='notice '+(pool.length?'ok':'error');
+    box.textContent=pool.length
+      ? `Gemini will use ${pool.length} existing website question${pool.length===1?'':'s'} from this exact lecture as source material and create new, non-copying questions.`
+      : 'No website questions exist for this exact module, subject and lecture. Choose Gemini medical knowledge or select another lecture.';
+  } else {
+    box.className='notice';
+    box.textContent='Gemini will create original questions using its medical knowledge for the selected module, subject and lecture.';
+  }
+}
+
 function aiChatTabHTML(){
   return `<div class="card">
     <div class="category-head"><strong>Ask Gemini anything</strong>${aiChat.length?'<button class="btn" onclick="clearAIChat()">Clear chat</button>':''}</div>
@@ -1221,42 +1275,67 @@ async function generateAIQuestions(){
   const subject=document.getElementById('genSubject').value.trim();
   const lecture=document.getElementById('genLecture').value.trim();
   const difficulty=document.getElementById('genDifficulty').value;
-  const count=Math.max(1,Math.min(20,Number(document.getElementById('genCount').value)||5));
-  const sourceInfo=document.getElementById('genSource').value.trim();
+  const count=Math.max(1,Math.min(30,Number(document.getElementById('genCount').value)||5));
+  const sourceType=document.getElementById('genSourceType').value;
+  const sourcePool=getAIGeneratorPool();
 
-  if(!module||!subject||!lecture){toast('Module, subject and lecture are required.','error');return;}
+  if(!module||!subject||!lecture){toast('Select a module, subject and lecture from the website lists.','error');return;}
+  if(sourceType==='website'&&!sourcePool.length){toast('No website questions exist for this exact lecture. Choose another lecture or use Gemini medical knowledge.','error');return;}
 
   const btn=document.getElementById('genBtn');
   const resultBox=document.getElementById('genResult');
   aiBusy=true;
   if(btn){btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Generating…';}
-  if(resultBox) resultBox.innerHTML='<div class="card" style="margin-top:14px"><div class="mini">Contacting Gemini…</div></div>';
+  if(resultBox) resultBox.innerHTML='<div class="card" style="margin-top:14px"><div class="mini">Contacting Gemini 3.6 Flash…</div></div>';
 
-  const prompt=`You are a medical exam question writer. Generate exactly ${count} multiple-choice questions for a medical students' exam bank.
+  let sourceBlock='';
+  let reference='Gemini 3.6 Flash medical knowledge';
+  if(sourceType==='website'){
+    // Keep the source compact enough for high-volume generation while preserving
+    // the actual wording, options, correct answer and explanation from the site.
+    const sourceQuestions=sourcePool.slice(0,80).map((q,i)=>({
+      number:i+1, question:q.question, options:q.options, correctAnswer:q.options[q.correctIndex], explanation:q.explanation
+    }));
+    sourceBlock=`Use the following existing questions from this website as the source.
+Create NEW questions that test the same lecture content. Do not copy, paraphrase, or reproduce any source question.
+Website source questions:
+${JSON.stringify(sourceQuestions)}`;
+    reference=`Website question bank · ${sourcePool.length} questions in ${module} / ${subject} / ${lecture}`;
+  } else {
+    sourceBlock='Use your medical knowledge to create accurate original questions for the selected topic. Do not invent facts or cite nonexistent sources.';
+  }
+
+  const prompt=`You are the medical question generator for Med64, a medical examination platform.
+Generate exactly ${count} original multiple-choice questions for medical students.
 Module: ${module}
 Subject: ${subject}
 Lecture: ${lecture}
 Difficulty: ${difficulty}
-${sourceInfo?`Base the questions strictly on this source material:\n"""${sourceInfo}"""`:'No source material was provided: use accurate, up-to-date medical knowledge for this topic.'}
+Question source: ${sourceType==='website'?'questions already in this website':'Gemini medical knowledge'}
+
+${sourceBlock}
 
 Rules:
 - Each question must have exactly 4 answer options and exactly one correct answer.
-- Return ONLY a raw JSON array, with no markdown code fences, no commentary, and no extra text before or after it.
-- Each array item must match this exact shape:
+- The questions must be clinically and medically accurate.
+- Avoid duplicate questions and avoid copying source wording.
+- Keep the questions focused on the selected lecture.
+- Return ONLY a JSON array, with no markdown fences or commentary.
+- Each item must have this exact shape:
 {"question":"...","options":["...","...","...","..."],"correctIndex":0,"explanation":"...","difficulty":"${difficulty}"}
-- "correctIndex" is the zero-based index of the correct option inside "options".
-- "explanation" should be 1-3 sentences justifying the correct answer.`;
+- correctIndex is zero-based.
+- explanation should briefly justify the correct answer.`;
 
   try{
-    const text=await callGemini([{role:'user',parts:[{text:prompt}]}],{temperature:0.6});
+    const text=await callGemini([{role:'user',parts:[{text:prompt}]}],{maxOutputTokens:Math.min(12000,Math.max(2500,count*500))});
     const rawList=parseAIQuestionJSON(text);
-    if(!rawList.length) throw new Error('No questions were returned. Try again or adjust your inputs.');
+    if(!rawList.length) throw new Error('No questions were returned. Try again or adjust your selections.');
 
-    const stamped=rawList.map((raw,i)=>normalizeQuestion({
+    const stamped=rawList.slice(0,count).map((raw,i)=>normalizeQuestion({
       id:`ai-${Date.now()}-${i}-${Math.random().toString(36).slice(2,6)}`,
       module, subject, lecture,
       difficulty: raw.difficulty || difficulty,
-      reference: sourceInfo ? (sourceInfo.length>300?sourceInfo.slice(0,300)+'…':sourceInfo) : 'Gemini general knowledge',
+      reference,
       question: raw.question,
       options: raw.options,
       correctIndex: raw.correctIndex,
@@ -1265,14 +1344,16 @@ Rules:
 
     const errors=stamped.map((q,i)=>validateQuestion(q,i)).filter(Boolean);
     if(errors.length) throw new Error('Gemini returned a malformed question: '+errors[0]);
+    if(stamped.length<count) throw new Error(`Gemini returned ${stamped.length} questions instead of ${count}. Please try again.`);
 
     aiQuestions.push(...stamped);
     localStorage.setItem(CONFIG.aiQuestionsKey,JSON.stringify(aiQuestions));
 
-    if(resultBox) resultBox.innerHTML=`<div class="card" style="margin-top:14px"><div class="notice ok">Generated ${stamped.length} question${stamped.length===1?'':'s'}.</div>
+    if(resultBox) resultBox.innerHTML=`<div class="card" style="margin-top:14px"><div class="notice ok">Generated ${stamped.length} question${stamped.length===1?'':'s'} from ${sourceType==='website'?'your website question bank':'Gemini medical knowledge'}.</div>
+    <div class="mini" style="margin-top:8px">${esc(module)} · ${esc(subject)} · ${esc(lecture)}</div>
     <div style="margin-top:12px">${stamped.map(q=>aiQuestionPreviewCard(q)).join('')}</div>
     <div class="actions" style="margin-top:12px"><button class="btn primary" onclick="go('aiquestions')">Review in AI Questions</button></div></div>`;
-    toast(`Generated ${stamped.length} question${stamped.length===1?'':'s'} with Gemini.`,'ok');
+    toast(`Generated ${stamped.length} questions with Gemini 3.6 Flash.`,'ok');
   }catch(e){
     if(resultBox) resultBox.innerHTML=`<div class="card" style="margin-top:14px"><div class="notice error">Generation failed: ${esc(e.message)}</div></div>`;
     toast('Gemini generation failed: '+e.message,'error');
@@ -1300,7 +1381,7 @@ async function sendAIChat(){
 
   try{
     const contents=aiChat.filter(m=>m.role==='user'||m.role==='ai').map(m=>({role:m.role==='ai'?'model':'user',parts:[{text:m.text}]}));
-    const reply=await callGemini(contents,{temperature:0.5});
+    const reply=await callGemini(contents,{maxOutputTokens:4096});
     aiChat.push({role:'ai',text:reply});
   }catch(e){
     aiChat.push({role:'error',text:'Error: '+e.message});
