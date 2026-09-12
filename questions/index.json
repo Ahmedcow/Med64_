@@ -1,6 +1,7 @@
 {
   "files": [
     "sample.json",
-    "usanatomyL1.json"
+    "usanatomyL1.json",
+    "us_patho_L1.json"
   ]
 }
