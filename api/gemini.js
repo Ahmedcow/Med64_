@@ -11,7 +11,7 @@
 //
 // Optional environment variables:
 //   GEMINI_MODEL            Default model id used when the client doesn't override one.
-//                            Defaults to "gemini-2.5-flash".
+//                            Defaults to "gemini-3.6-flash".
 //   GEMINI_ALLOWED_MODELS   Comma-separated allow-list of model ids clients may request
 //                            via the optional "Model override" field in the UI.
 //                            If unset, any model id the client sends is used as-is.
@@ -107,15 +107,18 @@ module.exports = async (req, res) => {
 
   const allowList = (process.env.GEMINI_ALLOWED_MODELS || '')
     .split(',').map(s => s.trim()).filter(Boolean);
-  let model = String(requestedModel || process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+  let model = String(requestedModel || process.env.GEMINI_MODEL || 'gemini-3.6-flash').trim();
   if (allowList.length && !allowList.includes(model)) {
-    model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+    model = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
   }
 
   // Clamp generation config so a single request can't run away with tokens/cost.
+  // Gemini 3.x deprecates the old sampling temperature parameter, so keep this
+  // proxy compatible with the current Gemini 3.x API by sending only supported
+  // output controls.
   const safeGenerationConfig = {
-    temperature: typeof generationConfig?.temperature === 'number' ? generationConfig.temperature : 0.6,
-    maxOutputTokens: Math.min(Number(generationConfig?.maxOutputTokens) || 2048, 4096)
+    maxOutputTokens: Math.min(Number(generationConfig?.maxOutputTokens) || 4096, 16384),
+    responseMimeType: 'application/json'
   };
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
