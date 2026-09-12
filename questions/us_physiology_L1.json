@@ -1,0 +1,1005 @@
+[
+  {
+    "id": "us-physiology01",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following expresses the endocrine functions of kidney?",
+    "options": [
+      "Erythropoiesis, blood pressure regulation, and calcium metabolism",
+      "Excretion of metabolic waste products such as urea and creatinine",
+      "Selective reabsorption of glucose and amino acids",
+      "Regulation of acid-base balance",
+      "Ultrafiltration of blood plasma across the glomerular capillary wall"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology02",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "What is correct about Macula Densa?",
+    "options": [
+      "Synthesize, store, and secrete renin",
+      "Consist of modified smooth muscle cells with",
+      "Secrete erythropoietin",
+      "Exhibit phagocytic activity between the afferent and efferent arterioles",
+      "Sense NaCl load in tubular fluid"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology03",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is correct regarding renal blood flow?",
+    "options": [
+      "It amounts to 50% of cardiac output.",
+      "Renal plasma flow is about 1200 ml/min.",
+      "The filtration fraction is the ratio between renal blood flow and renal plasma flow.",
+      "The renal cortex receives the great majority of renal blood flow.",
+      "It is only controlled by autoregulation."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology04",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Juxta glomerular apparatus:",
+    "options": [
+      "Is a combination of specialized vascular, tubular and interstitial cells located at the proximal convoluted tubule.",
+      "macula densa stimulated by low Nacl load.",
+      "Extraglomerular mesangial cells are not continuous with intraglomerular mesangium.",
+      "Juxta glomerular cells act as chemoreceptor in regulation of renal blood flow."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology05",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Macula densa:",
+    "options": [
+      "Is present in the collecting ducts.",
+      "Secretes rennin.",
+      "Responding to an increase in glucose conc.",
+      "Detects NaCl load.",
+      "Is present in media of afferent arteriole."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology06",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Stimulation of renin secretion will cause an increase in:",
+    "options": [
+      "K concentration in the blood.",
+      "Volume of ECF.",
+      "Hematocrit.",
+      "Plasma colloid osmotic pressure.",
+      "Plasma osmolarity."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology07",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Angiotensin II:",
+    "options": [
+      "Acts as a trophic hormone for zona glomerulosa of suprarenal cortex, increasing synthesis and secretion of aldosterone.",
+      "Less potent than angiotensin I.",
+      "Inhibit thirst sensation.",
+      "Acts as a local vasodilator for renal blood vessels."
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology08",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is characteristic of cortical nephron?",
+    "options": [
+      "Longer loop of Henle.",
+      "Greater numbers.",
+      "Presence of vasa recta.",
+      "Major role in concentration of urine",
+      "Large size glomeruli."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology09",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which cell is a modified smooth muscle cell that secretes renin?",
+    "options": [
+      "Macula densa cells",
+      "Mesangial cells",
+      "Podocytes",
+      "Juxtaglomerular cells",
+      "Endothelial cells"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology10",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Macula densa cells in a section of the kidney identify part of:",
+    "options": [
+      "Proximal tubule",
+      "Loop of Henle",
+      "Distal tubule",
+      "Collecting duct",
+      "Glomerular mesangium"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology11",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is related to the macula densa?",
+    "options": [
+      "It is responsible for secretion of antidiuretic hormone.",
+      "It is responsible for the release of renin.",
+      "It releases renin with high sodium chloride load in the tubular fluid.",
+      "It senses the sodium chloride load in tubular fluid.",
+      "Renin release causes inhibition of aldosterone release"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology12",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "The kidney contributes to Ca homeostasis by secreting:",
+    "options": [
+      "Rennin",
+      "Angiotensin2",
+      "Erythropiotin",
+      "1,25 di hydroxycholicalciferol",
+      "Parathyroid hormone"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology13",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is a function of kidney:",
+    "options": [
+      "Regulate body temperature",
+      "Regulate vit A activation",
+      "Regulate aldosterone secretion",
+      "Regulate arterial blood pressure",
+      "Regulate blood glucose"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology14",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Concerning juxta glomerular cell:",
+    "options": [
+      "Macula densa secrete rennin",
+      "Granular cell secretes angiotensin 2",
+      "Rennin is present predominantly in efferent arteriole",
+      "Low tubular NACL sensed by macula densa to stimulate rennin release",
+      "In not affected by catecholamine"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology15",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Renin is secreted from:",
+    "options": [
+      "Distal tubule",
+      "Juxta glomerular cell",
+      "Glomerular capillary wall",
+      "Macula densa cell",
+      "Proximal convoluted tubule"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology16",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "In renal failure, loss of hormones released by kidney cause:",
+    "options": [
+      "Hypertention",
+      "Anemia",
+      "Acidosis",
+      "Edema",
+      "Albuminuria"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology17",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which is true about renin:",
+    "options": [
+      "Secreted by cells of proimal tubule",
+      "Its secretion leads to loss of sodium and water from plasma",
+      "Its secretion is stimulated by increased mean ABP",
+      "It converts angiotensinogen to angiotensin 1",
+      "It converts angiotensin 1 to 2"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology18",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Decrease in conc of NACL in the tubular fluid, stimulate juxta glomerular cell to secrete:",
+    "options": [
+      "Anti diuretic hormone",
+      "Aldosterone",
+      "Renin",
+      "Angiotensin"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology19",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following cause increased renin release by the kidney:",
+    "options": [
+      "Increased fluid and solute delivery to macula densa",
+      "An increase in blood pressure",
+      "Intra venous infusion of iso tonic saline",
+      "Stimulation of renal sympathetic fibers",
+      "Increase in plasma CL ions"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology20",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Urinary volume is increased by all the following except:",
+    "options": [
+      "Diabetes insipidus",
+      "Diabetes mellitus",
+      "Sympathetic stimulation",
+      "Increased renal arterial pressure",
+      "Infusion of mannitol"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology21",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Drop in blood pressure which decrease the stretch of afferent arteriole leads to relaxation of afferent arteriole smooth ms. this can be explained by:",
+    "options": [
+      "Pressure naturesis",
+      "Glomerulaotubulo- feedback",
+      "Tubule-glomerular feedback",
+      "Myogenic theory of autoregulation",
+      "Stress relaxation"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology22",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Clump around renal artery partially tightened to reduce renal artery pressure from a mean 120 mmhg to 90 mmhg. how much do you predict RBF will change:",
+    "options": [
+      "25% decrease",
+      "Zero (no change in RBF)",
+      "5-10% decrease",
+      "25% increase"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology23",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following causes increased renin release by the kidneys?",
+    "options": [
+      "Increased fluid and solute delivery to the macula densa.",
+      "An increase in blood pressure.",
+      "Intravenous infusion of isotonic saline.",
+      "Stimulation of renal sympathetic nerves.",
+      "Increase of plasma CI ions."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology24",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which one of the following best describes renal blood flow;",
+    "options": [
+      "Is about 80% of the cardiac output.",
+      "Is more in the medulla than the cortex.",
+      "Can be calculated if renal plasma flow and GFR are known.",
+      "Is more in the cortex than medulla.",
+      "Is usually calculated by inulin clearance."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology25",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "One of the following is not a function of kidney:",
+    "options": [
+      "acid-base balance",
+      "ADH secretion.",
+      "water regulation.",
+      "electrolyte balance.",
+      "arterial blood pressure regulation."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology26",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "The macula densa cells are located in :",
+    "options": [
+      "JG cells.",
+      "Extraglomerular mesangium.",
+      "Beginning of early distal tubule",
+      "Peritubular capillaries.",
+      "End of proximal tubules"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology27",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Stimulation of renin secretion will cause an increase in:",
+    "options": [
+      "K concentration in the blood.",
+      "Volume of ECF.",
+      "Haematocrit.",
+      "Plasma colloid osmotic pressure.",
+      "Plasma osmolarity."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology28",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "In human juxtamedullary nephrons constitute about % of the total nephron:",
+    "options": [
+      "10%.",
+      "15%",
+      "20%.",
+      "25%.",
+      "30%."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology29",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "The peritubular capillaries:",
+    "options": [
+      "Receive a greater blood volume than the glomerular capillaries.,",
+      "Run through the Bowman's capsules.",
+      "Exhibit fluid filtration.",
+      "Form a low pressure bed.",
+      "Do not lead to vasa recta in the juxtamedullary nephrons."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology30",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "The anemia of chronic renal failure is mainly due to which of the following?",
+    "options": [
+      "Decreased erthyropoietin production",
+      "Folate deficiency",
+      "Blood loss",
+      "Vitamin B12 deficiency",
+      "Malabsorption of iron"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology31",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which one of the following substances causes renal blood flow to increase:",
+    "options": [
+      "Angiotensin II",
+      "Endothelin",
+      "Nitric oxide",
+      "Serotonin.",
+      "Thromboxane A2"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology32",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Increased sympathetic discharge in the renal nerves will result in which of the following:",
+    "options": [
+      "An increase in the GFR.",
+      "An increase in urine volume.",
+      "Dilatation of the afferent and efferent arterioles.",
+      "Increased renal blood flow.",
+      "Renal retention of sodium and water."
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology33",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "In autoregulation range, renal blood flow changes by:",
+    "options": [
+      "About 5%",
+      "About 10%",
+      "About 15%",
+      "About 20%",
+      "About 25%"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology34",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Superficial cortical nephrons are characterized by which of the following?",
+    "options": [
+      "They have long loop of Henle",
+      "They have large sized glomeruli",
+      "The reasborptive capacity of their renal tubules are high",
+      "They give peritubular capillaries only",
+      "They have thin ALH"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology35",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Secretion of renin:",
+    "options": [
+      "Occurs in the stomach during infancy.",
+      "Is stimulated by the hormone angiotensin II.",
+      "Leads to raised levels of angiotensin II in the blood.",
+      "Is stimulated by an increase in blood volume.",
+      "Inhibits ADH secretion by the pituitary gland."
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology36",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following factors stimulates the renin release?",
+    "options": [
+      "Sympathetic stimulation via β1 receptors",
+      "ADH",
+      "ANP",
+      "Angiotensin II",
+      "Hypernatremia"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology37",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which one of the following is a major determinants of plasma osmolarity?",
+    "options": [
+      "Sodium.",
+      "Haemoglobin",
+      "Chloride.",
+      "Albumin.",
+      "Glucose."
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology38",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is correct as regarding the macula densa:",
+    "options": [
+      "the macula densa senses the sodium chloride load in tubular fluid.",
+      "the macula densa release renin with high sodium chloride load in the tubular fluid.",
+      "renin release causes inhibition of aldosterone release",
+      "It is responsible for the release of renin.",
+      "It is responsible for secretion of antidiuretic hormone."
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology39",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is a normal function of the kidney",
+    "options": [
+      "Regulation of body temperature,",
+      "Regulation of vitamin A activation.",
+      "Regulation of aldosterone secretion.",
+      "Regulation of pulse rate.",
+      "Regulation of blood glucose level."
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology40",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which one of the following is a function of the kidneys?",
+    "options": [
+      "Maintain proper plasma volume.",
+      "Secrete antidiuretic hormone",
+      "Secrete catecholamine hormones.",
+      "Major role in constant normal body temperature.",
+      "Minor role in maintaining heart rate."
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology41",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following hormone is secreted by the kidney?",
+    "options": [
+      "Aldosterone.",
+      "Angiotensin II.",
+      "Erythropoietin.",
+      "ADH",
+      "Insulin."
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology42",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Regarding autoregulation of renal blood flow:",
+    "options": [
+      "It is effective at blood pressure above 200 mm Hg.",
+      "It prevents large changes in GFR at blood pressure 80-180 mm Hg.",
+      "It is an extrinsic mechanism.",
+      "It is 100% effective mechanism.",
+      "It is effective at blood pressure within 50-60 mmHg."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology43",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is correct regarding renal autoregulation?",
+    "options": [
+      "Prostaglandins Increase medullary blood flow",
+      "Optimum autoregulation within range (90 - 200 mmHg).",
+      "Medullary blood flow is greater than cortical blood flow",
+      "Dopamine decreases renal blood flow (RBF).",
+      "Bradykinins cause renal vasoconstriction and decrease RBF."
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology44",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "In Tubuloglomerular feedback, as flow rate through the macula densa increases:",
+    "options": [
+      "A vasodilator substance is released.",
+      "Vasoconstriction of afferent arteriole occurs.",
+      "Macula densa cells release renin.",
+      "Renal blood flow increases.",
+      "Vasoconstriction of efferent arteriole occurs."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology45",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is correct regarding renal blood flow?",
+    "options": [
+      "It amounts to 50% of cardiac output.",
+      "Renal plasma flow is about 1200 ml/min.",
+      "The filtration fraction is the ratio between renal blood flow and renal plasma flow.",
+      "The renal cortex receives the great majority of renal blood flow.",
+      "It is only controlled by autoregulation."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology46",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following cause renal blood flow to decrease?",
+    "options": [
+      "Dopamine.",
+      "Bradykinin.",
+      "Prostacyclin.",
+      "Norepinephrine.",
+      "Thyroxine."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology47",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "As regarding autoregulation of GFR, decreased arterial blood pressure produces:",
+    "options": [
+      "Decreased resistance of the efferent arteriole.",
+      "Increased resistance of the afferent arteriole.",
+      "Increased (NaCl) in tubular fluid at the macula densa.",
+      "Decreased resistance of the afferent arteriole.",
+      "Increased glomerular hydrostatic pressure."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology48",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "The major site of renal auto regulatory resistance changes is the :",
+    "options": [
+      "Renal artery.",
+      "Afferent arteriole.",
+      "Efferent arteriole.",
+      "Peritubular capillary",
+      "Vasa recta."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology49",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is not a function of the kidney:",
+    "options": [
+      "Regulation of solutes concentration.",
+      "Production of rennin.",
+      "Production of angiotensin.",
+      "Activation of vitamin D.",
+      "Urine formation."
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology50",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following is not true about functions of the kidney:",
+    "options": [
+      "Regulation of acid base balance.",
+      "Production and release of rennin.",
+      "Conversion of angiotensin II.",
+      "Activation of vitamin D.",
+      "Regulation of the volume and ionic composition of body fluids."
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology51",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which one of the following renal vessels represents a major resistance to blood flow?",
+    "options": [
+      "Renal artery.",
+      "Afferent arteriole.",
+      "Efferent arteriole.",
+      "Peritubular capillary.",
+      "Vasa recta."
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology52",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Concerning the juxtaglomerular (JGA) apparatus which of the following is correct:",
+    "options": [
+      "It is located in the area of contact between the afferent arteriole, efferent arteriole, and DCT.",
+      "JC cells acts as receptors for NaCl concentration.",
+      "Macula densa cells secrete rennin.",
+      "Its main function is to regulate glucose concentration in the plasma.",
+      "It is present in the juxtamedullary nephrons only."
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology53",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which one of the following, autoregulates GFR when ABP is decreased?",
+    "options": [
+      "Decreased resistance of the efferent arteriole.",
+      "Increased resistance of the afferent arteriole.",
+      "Increased [NACL] in tubular fluid at the macula",
+      "Decreased resistance of the afferent arteriole.",
+      "Increased glomerular hydrostatic pressure"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology54",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Macula densa:",
+    "options": [
+      "Is present in the collecting ducts.",
+      "Secretes rennin.",
+      "Responding to an increase in glucose conc.",
+      "Detects NaCl load.",
+      "Is present in media of afferent arteriole."
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology55",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which one of the following is correct regarding renal blood flow?",
+    "options": [
+      "It amounts to 50% of cardiac output.",
+      "Renal blood flow is about 1200 ml/min.",
+      "The filtration fraction is the ratio between renal blood flow and renal plasma flow.",
+      "The renal medulla receives the great majority of renal blood flow.",
+      "It is only controlled by autoregulation."
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology56",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "It is correct to say:",
+    "options": [
+      "Secretion of renin is inversely proportional to the concentration of sodium in DCT.",
+      "Insulin is used to measure GFR.",
+      "Sodium has renal tubular transport maximum.",
+      "Filtration coefficient has no effect on GFR.",
+      "Urine volume remain unchanged whatever the change in arterial blood pressure."
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology57",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Concerning the structure of the kidney:",
+    "options": [
+      "cortical nephrons constitute about 15 % of the total number of nephrons.",
+      "glomeruli of juxlamedullary nephrons are present in the outer layer of the renal cortex",
+      "The cortical nephrons have long loops of Henle that reach renal papilla",
+      "The vasa recta supply the loops of Henle of cortical nephrons.",
+      "The macula dense forms a part of the juxtaglomerular apparatus"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology58",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "As the arterial blood pressure rises from 100 to 160 mm Hg:",
+    "options": [
+      "The urinary output remains constant",
+      "The renal blood flow increases proportionately",
+      "The GFR increases slightly",
+      "V.D. occurs in the afferent glomerular arterioles.",
+      "V.C. occurs in the efferent glomerular arterioles via release of renin."
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology59",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "The juxtaglomerular apparatus:",
+    "options": [
+      "Filters fluids from the glomerular capillaries",
+      "Reabsorbs vital solutes from the glomerulus",
+      "Actively secretes solutes into the glomerulus",
+      "Acts as it sphincter for the distal convoluted tubule",
+      "Contains the macula densa"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology60",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Increase in mean aortic pressure from 100 to 150 mmHg causes:",
+    "options": [
+      "Afferent arteriolar V.D.",
+      "A significant increase in the renal blood flow.",
+      "A significant increase in the filtration fraction",
+      "A slight increase in the GFR"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology61",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Renin is secreted by:",
+    "options": [
+      "cells in the macula densa",
+      "cells in the proximal tubules",
+      "cells in the distal tubules",
+      "granular cells in the juxtaglomerular apparatus",
+      "cells in the peritubular capillary bed"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology62",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following would not be expected to increase renin secretion?",
+    "options": [
+      "Administration of a drug that blocks angiotensin-converting enzyme",
+      "Administration of a drug that blocks AT1 receptors",
+      "Administration of a drug that blocks B adrenergic receptors",
+      "Constriction of the aorta between the celiac and renal arteries",
+      "Administration of a drug that reduces ECF volume"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-physiology63",
+    "module": "US",
+    "subject": "physiology",
+    "lecture": "Lec1",
+    "question": "Which of the following changes, compared with normal, would be expected to occur, under steady state conditions, in a patient whose severe renal disease has reduced number of functional nephrons to 25% normal?",
+    "options": [
+      "Increased GFR of the surviving nephrons",
+      "Decreased urinary creatinine excretion rate",
+      "Decreased urine flow rate in the surviving nephrons",
+      "Decreased urinary excretion of sodium",
+      "increased urine concentrating ability"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  }
+]
