@@ -107,9 +107,9 @@ module.exports = async (req, res) => {
 
   const allowList = (process.env.GEMINI_ALLOWED_MODELS || '')
     .split(',').map(s => s.trim()).filter(Boolean);
-  let model = String(requestedModel || process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+  let model = String(requestedModel || process.env.GEMINI_MODEL || 'gemini-3.6-flash').trim();
   if (allowList.length && !allowList.includes(model)) {
-    model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+    model = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
   }
 
   // Clamp generation config so a single request can't run away with tokens/cost.
