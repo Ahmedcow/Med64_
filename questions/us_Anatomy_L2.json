@@ -1,0 +1,722 @@
+[
+  {
+    "id": "us-anatomy29",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which combination best identifies the normal anatomical position of the kidneys as described in the handout?",
+    "options": [
+      "Retroperitoneal and opposite T11-L1",
+      "Retroperitoneal and opposite T12 with the upper three lumbar vertebrae",
+      "Retroperitoneal and opposite L2-L5",
+      "Retroperitoneal and opposite T11-L3 only",
+      "Retroperitoneal and opposite the upper three thoracic vertebrae"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy30",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A student compares the vertical levels of the two kidneys. Which conclusion is most consistent with the handout?",
+    "options": [
+      "The right kidney is slightly higher because of the liver",
+      "Both kidneys are at exactly the same level",
+      "The left kidney is slightly higher, while the right is lower because of the liver",
+      "The left kidney is lower because of the spleen",
+      "The right kidney reaches the 11th rib while the left reaches only the 12th rib"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy31",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "If only one surface of the kidney can be covered by peritoneum, which pairing is correct according to the handout?",
+    "options": [
+      "Anterior surface - covered; posterior surface - not covered",
+      "Anterior surface - not covered; posterior surface - covered",
+      "Both surfaces - covered",
+      "Neither surface - covered",
+      "Only the medial border - covered"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy32",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which set of measurements best matches the kidney dimensions given in the handout?",
+    "options": [
+      "5 x 2.5 x 1 cm",
+      "8 x 4 x 2 cm",
+      "10 x 5 x 2.5 cm",
+      "12 x 7 x 5 cm",
+      "15 x 10 x 5 cm"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy33",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A dissection proceeds from the kidney surface outward. Which sequence follows the handout?",
+    "options": [
+      "Renal fascia -> fibrous capsule -> perirenal fat -> pararenal fat",
+      "Fibrous capsule -> renal fascia -> perirenal fat -> pararenal fat",
+      "Fibrous capsule -> perirenal fat -> renal fascia -> pararenal fat",
+      "Perirenal fat -> fibrous capsule -> pararenal fat -> renal fascia",
+      "Pararenal fat -> renal fascia -> perirenal fat -> fibrous capsule MCQ Sem 3 Page 2 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy34",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which covering is best identified by the description 'condensation of areolar connective tissue that lies outside the perirenal fat and surrounds the suprarenal gland'?",
+    "options": [
+      "Fibrous capsule",
+      "Renal fascia",
+      "Pararenal fat",
+      "Perirenal fat",
+      "Peritoneum"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy35",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A mass of fat is found outside the renal fascia and is described as part of the retroperitoneal fat. What is it?",
+    "options": [
+      "Perirenal fat",
+      "Fibrous capsule",
+      "Pararenal fat",
+      "Renal fascia",
+      "Perinephric fascia"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy36",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Below the diaphragm, which medial-to-lateral arrangement of posterior muscular relations is correct?",
+    "options": [
+      "Transversus abdominis -> quadratus lumborum -> psoas major",
+      "Psoas major -> quadratus lumborum -> transversus abdominis",
+      "Quadratus lumborum -> psoas major -> transversus abdominis",
+      "Psoas major -> transversus abdominis -> quadratus lumborum",
+      "Quadratus lumborum -> transversus abdominis -> psoas major"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy37",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A structure is found between the kidney and quadratus lumborum. Which set contains only structures listed ?",
+    "options": [
+      "Subcostal vessels, subcostal nerve, iliohypogastric nerve, ilioinguinal nerve",
+      "Renal artery, renal vein, subcostal nerve, vagus nerve",
+      "Subcostal vessels, renal artery, renal vein, ilioinguinal nerve",
+      "Iliohypogastric nerve, vagus nerve, renal vessels, ureter",
+      "Subcostal nerve, renal vein, renal artery, iliohypogastric nerve"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy38",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which comparison of rib relations to the kidneys is supported by the handout?",
+    "options": [
+      "Both kidneys relate to the 10th and 11th ribs",
+      "Left: 11th and 12th ribs; Right: 11th intercostal space and 12th rib",
+      "Left: 12th rib only; Right: 11th and 12th ribs",
+      "Both kidneys relate only to the 12th rib",
+      "Right: 10th and 11th ribs; Left: 11th intercostal space and 12th rib"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy39",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which nerve-root pairing is correct for the posterior relations of the kidney?",
+    "options": [
+      "Subcostal nerve - L1",
+      "Iliohypogastric nerve - T12",
+      "Ilioinguinal nerve - L1",
+      "Ilioinguinal nerve - T12",
+      "Subcostal nerve - L2 MCQ Sem 3 Page 3 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy40",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which structure would NOT belong to the posterior relations of the kidney?",
+    "options": [
+      "Psoas major",
+      "Quadratus lumborum",
+      "Transversus abdominis",
+      "Subcostal nerve",
+      "Body of pancreas"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy41",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A structure touches the medial border and adjacent anterior surface around the hilum of the right kidney. Which structure is it?",
+    "options": [
+      "Spleen",
+      "Second part of duodenum",
+      "Body of pancreas",
+      "Descending colon",
+      "Stomach"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy42",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which combination correctly pairs a left kidney anterior relation with its described location?",
+    "options": [
+      "Spleen - lower medial part",
+      "Stomach - triangular area at the upper third",
+      "Pancreas - lower lateral border",
+      "Descending colon - upper pole",
+      "Left suprarenal gland - lower pole only"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy43",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which pair represents areas of the RIGHT kidney that are covered by peritoneum?",
+    "options": [
+      "Suprarenal and duodenal areas",
+      "Duodenal and right colic flexure areas",
+      "Hepatic and jejunal areas",
+      "Hepatic and suprarenal areas",
+      "Jejunal and duodenal areas"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy44",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which set contains ONLY areas of the LEFT kidney covered by peritoneum?",
+    "options": [
+      "Splenic, gastric, jejunal",
+      "Suprarenal, pancreatic, descending colon",
+      "Gastric, pancreatic, jejunal",
+      "Splenic, pancreatic, descending colon",
+      "Suprarenal, gastric, jejunal"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy45",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which trio is NOT covered by peritoneum on the RIGHT kidney?",
+    "options": [
+      "Hepatic, jejunal, suprarenal",
+      "Suprarenal, duodenal",
+      "Hepatic, duodenal, right colic flexure",
+      "Jejunal, duodenal, suprarenal",
+      "Hepatic, jejunal, right colic flexure MCQ Sem 3 Page 4 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy46",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which trio is NOT covered by peritoneum on the LEFT kidney?",
+    "options": [
+      "Splenic, gastric, jejunal",
+      "Gastric, pancreatic, jejunal",
+      "Suprarenal, pancreatic, descending colon",
+      "Splenic, pancreatic, descending colon",
+      "Suprarenal, gastric, descending colon"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy47",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "At the renal hilum, which anterior-to-posterior order is correct?",
+    "options": [
+      "Renal artery -> renal vein -> pelvis of ureter",
+      "Pelvis of ureter -> renal artery -> renal vein",
+      "Renal vein -> renal artery -> pelvis of ureter",
+      "Renal vein -> pelvis of ureter -> renal artery",
+      "Renal artery -> pelvis of ureter -> renal vein"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy48",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which statement best links the hilum to the interior of the kidney?",
+    "options": [
+      "It is a horizontal opening leading directly to the bladder",
+      "It is a vertical opening in the middle of the medial border that leads to the renal sinus",
+      "It lies on the lateral border and leads to the ureter",
+      "It is at the upper pole and leads to the renal capsule",
+      "It is at the lower pole and leads to the renal pelvis only"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy49",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which integrated statement about the renal artery is correct?",
+    "options": [
+      "It arises from the IVC at L2",
+      "It arises from the aorta at a right angle at the upper border of L2",
+      "It arises from the common iliac artery at L3",
+      "It arises from the aorta at the upper border of T12",
+      "It arises from the internal iliac artery at L1"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy50",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A vein leaving the kidney is drained in.?",
+    "options": [
+      "Abdominal aorta",
+      "External iliac vein",
+      "Inferior vena cava",
+      "Common iliac artery",
+      "Renal artery"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy51",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "If renal lymphatics are followed from the kidney, which nodes should be expected to see?",
+    "options": [
+      "Lateral aortic nodes around the bifurcation of the common iliac artery",
+      "Lateral aortic nodes around the origin of the renal artery",
+      "Lateral aortic nodes around the lower end of the ureter",
+      "Lateral aortic nodes at the intramural part of the ureter",
+      "Lateral aortic nodes at the renal lower pole MCQ Sem 3 Page 5 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy52",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which autonomic pairing for the kidney is correct?",
+    "options": [
+      "Sympathetic T10, T11, T12 and L1; parasympathetic vagus",
+      "Sympathetic S2, S3 and S4; parasympathetic vagus",
+      "Sympathetic T10, T11 and T12; parasympathetic S2, S3 and S4",
+      "Sympathetic L1 only; parasympathetic T10, T11 and T12",
+      "Sympathetic S2, S3 and S4; parasympathetic L1"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy53",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which option contains only factors helping support the kidneys in position?",
+    "options": [
+      "Perinephric fascia, perinephric fat, renal vessels, suspensory ligament, neighboring viscera/intra-abdominal pressure",
+      "Fibrous capsule, renal pelvis, common iliac artery, spleen, diaphragm",
+      "Renal pelvis, major calyces, vagus nerves, liver, perirenal fat",
+      "Common iliac artery, suprarenal gland, quadratus lumborum, renal sinus, IVC",
+      "Pararenal fat, abdominal aorta, psoas major, renal artery, pancreas"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy54",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which boundaries correctly define Morris's rectangle posteriorly?",
+    "options": [
+      "Horizontal: T11 and L3; vertical: 2.5 cm and 7.5 cm from median plane",
+      "Horizontal: T12 and L2; vertical: 5 cm and 10 cm",
+      "Horizontal: T10 and L4; vertical: 1 cm and 5 cm",
+      "Horizontal: L1 and L5; vertical: 2.5 cm and 5 cm",
+      "Horizontal: T11 and L1; vertical: 7.5 cm and 10 cm"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy55",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which surface-marking set is fully correct?",
+    "options": [
+      "Hilum T11 at 2.5 cm; upper pole L1 at 5 cm; lower pole L3 at 7.5 cm",
+      "Hilum L1 at 5 cm; upper pole T11 at 2.5 cm; lower pole L3 at 7.5 cm",
+      "Hilum L2 at 7.5 cm; upper pole T12 at 5 cm; lower pole L4 at 2.5 cm",
+      "Hilum L3 at 5 cm; upper pole T11 at 7.5 cm; lower pole L1 at 2.5 cm",
+      "Hilum T12 at 5 cm; upper pole T10 at 2.5 cm; lower pole L2 at 7.5 cm"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy56",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "How does the ureter begin t?",
+    "options": [
+      "In the renal sinus by union of 1 major calyx",
+      "In the renal sinus by union of 2-3 major calyces",
+      "At the lower end of kidney by union of 2-3 renal arteries",
+      "At the hilum by union of renal vein and renal artery",
+      "At the pelvic inlet by union of 2-3 major calyces"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy57",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which sequence correctly lists the three parts of the ureter?",
+    "options": [
+      "Abdominal -> renal pelvis -> pelvic",
+      "Renal pelvis -> abdominal -> pelvic",
+      "Pelvic -> renal pelvis -> abdominal",
+      "Renal pelvis -> pelvic -> abdominal",
+      "Abdominal -> pelvic -> renal pelvis MCQ Sem 3 Page 6 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy58",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which description correctly follows the abdominal part of the ureter?",
+    "options": [
+      "Begins at lower end of kidney and descends opposite tips of T11-L3 transverse processes",
+      "Begins at lower end of kidney and descends opposite tips of L2-L5 transverse processes",
+      "Begins at hilum and descends opposite T12-L3 transverse processes",
+      "Begins at lower end of kidney and descends opposite L1-L3 transverse processes",
+      "Begins at renal sinus and descends opposite T11-L2 transverse processes"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy59",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "At the pelvic inlet, the ureter enters the pelvis by passing in front of the:",
+    "options": [
+      "Origin of renal artery",
+      "Inferior vena cava",
+      "Bifurcation of the common iliac artery",
+      "Internal iliac vein only",
+      "Abdominal aortic bifurcation"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy60",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which nerve supply pairing for the ureter matches?",
+    "options": [
+      "Sympathetic T10, T11, T12 and L1; parasympathetic S2, S3 and S4",
+      "Sympathetic S2, S3 and S4; parasympathetic T10, T11, T12 and L1",
+      "Sympathetic T10, T11, T12 and L1; parasympathetic vagus nerves",
+      "Sympathetic L1 only; parasympathetic S2 and S3 only",
+      "Sympathetic T12 only; parasympathetic S4 only"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy61",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which set contains all three common sites of ureteric stone impaction?",
+    "options": [
+      "Renal hilum, lower end of kidney, intramural part",
+      "Junction between pelvis and ureter proper, crossing at common iliac bifurcation, intramural part",
+      "Renal sinus, L2 transverse process, urinary bladder",
+      "Upper pole, renal hilum, lower pole",
+      "Lower end of kidney, L5 transverse process, renal pelvis"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy62",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which statement about renal transplantation is true?",
+    "options": [
+      "Graft in iliac fossa; renal artery and vein joined to external iliac artery and vein",
+      "Graft at the normal renal level; renal artery joined to abdominal aorta only",
+      "Graft in iliac fossa; renal vessels joined to common iliac artery only",
+      "Graft at T11-L3; renal vein joined to IVC only",
+      "Graft in renal sinus; renal vessels joined to internal iliac artery only"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy63",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "Which statement correctly combines two left kidney anterior relations?",
+    "options": [
+      "Splenic artery lies below the body of pancreas",
+      "Splenic artery lies above the body of pancreas",
+      "Pancreas lies at the lower lateral border",
+      "Spleen lies below the descending colon",
+      "Stomach lies at the lower medial area MCQ Sem 3 Page 7 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy64",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "The second part of the duodenum is most closely related to which region of the right kidney?",
+    "options": [
+      "Lateral border far from hilum",
+      "Medial border and adjacent anterior surface around the hilum",
+      "Lower pole only",
+      "Posterior surface",
+      "Upper lateral border"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy65",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A patient has pain beginning in the back and lumbar region, then moving to the anterior abdominal wall and down toward the external genital organs. Which interpretation best?",
+    "options": [
+      "The pain pattern is typical of renal pain",
+      "The pain must arise from the stomach",
+      "The pain corresponds to splenic pain",
+      "The pain proves a pancreatic lesion",
+      "The pain pattern is unrelated to the urinary system"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy66",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "During posterior surgical exposure of a kidney, the surgeon identifies three muscles below the diaphragm. If the dissection proceeds from medial to lateral, which order should be encountered?",
+    "options": [
+      "Quadratus lumborum -> psoas major -> transversus abdominis",
+      "Psoas major -> quadratus lumborum -> transversus abdominis",
+      "Transversus abdominis -> psoas major -> quadratus lumborum",
+      "Psoas major -> transversus abdominis -> quadratus lumborum",
+      "Diaphragm -> transversus abdominis -> psoas major"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy67",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A surgeon opens the renal hilum and sees a vessel most anteriorly, another vessel behind it, and the pelvis of the ureter posteriorly and downward. Which structures are these in order?",
+    "options": [
+      "Renal artery -> renal vein -> pelvis",
+      "Renal vein -> renal artery -> pelvis",
+      "Pelvis -> renal artery -> renal vein",
+      "Renal vein -> pelvis -> renal artery",
+      "Renal artery -> pelvis -> renal vein"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy68",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "On imaging, a ureteric stone is located exactly where the renal pelvis becomes the ureter proper. Why?",
+    "options": [
+      "It is a common site of stone impaction",
+      "It is the point of renal vein termination",
+      "It is the site of lymph drainage",
+      "It is where the ureter enters the kidney capsule",
+      "It is where the renal artery arises MCQ Sem 3 Page 8 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy69",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A third patient has a ureteric stone lodged within the wall of the urinary bladder. Which named site from most commonly involved?",
+    "options": [
+      "Pelviureteric junction",
+      "Crossing of renal artery",
+      "Intramural part",
+      "Renal sinus",
+      "Lumbar transverse process level"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy70",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "During surface marking, a clinician places a point at the transpyloric plane, 5 cm from the median plane. Which renal landmark is being marked?",
+    "options": [
+      "Upper pole",
+      "Lower pole",
+      "Hilum of kidney",
+      "Lateral border",
+      "Costodiaphragmatic recess"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy71",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A surgeon is operating on the anterior surface of the LEFT kidney and wishes to avoid an area not covered by peritoneum. Which of the following could be?",
+    "options": [
+      "Splenic area",
+      "Gastric area",
+      "Jejunal area",
+      "Pancreatic area",
+      "All left-kidney areas are covered"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy72",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "A renal transplant is planned for a patient with chronic renal failure. Which operative plan matches the handout?",
+    "options": [
+      "Place graft in iliac fossa, join renal artery and vein to external iliac vessels, and suture ureter into bladder",
+      "Place graft at T11-L3, join renal artery to abdominal aorta only, and suture ureter to renal fascia",
+      "Place graft in iliac fossa, join renal vein to IVC only, and leave ureter at the pelvic inlet",
+      "Place graft at the normal renal site, join vessels to common iliac artery only, and suture ureter to renal pelvis",
+      "Place graft in renal sinus, join vessels to internal iliac artery only, and suture ureter to perirenal fat"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy73",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec2",
+    "question": "In a female patient, the surgeon traces arterial branches to the ureter. Which vessel is specifically is an additional source in females?",
+    "options": [
+      "Uterine artery",
+      "Ovarian artery",
+      "Renal artery",
+      "Common iliac artery",
+      "Internal iliac artery"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  }
+]

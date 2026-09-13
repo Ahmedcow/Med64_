@@ -1,0 +1,449 @@
+[
+  {
+    "id": "us-anatomy01",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A student wants to identify the two muscles that finally reach the lesser trochanter together. Which pairing is correct according to the handout?",
+    "options": [
+      "Iliacus and psoas major",
+      "Iliacus and psoas minor",
+      "Psoas minor and quadratus lumborum",
+      "Psoas major and quadratus lumborum",
+      "Iliacus and quadratus lumborum"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy02",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A muscle begins from the upper two-thirds of the iliac fossa and joins psoas major before insertion. Which muscle is being described?",
+    "options": [
+      "Psoas major",
+      "Psoas minor",
+      "Iliacus",
+      "Quadratus lumborum",
+      "Obturator nerve"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy03",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which description most accurately identifies the origin of psoas major?",
+    "options": [
+      "Upper two-thirds of iliac fossa only",
+      "Sides of T12 and L1 bodies with the intervening disc only",
+      "Transverse processes of all lumbar vertebrae plus bodies of T12-L5 and intervening discs",
+      "Posterior 5 cm of iliac crest only",
+      "Iliolumbar ligament and last rib only"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy04",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A muscle is noted to be present in about 60% of subjects and arises from the sides of T12 and L1 bodies with the disc between them. Which muscle is it?",
+    "options": [
+      "Iliacus",
+      "Psoas major",
+      "Psoas minor",
+      "Quadratus lumborum",
+      "Femoral nerve MCQ Sem 3 Page 2 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy05",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which combination of attachments best identifies the origin of quadratus lumborum?",
+    "options": [
+      "Upper two-thirds of iliac fossa and T12 body",
+      "Posterior 5 cm of the inner lip of iliac crest, iliolumbar ligament and transverse process of L5",
+      "Bodies of T12-L5 and all lumbar discs",
+      "Sides of T12 and L1 bodies only",
+      "Lesser trochanter and iliopubic eminence"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy06",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "If a structure is attached to the iliopubic eminence of the hip bone, which one of the posterior abdominal wall muscle will be?",
+    "options": [
+      "Iliacus",
+      "Psoas major",
+      "Psoas minor",
+      "Quadratus lumborum",
+      "Iliopsoas tendon"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy07",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which insertion pattern is assigned to quadratus lumborum?",
+    "options": [
+      "Lesser trochanter of femur",
+      "Iliopubic eminence",
+      "Medial half of the last rib and tips of lumbar transverse processes",
+      "Upper two-thirds of iliac fossa",
+      "Bodies of T12 and L1"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy08",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which nerve-supply comparison between iliacus and psoas major is correct?",
+    "options": [
+      "Iliacus: femoral nerve L2,3,4; psoas major: L1,2,3",
+      "Iliacus: L1 only; psoas major: femoral nerve L2,3,4",
+      "Iliacus: subcostal T12; psoas major: L1 only",
+      "Iliacus: L2,3; psoas major: L2,3,4 posterior division",
+      "Iliacus: L3,4; psoas major: subcostal T12"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy09",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A posterior abdominal wall muscle receives its nerve supply from L1 spinal nerve. Which muscle is it?",
+    "options": [
+      "Iliacus",
+      "Psoas major",
+      "Psoas minor",
+      "Quadratus lumborum",
+      "Iliopsoas MCQ Sem 3 Page 3 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy10",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which nerve supply best matches quadratus lumborum?",
+    "options": [
+      "Femoral nerve L2,3,4 only",
+      "L1 spinal nerve only",
+      "Subcostal nerve T12 plus L1,2,3",
+      "L2,3 only",
+      "L3,4 anterior division only"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy11",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which functional statement best distinguishes psoas major from iliacus?",
+    "options": [
+      "Psoas major flexes and laterally rotates the thigh, whereas iliacus assists psoas major in thigh flexion",
+      "Psoas major only stabilizes the last rib, whereas iliacus extends the trunk",
+      "Psoas major extends the thigh, whereas iliacus laterally flexes the trunk",
+      "Psoas major acts only in respiration, whereas iliacus rotates the trunk",
+      "Psoas major has no action on the thigh, whereas iliacus laterally rotates it"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy12",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "When psoas major acts from below on both sides, which movement is assigned to be done by it?",
+    "options": [
+      "Extension of the trunk",
+      "Flexion of the trunk forwards",
+      "Stabilization of the last rib only",
+      "Extension of the thigh"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy13",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "When psoas major acts from below on one side, the expected action is:",
+    "options": [
+      "Bilateral trunk flexion",
+      "Extension of lumbar vertebral column",
+      "Lateral flexion of the trunk",
+      "Stabilization of the last rib",
+      "Flexion of both thighs"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy14",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "The origin of psoas major includes five tendinous arches., these arches bridge over:",
+    "options": [
+      "Lumbar vessels",
+      "Femoral nerve",
+      "Iliolumbar ligament",
+      "Last rib",
+      "Iliac crest MCQ Sem 3 Page 4 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy15",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which statement best describes the location of the lumbar plexus?",
+    "options": [
+      "Inside psoas major",
+      "Inside quadratus lumborum",
+      "Between psoas minor and iliacus",
+      "Inside iliacus",
+      "Superficial to the inguinal ligament"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy16",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which roots form the lumbar plexus ?",
+    "options": [
+      "Ventral rami of L1-L3 plus the upper part of the ventral ramus of L4",
+      "Dorsal rami of L1-L4",
+      "Ventral rami of T12-L2 only",
+      "Ventral rami of L2-L5",
+      "Dorsal rami of T12-L4"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy17",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which pair of named branches is derived from L1 alone?",
+    "options": [
+      "Iliohypogastric and ilioinguinal",
+      "Genitofemoral and ilioinguinal",
+      "Femoral and obturator",
+      "Lateral cutaneous nerve of thigh and genitofemoral",
+      "Obturator and accessory obturator"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy18",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A branch of the lumbar plexus is formed from L1 and L2. Which branch is it?",
+    "options": [
+      "Iliohypogastric nerve",
+      "Ilioinguinal nerve",
+      "Genitofemoral nerve",
+      "Lateral cutaneous nerve of the thigh",
+      "Femoral nerve"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy19",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which lumbar plexus branch is specifically listed as arising from L2 and L3?",
+    "options": [
+      "Genitofemoral nerve",
+      "Lateral cutaneous nerve of the thigh",
+      "Obturator nerve",
+      "Femoral nerve",
+      "Accessory obturator nerve MCQ Sem 3 Page 5 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy20",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which comparison between the obturator and femoral nerves is correct?",
+    "options": [
+      "Both are L2,3,4; obturator from anterior division and femoral from posterior division",
+      "Both are L1 only",
+      "Obturator is L1,2 and femoral is L2,3",
+      "Obturator is posterior division and femoral is anterior division",
+      "Both arise from L3,4 anterior division"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy21",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which root and division combination is assigned to the accessory obturator nerve?",
+    "options": [
+      "L1,2 posterior division",
+      "L2,3 posterior division",
+      "L3,L4 anterior division",
+      "L2,3,4 posterior division",
+      "L1 only"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy22",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which nerve emerges from the anterior surface of psoas major?",
+    "options": [
+      "Femoral nerve",
+      "Obturator nerve",
+      "Genitofemoral nerve",
+      "Ilioinguinal nerve",
+      "Lumbosacral trunk"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy23",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "Which set contains only structures described as emerging from the lateral border of psoas major?",
+    "options": [
+      "Iliohypogastric, ilioinguinal, lateral cutaneous nerve of thigh and femoral nerve",
+      "Genitofemoral, obturator, femoral and lumbosacral trunk",
+      "Obturator, lumbosacral trunk, ilioinguinal and genitofemoral",
+      "Genitofemoral, iliohypogastric, obturator and accessory obturator",
+      "Femoral, obturator, lumbosacral trunk and genitofemoral"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy24",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A child with tuberculosis of the lumbar vertebral column develops a psoas abscess, where is the pus most likely to track next?",
+    "options": [
+      "Inferiorly along psoas, deep to the inguinal ligament, toward the superior part of the thigh",
+      "Inferiorly along iliacus, superficial to the inguinal ligament, toward the superior thigh",
+      "Superiorly along psoas toward the T12-L1 region",
+      "Inferiorly along psoas toward the iliopubic eminence",
+      "Inferiorly along quadratus lumborum toward the lesser trochanter MCQ Sem 3 Page 6 DR. HEBA EL- HESSY Anatomy"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy25",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "During surgery, a nerve is found running on the anterior surface of psoas major. Which nerve should the surgeon identify?",
+    "options": [
+      "Iliohypogastric nerve",
+      "Ilioinguinal nerve",
+      "Genitofemoral nerve",
+      "Femoral nerve",
+      "Obturator nerve"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy26",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A nerve emerging from the lateral border of psoas major is traced back to roots L2 and L3. Which nerve is most consistent with both facts?",
+    "options": [
+      "Iliohypogastric nerve",
+      "Ilioinguinal nerve",
+      "Genitofemoral nerve",
+      "Lateral cutaneous nerve of the thigh",
+      "Obturator nerve"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy27",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A surgeon identifies a nerve at the medial border of psoas major. It arises from L2,3,4 and is derived from the anterior division. Which nerve is it?",
+    "options": [
+      "Femoral nerve",
+      "Obturator nerve",
+      "Genitofemoral nerve",
+      "Lateral cutaneous nerve of the thigh",
+      "Ilioinguinal nerve"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us-anatomy28",
+    "module": "US",
+    "subject": "Anatomy",
+    "lecture": "Lec1",
+    "question": "A posterior abdominal wall muscle is injured. The affected muscle normally arises from all lumbar transverse processes and bodies of T12-L5, inserts into the lesser trochanter, and is supplied by L1,2,3. Which muscle is affected?",
+    "options": [
+      "Iliacus",
+      "Psoas major",
+      "Psoas minor",
+      "Quadratus lumborum",
+      "Iliolumbar ligament"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  }
+]
