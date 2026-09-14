@@ -1,0 +1,402 @@
+[
+  {
+    "id": "us_histo_L2_000001",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which of the following has luminal brush border:-",
+    "options": [
+      "Collecting duct",
+      "Distal convoluted tubule",
+      "Loop of henle",
+      "Proximal convoluted tubule",
+      "Renal corpuscle"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000002",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which is correct about cells of the proximal convoluted tubules:-",
+    "options": [
+      "Have a prominent brush border",
+      "Are basophilic",
+      "Have few mitochondria",
+      "Have distinct lateral intercellular borders",
+      "Have central oval nuclei"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000003",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Mesangial cells are characterized by all of the followings except:-",
+    "options": [
+      "Stellate shaped cells",
+      "Have supportive role by elastic fibers",
+      "Phagocytosis function",
+      "Between glomerulus capillaries",
+      "Basophilic cytoplasm"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000004",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Cells with phagocytic functions of the kidney are:-",
+    "options": [
+      "Endothelial cells",
+      "Juxtaglomerular cells",
+      "Macula densa cells",
+      "Mesangial cells",
+      "Podocytes"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000005",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Function of mesangial cells:-",
+    "options": [
+      "Formation of filtration barrier",
+      "Secrete histamine",
+      "Synthesis of glomerular basement membrane",
+      "Continuous turnover of basement membrane",
+      "Reabsorption of sodium and water"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000006",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which part of filtration barrier can hold blood cells:-",
+    "options": [
+      "Glomerular endothelium",
+      "Basement membrane",
+      "Filtration slit diaphragm",
+      "Capsular epithelium",
+      "None of the above"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000007",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "The blood renal barrier is formed of:-",
+    "options": [
+      "Glomerular endothelium",
+      "Basement membrane",
+      "Filtration slits",
+      "Minute gaps between foot processes",
+      "All of the above"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000008",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "The cell responsible for continuous turnover of glomerular BM:-",
+    "options": [
+      "Podocytes",
+      "Mesangial cell",
+      "Juxtaglomerular cell",
+      "Endothelial cell",
+      "Macula densa cells"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000009",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which of the following cells is stellate shape with basophilic cytoplasm:-",
+    "options": [
+      "Podocytes",
+      "Endothelial cells",
+      "Mesangial cells",
+      "Capsular epithelial cells",
+      "Macula densa cells"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000010",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Main function of blood renal barrier is:-",
+    "options": [
+      "Reabsorption of glucose",
+      "Reabsorption of Na",
+      "Blood plasma dialysis",
+      "Reabsorption of water",
+      "Excretion of dyes"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000011",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "The epithelial lining of proximal convoluted tubules is:-",
+    "options": [
+      "Simple columnar",
+      "Simple squamous",
+      "Transitional",
+      "Simple cubical",
+      "Stratified squamous"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000012",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "The lining cells of PCT are characterized by:-",
+    "options": [
+      "Cubical",
+      "Presence of luminal microvilli",
+      "Basal striation",
+      "Deep acidophilic granular cytoplasm",
+      "All of the above"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000013",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Macula densa is part of:-",
+    "options": [
+      "Glomerulus",
+      "PCT",
+      "Loop of Henle",
+      "DCT",
+      "Collecting tubule"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000014",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "PCT:-",
+    "options": [
+      "Secrete renin hormone",
+      "Lined by 3-5 cubical cells",
+      "Lined by 5-8 cells",
+      "Formed of descending and ascending limbs",
+      "Present between the glomerular blood capillaries"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000015",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "One of the following is true about distal convoluted tubules:-",
+    "options": [
+      "Arise from descending loop of Henle",
+      "Lining cell has numerous microvilli brush appearance",
+      "Cytoplasm is non-granular",
+      "Deep acidophilic cytoplasm",
+      "Lateral borders are not clear"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000016",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which of the following isn't a function of PCT:-",
+    "options": [
+      "Reabsorption of water and sodium",
+      "Reabsorption of glucose",
+      "Excretion of some metabolites as dyes",
+      "Blood plasma dialysis",
+      "Reabsorption of plasma proteins"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000017",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which of the followings can reabsorb water and sodium under the effect of ADH & aldosterone:-",
+    "options": [
+      "PCT",
+      "DCT",
+      "Loop of henle",
+      "Renal corpuscle",
+      "Bowman's capsule"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000018",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "All of the followings are functions of mesangial cells except:-",
+    "options": [
+      "Phagocytosis",
+      "Hormone secretion",
+      "Synthesis of glomerular BM",
+      "Continuous turnover of glomerular BM",
+      "Supportive function by collagen secretion"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000019",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "What is the shape of mesangial cells:-",
+    "options": [
+      "Squamous",
+      "Cubical",
+      "Stellate",
+      "Columnar",
+      "Transitional"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000020",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which part of filtration barrier can hold albumin:-",
+    "options": [
+      "Glomerular endothelium",
+      "Basement membrane",
+      "Filtration slit diaphragm",
+      "Capsular epithelium",
+      "Mesangial cells"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000021",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "What is the number of cells in PCT:-",
+    "options": [
+      "1-3",
+      "5-8",
+      "2-4",
+      "3-5",
+      "10-18"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000022",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "What is the number of cells in DCT:-",
+    "options": [
+      "1-3",
+      "5-8",
+      "2-4",
+      "3-5",
+      "10-18"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000023",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which part of filtration barrier can hold large molecules:-",
+    "options": [
+      "Glomerular endothelium",
+      "Basement membrane",
+      "Filtration slit diaphragm",
+      "Capsular epithelium",
+      "Mesangial cells"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000024",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Proximal convoluted tubules arise from:-",
+    "options": [
+      "Distal convoluted tubule",
+      "Loop of henle",
+      "Malpighian corpuscle",
+      "Collecting tubules",
+      "Duct of Bellini"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L2_000025",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec2",
+    "question": "Which of the following is characteristic for lining cell of P.C.T:-",
+    "options": [
+      "Nucleus is central",
+      "Has few Microvilli",
+      "Pale acidophilic cytoplasm",
+      "Non-clear lateral borders",
+      "Columnar in shape"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  }
+]
