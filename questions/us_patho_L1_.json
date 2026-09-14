@@ -1,0 +1,706 @@
+[
+  {
+    "id": "us_patho_L1_000001",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "New born has been delivered with low set ears, beaked nose, absent both kidneys and ureters with multiple limb deformities. Diagnosis of this case:-",
+    "options": [
+      "Childhood PKD",
+      "Megacystis syndrome",
+      "Potter's syndrome",
+      "Adulthood PKD",
+      "Ureterocele"
+    ],
+    "correctIndex": 2,
+    "explanation": "Potter's syndrome results from bilateral renal agenesis leading to oligohydramnios, which causes fetal compression, pulmonary hypoplasia, facial anomalies (low-set ears, beaked nose), and limb deformities."
+  },
+  {
+    "id": "us_patho_L1_000002",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Cause of polycystic kidney is:-",
+    "options": [
+      "Infection",
+      "Carcinoma",
+      "Genetic inheritance or congenital anomaly",
+      "Hypertension",
+      "DM"
+    ],
+    "correctIndex": 2,
+    "explanation": "Polycystic kidney diseases (both ADPKD and ARPKD) are hereditary genetic disorders caused by mutations in specific genes controlling tubular cilia and development (such as PKD1, PKD2, or PKHD1)."
+  },
+  {
+    "id": "us_patho_L1_000003",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Deficiency of which protein leads to ARPKD:-",
+    "options": [
+      "Fibronectin",
+      "Cysteine",
+      "Albumin",
+      "Fibrocystin",
+      "Purine"
+    ],
+    "correctIndex": 3,
+    "explanation": "ARPKD is caused by mutations in the PKHD1 gene, which encodes fibrocystin (polyductin), a membrane protein located in the primary cilia of renal collecting duct cells."
+  },
+  {
+    "id": "us_patho_L1_000004",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "U-shaped both kidneys is called:-",
+    "options": [
+      "Horseshoe kidney",
+      "Amalgamated kidney",
+      "Non-fused kidney",
+      "Ectopic kidney",
+      "Ptosed kidney"
+    ],
+    "correctIndex": 0,
+    "explanation": "Horseshoe kidney occurs when the lower poles of both kidneys fuse across the midline anterior to the lower lumbar vertebrae, creating a characteristic U-shaped appearance."
+  },
+  {
+    "id": "us_patho_L1_000005",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Adult polycystic kidney is characterized by all except:-",
+    "options": [
+      "Inherited as autosomal dominant trait",
+      "Associated with berry aneurysms",
+      "Bilateral",
+      "Shows multiple cysts communicating with pelvis",
+      "The cysts are lined by cuboidal or columnar epithelium"
+    ],
+    "correctIndex": 3,
+    "explanation": "In ADPKD, cysts arise from dilated nephron segments and become isolated structures that do NOT communicate with the renal pelvis."
+  },
+  {
+    "id": "us_patho_L1_000006",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "In childhood polycystic kidney disease, we expect to find:-",
+    "options": [
+      "Irregular outer surface",
+      "Cysts affecting any parts of the nephron",
+      "Cysts communicating with each other and with the renal pelvis",
+      "Early renal failure",
+      "Longer life expectancy"
+    ],
+    "correctIndex": 3,
+    "explanation": "Childhood PKD (ARPKD) presents early in life with diffuse involvement of collecting ducts, typically leading to early renal failure and congenital hepatic fibrosis."
+  },
+  {
+    "id": "us_patho_L1_000007",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Congenital absence of renal tissue is called:-",
+    "options": [
+      "Polycystic kidney",
+      "Agenesis",
+      "Horse-shoe kidney",
+      "Ectopic kidney",
+      "Medullary spongy kidney"
+    ],
+    "correctIndex": 1,
+    "explanation": "Renal agenesis is defined as the complete failure of embryonic kidney development, resulting in congenital absence of one or both kidneys."
+  },
+  {
+    "id": "us_patho_L1_000008",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Potter's syndrome is an example of:-",
+    "options": [
+      "Pelvic kidney",
+      "Unilateral renal agenesis",
+      "Bilateral renal agenesis",
+      "Medullary spongy kidney",
+      "Polycystic kidney"
+    ],
+    "correctIndex": 2,
+    "explanation": "Potter's syndrome classically develops as a cascade secondary to bilateral renal agenesis, which eliminates fetal urine production and causes severe oligohydramnios."
+  },
+  {
+    "id": "us_patho_L1_000009",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "In unilateral renal agenesis, the one kidney adapt by:-",
+    "options": [
+      "Metaplasia",
+      "Hormonal atrophy",
+      "Irritative hyperplasia",
+      "Hormonal hypertrophy",
+      "Compensatory hypertrophy"
+    ],
+    "correctIndex": 4,
+    "explanation": "When one kidney is absent from birth, the single remaining kidney undergoes compensatory hypertrophy to increase filtration capacity and maintain normal renal function."
+  },
+  {
+    "id": "us_patho_L1_000010",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Potter's syndrome is characterized by all except:-",
+    "options": [
+      "Unilateral renal agenesis",
+      "Low set ear",
+      "Limb deformity",
+      "Pulmonary hypoplasia",
+      "Downward slanting of eyes"
+    ],
+    "correctIndex": 0,
+    "explanation": "Potter's syndrome is caused by BILATERAL renal agenesis (or severe bilateral non-functioning dysplasia). Unilateral renal agenesis is usually asymptomatic because the other kidney compensates."
+  },
+  {
+    "id": "us_patho_L1_000011",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Failure of kidney ascent to lumbar region is known as:-",
+    "options": [
+      "Polycystic kidney",
+      "Potter's syndrome",
+      "Horse-shoe kidney",
+      "Medullary spongy kidney",
+      "Ectopic kidney"
+    ],
+    "correctIndex": 4,
+    "explanation": "An ectopic kidney is one that fails to ascend from the pelvis to its normal anatomical position in the lumbar region during embryonic development."
+  },
+  {
+    "id": "us_patho_L1_000012",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Ectopic kidney is also known as:-",
+    "options": [
+      "Lumbar kidney",
+      "Horse-shoe kidney",
+      "Spongy kidney",
+      "Pelvic kidney",
+      "Polycystic kidney"
+    ],
+    "correctIndex": 3,
+    "explanation": "Because ectopic kidneys most commonly arrest in their embryonic origin within the pelvic cavity, they are also referred to as pelvic kidneys."
+  },
+  {
+    "id": "us_patho_L1_000013",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Fusion of both kidneys at lower ends is called:-",
+    "options": [
+      "Lumbar kidney",
+      "Horse-shoe kidney",
+      "Medullary spongy kidney",
+      "Pelvic kidney",
+      "Polycystic kidney"
+    ],
+    "correctIndex": 1,
+    "explanation": "Horseshoe kidney is defined as fusion across the midline connecting the lower poles of both kidneys via an isthmus of parenchymal or fibrous tissue."
+  },
+  {
+    "id": "us_patho_L1_000014",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the followings is a common complication of horse-shoe kidney:-",
+    "options": [
+      "Renal cell carcinoma",
+      "Renal agenesis",
+      "Renal stones",
+      "Berry aneurysms",
+      "Liver cysts"
+    ],
+    "correctIndex": 2,
+    "explanation": "Anterior ureteral kinking over the isthmus leads to urinary stasis and ureteropelvic junction obstruction, predisposing to nephrolithiasis (renal stones) and infections."
+  },
+  {
+    "id": "us_patho_L1_000015",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the followings is not true about ADPKD:-",
+    "options": [
+      "Autosomal recessive",
+      "Common in adults",
+      "Any part of nephron can be affected",
+      "May be associated with berry aneurysm",
+      "Cystic outer surface"
+    ],
+    "correctIndex": 0,
+    "explanation": "ADPKD stands for Autosomal DOMINANT Polycystic Kidney Disease; it is inherited in an autosomal dominant pattern, not autosomal recessive."
+  },
+  {
+    "id": "us_patho_L1_000016",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Mutation of PKD 1 & 2 is usually associated with:-",
+    "options": [
+      "Medullary spongy kidney",
+      "Potter's syndrome",
+      "Ectopic kidney",
+      "Childhood PKD",
+      "Adult PKD"
+    ],
+    "correctIndex": 4,
+    "explanation": "Mutations in PKD1 (85% of cases) and PKD2 (15% of cases) are responsible for Autosomal Dominant (Adult) Polycystic Kidney Disease."
+  },
+  {
+    "id": "us_patho_L1_000017",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following alterations is associated with ADPKD:-",
+    "options": [
+      "Increased Na influx",
+      "Increased K influx",
+      "Increased Ca influx",
+      "Increased K efflux",
+      "Increased Cl efflux"
+    ],
+    "correctIndex": 2,
+    "explanation": "Polycystin-1 and Polycystin-2 form a primary cilia-localized ion channel complex regulating calcium transport; disruption leads to intracellular calcium dysregulation and altered cAMP signalling."
+  },
+  {
+    "id": "us_patho_L1_000018",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Berry aneurysms are associated with:-",
+    "options": [
+      "ADPKD",
+      "Ectopic kidney",
+      "Medullary spongy kidney",
+      "Renal agenesis",
+      "Horse-shoe kidney"
+    ],
+    "correctIndex": 0,
+    "explanation": "Intracranial berry aneurysms in the Circle of Willis are a well-known extrarenal vascular complication of ADPKD and can lead to subarachnoid hemorrhage."
+  },
+  {
+    "id": "us_patho_L1_000019",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the followings is not true about ADPKD:-",
+    "options": [
+      "More common than ARPKD",
+      "Autosomal dominant",
+      "Some nephrons are only involved",
+      "Smooth outer surface",
+      "May be associated with liver cysts"
+    ],
+    "correctIndex": 3,
+    "explanation": "Kidneys affected by ADPKD become markedly enlarged with a bumpy, highly irregular, bosselated surface due to thousands of protruding cysts."
+  },
+  {
+    "id": "us_patho_L1_000020",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Liver cysts are commonly associated with:-",
+    "options": [
+      "Renal agenesis",
+      "PKD",
+      "Medullary spongy kidney",
+      "Horse-shoe kidney",
+      "Ectopic kidney"
+    ],
+    "correctIndex": 1,
+    "explanation": "Polycystic liver disease (epithelial hepatic cysts) is the most frequent extrarenal manifestation of polycystic kidney disease (especially ADPKD)."
+  },
+  {
+    "id": "us_patho_L1_000021",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Mutation of PKHD is usually associated with:-",
+    "options": [
+      "Medullary spongy kidney",
+      "Potter's syndrome",
+      "Ectopic kidney",
+      "Childhood PKD",
+      "Adult PKD"
+    ],
+    "correctIndex": 3,
+    "explanation": "Mutations in the PKHD1 gene on chromosome 6 encode fibrocystin and cause Childhood/Autosomal Recessive Polycystic Kidney Disease (ARPKD)."
+  },
+  {
+    "id": "us_patho_L1_000022",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following parts is affected in ARPKD:-",
+    "options": [
+      "PCT",
+      "DCT",
+      "Collecting tubules",
+      "Loop of henle",
+      "Bowman's capsule"
+    ],
+    "correctIndex": 2,
+    "explanation": "In ARPKD, cystic dilatation selectively involves the renal collecting tubules/ducts throughout the cortex and medulla."
+  },
+  {
+    "id": "us_patho_L1_000023",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following diseases is characterized by the presence of dilated elongated channels in cortex and medulla:-",
+    "options": [
+      "Childhood PKD",
+      "Medullary spongy kidney",
+      "Adult PKD",
+      "Ectopic kidney",
+      "Potter's syndrome"
+    ],
+    "correctIndex": 0,
+    "explanation": "ARPKD (Childhood PKD) exhibits elongated, fusiform cystic channels radially arranged perpendicular to the renal capsule across both cortex and medulla."
+  },
+  {
+    "id": "us_patho_L1_000024",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the followings is not true about ARPKD:-",
+    "options": [
+      "Smooth outer surface",
+      "All nephrons are affected",
+      "Autosomal recessive",
+      "Cysts are lined by columnar epithelium",
+      "Early renal failure"
+    ],
+    "correctIndex": 3,
+    "explanation": "The dilated collecting ducts in ARPKD are lined by uniform simple cuboidal epithelium, rather than columnar epithelium."
+  },
+  {
+    "id": "us_patho_L1_000025",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Portal HTN is commonly associated with:-",
+    "options": [
+      "Renal agenesis",
+      "ARPKD",
+      "Medullary spongy kidney",
+      "Horse-shoe kidney",
+      "Ectopic kidney"
+    ],
+    "correctIndex": 1,
+    "explanation": "ARPKD is universally linked to congenital hepatic fibrosis, which leads to portal hypertension, esophageal varices, and splenomegaly."
+  },
+  {
+    "id": "us_patho_L1_000026",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Type of lining epithelium in the cysts of ARPKD:-",
+    "options": [
+      "Columnar epithelium",
+      "Simple squamous epithelium",
+      "Stratified squamous epithelium",
+      "Transitional epithelium",
+      "Cuboidal epithelium"
+    ],
+    "correctIndex": 4,
+    "explanation": "The small fusiform cysts of ARPKD represent dilated collecting tubules lined by a layer of simple cuboidal epithelial cells."
+  },
+  {
+    "id": "us_patho_L1_000027",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following diseases is caused by deficient Fibrocystin:-",
+    "options": [
+      "Potter's syndrome",
+      "Adult PKD",
+      "Childhood PKD",
+      "Medullary spongy kidney",
+      "Ectopic kidney"
+    ],
+    "correctIndex": 2,
+    "explanation": "Fibrocystin is the protein product of the PKHD1 gene; its functional deficiency leads to Childhood/Autosomal Recessive Polycystic Kidney Disease."
+  },
+  {
+    "id": "us_patho_L1_000028",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following diseases is characterized by the presence of tiny fluid-filled cysts from the tubules within the medulla:-",
+    "options": [
+      "Medullary spongy kidney",
+      "ADPKD",
+      "ARPKD",
+      "Horse-shoe kidney",
+      "Renal agenesis"
+    ],
+    "correctIndex": 0,
+    "explanation": "Medullary sponge kidney is a dysplastic defect marked by multiple cystic ectasias of the papillary collecting ducts confined exclusively to the renal medulla."
+  },
+  {
+    "id": "us_patho_L1_000029",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following diseases show sponge-like appearance of kidney:-",
+    "options": [
+      "ADPKD",
+      "ARPKD",
+      "Horse-shoe kidney",
+      "Medullary spongy kidney",
+      "Ectopic kidney"
+    ],
+    "correctIndex": 3,
+    "explanation": "Dilation of the papillary collecting ducts creates small medullary cavities that give the renal pyramids a porous, sponge-like visual texture."
+  },
+  {
+    "id": "us_patho_L1_000030",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the followings is not true about medullary spongy kidney:-",
+    "options": [
+      "Tiny fluid-filled cysts",
+      "Early chronic renal failure",
+      "Frequent UTI",
+      "Renal stones",
+      "Affects the tubules in the medulla"
+    ],
+    "correctIndex": 1,
+    "explanation": "Medullary sponge kidney is typically a benign condition that does not cause renal failure; renal function remains normal unless recurrent infection or severe stones intervene."
+  },
+  {
+    "id": "us_patho_L1_000031",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following diseases is characterized by the presence of cystic outpouching at the bottom of the ureter:-",
+    "options": [
+      "Bladder diverticulum",
+      "Varicocele",
+      "Encephalocele",
+      "Megacystis syndrome",
+      "Ureterocele"
+    ],
+    "correctIndex": 4,
+    "explanation": "A ureterocele is a congenital cystic enlargement of the submucosal terminal end of the ureter where it enters the bladder."
+  },
+  {
+    "id": "us_patho_L1_000032",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Stenosis of ureteric orifice may be associated with:-",
+    "options": [
+      "Blacker diverticulum",
+      "Neurogenic bladder",
+      "Ureterocele",
+      "Bladder Exstrophy",
+      "Megacystis syndrome"
+    ],
+    "correctIndex": 2,
+    "explanation": "Congenital narrowing (stenosis) of the ureteral orifice leads to ballooning of the distal ureter segment within the bladder wall, forming a ureterocele."
+  },
+  {
+    "id": "us_patho_L1_000033",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following diseases is characterized by herniation of bladder mucosa through defect in muscle layer:-",
+    "options": [
+      "Bladder diverticulum",
+      "Neurogenic bladder",
+      "Bladder Exstrophy",
+      "Megacystis syndrome",
+      "Ureterocele"
+    ],
+    "correctIndex": 0,
+    "explanation": "A bladder diverticulum forms when mucosa and submucosa herniate outward through focal defects or gaps in the muscular detrusor layer."
+  },
+  {
+    "id": "us_patho_L1_000034",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Vesicoureteral reflux may be associated with:-",
+    "options": [
+      "Neurogenic bladder",
+      "Ureterocele",
+      "Megacystis syndrome",
+      "Bladder diverticulum",
+      "Potter's syndrome"
+    ],
+    "correctIndex": 3,
+    "explanation": "Diverticula located near the ureterovesical junction can distort the flap-valve mechanism of the ureteric orifice, predisposing to vesicoureteral reflux (VUR)."
+  },
+  {
+    "id": "us_patho_L1_000035",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the followings is caused by failure of closure of midline from umbilicus to perineum:-",
+    "options": [
+      "Bladder diverticulum",
+      "Bladder Exstrophy",
+      "Neurogenic bladder",
+      "Megacystis syndrome",
+      "Ureterocele"
+    ],
+    "correctIndex": 1,
+    "explanation": "Bladder exstrophy is a major congenital anomaly caused by failure of anterior abdominal wall and pelvic midline closure, exposing the anterior bladder wall."
+  },
+  {
+    "id": "us_patho_L1_000036",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Epispadias is a common association with:-",
+    "options": [
+      "Ureterocele",
+      "Neurogenic bladder",
+      "Bladder diverticulum",
+      "Megacystis syndrome",
+      "Bladder exstrophy"
+    ],
+    "correctIndex": 4,
+    "explanation": "Epispadias (failure of dorsal urethral tube closure) almost universally accompanies bladder exstrophy as part of the exstrophy-epispadias complex."
+  },
+  {
+    "id": "us_patho_L1_000037",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Continuity of bladder mucosa with abdominal skin and separation of symphysis pubis are commonly associated with:-",
+    "options": [
+      "Neurogenic bladder",
+      "Megacystis syndrome",
+      "Bladder exstrophy",
+      "Ureterocele",
+      "Bladder diverticulum"
+    ],
+    "correctIndex": 2,
+    "explanation": "Bladder exstrophy features exposed bladder mucosa continuous with the lower abdominal skin, alongside separation of the pubic bones at the symphysis."
+  },
+  {
+    "id": "us_patho_L1_000038",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Pelvic surgery as imperforate anus can lead to the following lesion:-",
+    "options": [
+      "Neurogenic bladder",
+      "Megacystis syndrome",
+      "Bladder exstrophy",
+      "Ureterocele",
+      "Bladder diverticulum"
+    ],
+    "correctIndex": 0,
+    "explanation": "Surgical correction of anorectal malformations (like imperforate anus) can accidentally disrupt the pelvic autonomic nerve plexus, resulting in neurogenic bladder."
+  },
+  {
+    "id": "us_patho_L1_000039",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "A large thin-walled smooth bladder is a common finding in:-",
+    "options": [
+      "Ureterocele",
+      "Neurogenic bladder",
+      "Bladder exstrophy",
+      "Megacystis syndrome",
+      "Bladder diverticulum"
+    ],
+    "correctIndex": 3,
+    "explanation": "Megacystis syndrome is defined by massive congenital bladder distension resulting in a smooth, remarkably dilated, thin-walled urinary bladder."
+  },
+  {
+    "id": "us_patho_L1_000040",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Micro-colon & Intestinal Hypo-peristalsis are common findings in:-",
+    "options": [
+      "Ureterocele",
+      "Megacystis syndrome",
+      "Neurogenic bladder",
+      "Bladder exstrophy",
+      "Bladder diverticulum"
+    ],
+    "correctIndex": 1,
+    "explanation": "Megacystis-Microcolon-Intestinal Hypoperistalsis Syndrome (MMIHS) features massive megacystis together with small colon diameter (micro-colon) and decreased intestinal motility."
+  },
+  {
+    "id": "us_patho_L1_000041",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following bladder lesions is more common in girls:-",
+    "options": [
+      "Ureterocele",
+      "Bladder diverticulum",
+      "Neurogenic bladder",
+      "Bladder exstrophy",
+      "Megacystis syndrome"
+    ],
+    "correctIndex": 4,
+    "explanation": "Megacystis-Microcolon-Intestinal Hypoperistalsis Syndrome (MMIHS) shows a striking female predominance, affecting female newborns significantly more often than males."
+  },
+  {
+    "id": "us_patho_L1_000042",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "The exact cause of Megacystis syndrome is:-",
+    "options": [
+      "Genetic inheritance",
+      "Bacterial infection",
+      "Unknown",
+      "Environmental factors",
+      "Diabetes mellitus"
+    ],
+    "correctIndex": 2,
+    "explanation": "Although visceral smooth muscle gene mutations (such as ACTG2) are associated with some cases, the precise overall underlying cause of congenital Megacystis syndrome remains unknown."
+  },
+  {
+    "id": "us_patho_L1_000043",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following bladder lesions is a primary myo-neural defect:-",
+    "options": [
+      "Megacystis syndrome",
+      "Ureterocele",
+      "Neurogenic bladder",
+      "Bladder exstrophy",
+      "Bladder diverticulum"
+    ],
+    "correctIndex": 0,
+    "explanation": "Megacystis syndrome is considered a congenital visceral myopathy / myoneural defect causing intrinsic failure of smooth muscle contraction in the bladder and digestive tract."
+  },
+  {
+    "id": "us_patho_L1_000044",
+    "module": "US",
+    "subject": "pathology",
+    "lecture": "Lec1",
+    "question": "Which of the following bladder lesions is caused by CNS abnormalities:-",
+    "options": [
+      "Megacystis syndrome",
+      "Ureterocele",
+      "Bladder exstrophy",
+      "Neurogenic bladder",
+      "Bladder diverticulum"
+    ],
+    "correctIndex": 3,
+    "explanation": "Neurogenic bladder stems from impaired neural control resulting from central nervous system disorders (e.g., neural tube defects, spinal dysraphism, brain lesions) or nerve damage."
+  }
+]
