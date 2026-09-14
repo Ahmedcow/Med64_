@@ -1,0 +1,482 @@
+[
+  {
+    "id": "us_histo_L1_000001",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "What is the structural and functional unit of the kidney:-",
+    "options": [
+      "Uriniferous tubule",
+      "Proximal tubule",
+      "Major calyx",
+      "Distal tubule",
+      "Collecting tubule"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000002",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "What is the name of cortical tissues that lie between medullary pyramids:-",
+    "options": [
+      "Cortex cortices",
+      "Cortex proper",
+      "Duct of Bellini",
+      "Juxtaglomerular complex",
+      "Renal column of Bertini"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000003",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "What is the composition of Uriniferous tubule:-",
+    "options": [
+      "A nephron with its collecting tubule",
+      "Juxtaglomerular apparatus",
+      "Loop of Henle",
+      "Proximal convoluted tubule",
+      "Renal corpuscle"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000004",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "What is the type of epithelium lining parietal layer of bowman's capsule:-",
+    "options": [
+      "Simple columnar",
+      "Simple squamous",
+      "Stratified squamous",
+      "Podocytes",
+      "Mesangial cells"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000005",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The stroma of kidney consists of:-",
+    "options": [
+      "Medullary rays",
+      "Uriniferous tubules",
+      "Nephron and collecting tubules",
+      "Capsule and reticular tissue",
+      "Bowman's capsule"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000006",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "All of the followings are parts of the nephron except:-",
+    "options": [
+      "Renal corpuscle",
+      "Collecting tubule",
+      "Proximal convoluted tubule",
+      "Loop of Henle",
+      "Distal convoluted tubule"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000007",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The most active part of the nephron responsible for plasma dialysis is:-",
+    "options": [
+      "Renal corpuscle",
+      "PCT",
+      "Loop of Henle",
+      "DCT",
+      "Mesangium"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000008",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Renal column of Bertini is:-",
+    "options": [
+      "Part of the pyramid extends into the cortex",
+      "Part of the cortical tissue lies between the medullary pyramids",
+      "Part of the cortical tissue extends to the capsule",
+      "Part of the renal corpuscle",
+      "Large ducts draining collecting tubules"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000009",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The visceral layer of bowman's capsule is lined with:-",
+    "options": [
+      "Simple squamous cells",
+      "Simple columnar cells",
+      "Cubical cells",
+      "Podocytes",
+      "Mesangial cells"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000010",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The cell responsible for synthesis of glomerular basement membrane is:-",
+    "options": [
+      "Podocytes",
+      "Mesangial cell",
+      "Juxtaglomerular cell",
+      "Endothelial cell",
+      "Macula densa cells"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000011",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "One of the following is true about podocytes:-",
+    "options": [
+      "Large cubical cells",
+      "Their function is to reabsorb NaCl",
+      "They contain filtration slits",
+      "They line the outer layer of bowman's capsule",
+      "Stellate shaped cells"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000012",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The glomerulus E.M shows:-",
+    "options": [
+      "Fenestrated endothelium with discontinuous basement membrane",
+      "Continuous endothelium with continuous basement membrane",
+      "Fenestrated endothelium with thin continuous basement membrane",
+      "Fenestrated endothelium with thick continuous basement membrane",
+      "Continuous endothelium with discontinuous basement membrane"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000013",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The number of medullary pyramids in the medulla of kidney is:-",
+    "options": [
+      "3-5",
+      "5-10",
+      "10-15",
+      "12-15",
+      "10-18"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000014",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Cortex cortices is located:-",
+    "options": [
+      "Around medullary rays",
+      "Between medullary pyramids",
+      "Under capsule",
+      "Most inner part of kidney",
+      "At renal pelvis"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000015",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Cortex proper is located:-",
+    "options": [
+      "Around medullary rays",
+      "Between medullary pyramids",
+      "Under capsule",
+      "Most inner part of kidney",
+      "At renal pelvis"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000016",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Medullary rays represent:-",
+    "options": [
+      "Renal corpuscle",
+      "PCT",
+      "Loop of henle",
+      "Collecting ducts",
+      "DCT"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000017",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The glomerulus drains into:-",
+    "options": [
+      "Efferent arteriole",
+      "Afferent arteriole",
+      "Afferent vein",
+      "Efferent vein",
+      "Renal artery"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000018",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Lamina densa of basement membrane is:-",
+    "options": [
+      "Outer pale layer",
+      "Outer dark layer",
+      "Central dark layer",
+      "Inner dark layer",
+      "Central pale layer"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000019",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "About Malpighian corpuscles all are true except:-",
+    "options": [
+      "It is the most active part of the nephron",
+      "Its diameter ranges from 50 to 250 micrometer",
+      "It is responsible for reabsorption",
+      "It contains Bowman's capsule and glomerulus",
+      "Located at renal cortex"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000020",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Tuft of capillaries arises from the afferent arteriole is:-",
+    "options": [
+      "Glomerulus",
+      "Bowman's capsule",
+      "PCT",
+      "DCT",
+      "Loop of henle"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000021",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "What is the type of gland in the kidney:-",
+    "options": [
+      "Simple tubular gland",
+      "Simple alveolar gland",
+      "Compound alveolar gland",
+      "Compound tubular gland",
+      "Compound tubulo-alveolar gland"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000022",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "What is the double layered cup-shaped structure around the glomerulus:-",
+    "options": [
+      "PCT",
+      "Bowman's capsule",
+      "DCT",
+      "Collecting tubule",
+      "Loop of henle"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000023",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Which of the followings is a main function of podocytes:-",
+    "options": [
+      "Phagocytosis",
+      "Continuous turnover of glomerular basement membrane",
+      "Synthesis of glomerular basement membrane",
+      "Hormone secretion",
+      "Renin secretion"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000024",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The renal labyrinth refers to:-",
+    "options": [
+      "Cortex proper",
+      "Cortex cortices",
+      "Column of Bertini",
+      "Duct of Bellini",
+      "Renal corpuscle"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000025",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Which of the followings is found primarily in the medullary pyramids:-",
+    "options": [
+      "Renal corpuscle",
+      "Bowman's capsule",
+      "PCT",
+      "DCT",
+      "Collecting tubule"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000026",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The loop of henle arise from:-",
+    "options": [
+      "Collecting tubule",
+      "Renal corpuscle",
+      "DCT",
+      "PCT",
+      "Bowman's capsule"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000027",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Which of the following is true regarding glomerular BM:-",
+    "options": [
+      "Discontinuous and thick",
+      "Under E/M it is formed of 3 layers",
+      "Made of fusion of 3 membranes",
+      "Surrounds the parietal layer of bowman's capsule",
+      "All of its layers appear dark on E/M"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000028",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "Lamina lucida externa of glomerular basement membrane appears:-",
+    "options": [
+      "Outer & pale",
+      "Outer & dark",
+      "Inner & pale",
+      "Inner & dark",
+      "Central & pale"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000029",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "The minute gaps between foot like extensions of podocytes are known as:-",
+    "options": [
+      "Renal corpuscle",
+      "Mesangium",
+      "Minor process",
+      "Major process",
+      "Filtration slits"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L1_000030",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec1",
+    "question": "What is the structural and functional unit of the kidney:-",
+    "options": [
+      "Proximal tubule",
+      "Distal tubule",
+      "The nephron",
+      "Renal corpuscle",
+      "Collecting tubule"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  }
+]
