@@ -1,0 +1,402 @@
+[
+  {
+    "id": "us_histo_L3_000001",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Which of the following cells is continuation of mesangial cells:-",
+    "options": [
+      "Glomerular endothelium",
+      "Lacis cells",
+      "Podocytes",
+      "Endothelial cells",
+      "Simple cubical cells"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000002",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "What is the type of muscle in musculosa of the ureter:-",
+    "options": [
+      "Skeletal muscle",
+      "Smooth muscle",
+      "Spindle muscle",
+      "Purkinje muscle",
+      "Cardiac muscle"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000003",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "What type of tissue lines the urinary bladder:-",
+    "options": [
+      "Simple squamous epithelium",
+      "Simple cuboidal epithelium",
+      "Simple columnar epithelium",
+      "Stratified squamous epithelium",
+      "Transitional epithelium"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000004",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Which of the followings open into duct of Bellini:-",
+    "options": [
+      "Malpighian corpuscle",
+      "Proximal convoluted tubule",
+      "Loop of Henle",
+      "Distal convoluted tubule",
+      "Collecting tubule"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000005",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "All are components of juxtaglomerular complex except:-",
+    "options": [
+      "Macula densa cells",
+      "Lacis cells",
+      "Podocytes",
+      "Juxtaglomerular cells",
+      "None of the above"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000006",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Collecting tubules are lined by:-",
+    "options": [
+      "Cubical cells",
+      "Columnar cells",
+      "Flat cells",
+      "Podocytes",
+      "Squamous cells"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000007",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Ducts of Bellini are lined by:-",
+    "options": [
+      "Cubical cells",
+      "Columnar cells",
+      "Flat cells",
+      "Podocytes",
+      "Squamous cells"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000008",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "The thin part of descending and ascending loop of henle is lined by:-",
+    "options": [
+      "Transitional epithelium",
+      "Simple squamous epithelium",
+      "Podocytes",
+      "Simple cubical epithelium",
+      "Simple columnar epithelium"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000009",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "The thick part of descending and ascending loop of henle is lined by:-",
+    "options": [
+      "Transitional epithelium",
+      "Simple squamous epithelium",
+      "Podocytes",
+      "Simple cubical epithelium",
+      "Simple columnar epithelium"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000010",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Macula densa is part of:-",
+    "options": [
+      "Glomerulus",
+      "PCT",
+      "Loop of Henle",
+      "DCT",
+      "Collecting tubule"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000011",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "The loop of henle arises from:-",
+    "options": [
+      "Renal glomerulus",
+      "Renal corpuscle",
+      "PCT",
+      "DCT",
+      "Collecting tubule"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000012",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "The loop of henle drains into:-",
+    "options": [
+      "Renal glomerulus",
+      "Renal corpuscle",
+      "PCT",
+      "DCT",
+      "Collecting tubule"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000013",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Collecting tubules open in:-",
+    "options": [
+      "Ducts of Bellini",
+      "Nephrons",
+      "Major calyces",
+      "Minor calyces",
+      "Columns of Bertini"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000014",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "The part of the nephron responsible for keeping the tissue fluid in the medullary pyramids hypertonic is:-",
+    "options": [
+      "Glomerulus",
+      "PCT",
+      "Loop of Henle",
+      "DCT",
+      "Collecting tubules"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000015",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Serosa in the urinary bladder covers:-",
+    "options": [
+      "Fundus",
+      "Body",
+      "Trigon",
+      "Apex",
+      "All of the above"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000016",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Muscle layer of Ureter in upper 2\\3 is formed of:-",
+    "options": [
+      "Inner longitudinal, outer circular",
+      "Inner circular, outer longitudinal",
+      "Inner longitudinal, middle circular, outer longitudinal",
+      "Inner circular, middle longitudinal, outer circular",
+      "Inner longitudinal, middle circular, outer circular"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000017",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Muscle layer of Ureter in lower 1\\3 is formed of:-",
+    "options": [
+      "Inner longitudinal, outer circular",
+      "Inner circular, outer longitudinal",
+      "Inner longitudinal, middle circular, outer longitudinal",
+      "Inner circular, middle longitudinal, outer circular",
+      "Inner longitudinal, middle circular, outer circular"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000018",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Type of lining epithelium in ureter:-",
+    "options": [
+      "Simple columnar",
+      "Simple cuboidal",
+      "Simple squamous",
+      "Stratified squamous",
+      "Transitional"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000019",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Muscle layer of Urinary bladder is formed of:-",
+    "options": [
+      "Inner longitudinal, outer circular",
+      "Inner circular, outer longitudinal",
+      "Inner longitudinal, middle circular, outer longitudinal",
+      "Inner circular, middle longitudinal, outer circular",
+      "Inner longitudinal, middle circular, outer circular"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000020",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Juxta-glomerular cells are modified:-",
+    "options": [
+      "Smooth muscle",
+      "Skeletal muscle",
+      "DCT cells",
+      "Mesangial cells",
+      "Podocytes"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000021",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Which of the following cells are present in DCT:-",
+    "options": [
+      "Lacis cells",
+      "Juxta Glomerular cells",
+      "Podocytes",
+      "Macula densa cells",
+      "Mesangial cells"
+    ],
+    "correctIndex": 3,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000022",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Which of the following cells are present in the media of afferent arteriole:-",
+    "options": [
+      "Lacis cells",
+      "Juxta Glomerular cells",
+      "Podocytes",
+      "Macula densa cells",
+      "Mesangial cells"
+    ],
+    "correctIndex": 1,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000023",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Which of the followings cells contain secretory granules rich in renin:-",
+    "options": [
+      "Lacis cells",
+      "Macula densa cells",
+      "Juxta Glomerular cells",
+      "Podocytes",
+      "Mesangial cells"
+    ],
+    "correctIndex": 2,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000024",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "What is the shape of macula densa cells:-",
+    "options": [
+      "Columnar",
+      "Cubical",
+      "Squamous",
+      "Transitional",
+      "Stellate"
+    ],
+    "correctIndex": 0,
+    "explanation": ""
+  },
+  {
+    "id": "us_histo_L3_000025",
+    "module": "US",
+    "subject": "histology",
+    "lecture": "Lec3",
+    "question": "Which of the followings has a role in regulation of blood pressure:-",
+    "options": [
+      "Bowman's capsule",
+      "PCT",
+      "Collecting tubule",
+      "Podocytes",
+      "Juxta glomerular complex"
+    ],
+    "correctIndex": 4,
+    "explanation": ""
+  }
+]
