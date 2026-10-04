@@ -297,16 +297,16 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:600;letter-spacing:-.01em;mar
 .dashboard-progress-icon{width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--border);border-radius:14px;background:var(--panel2);color:var(--primary);flex:0 0 auto}
 .dashboard-progress-icon svg{width:25px;height:25px}
 .shortcut-arrow{font-size:28px;color:var(--muted);padding:0 6px}
-.study-chart-wrap{margin-top:14px;overflow-x:auto}
+.dashboard-spaced-review{margin-bottom:24px}.spaced-review-stats{gap:14px}.spaced-review-actions{padding-top:2px}.study-chart-wrap{margin-top:14px;overflow-x:auto;padding-bottom:4px}
 .study-chart{display:block;width:100%;min-width:640px;height:auto}
 .study-grid{stroke:var(--border);stroke-width:1;opacity:.7}
 .study-axis,.study-day{fill:var(--muted);font-size:11px;font-family:var(--font-sans)}
-.study-total{fill:var(--text);font-size:11px;font-weight:700;font-family:var(--font-sans)}
+.study-total{fill:var(--text);font-size:11px;font-weight:700;font-family:var(--font-sans)}.study-total-line{stroke:var(--primary);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}.study-total-dot{fill:var(--card);stroke:var(--primary);stroke-width:2}
 .study-bar{opacity:.95}
 .study-bar.bar-0{fill:var(--primary)}
 .study-bar.bar-1{fill:#45c98a}
 .study-bar.bar-2{fill:#ef6b73}
-.study-legend{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:6px;color:var(--muted);font-size:12px}
+.study-legend{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:12px}
 .study-legend span{display:inline-flex;align-items:center;gap:6px}
 .study-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
 .legend-total{background:var(--primary)}
@@ -915,7 +915,7 @@ function startSpacedReview(){
 function spacedReviewSummaryHTML(){
   const due=dueSpacedQuestions(), next=nextSpacedReviewDate();
   const cycle=bank.filter(q=>progress[key(q)]&&Number(progress[key(q)].attempts||0)>0).length;
-  return `<div class="card" style="margin-top:16px"><div class="category-head"><div><strong>Spaced repetition</strong><div class="mini">Review questions again at the right interval based on your previous answers.</div></div><span class="pill">${due.length} due</span></div><div class="phase2-grid" style="margin-top:12px"><div class="phase2-mini-card"><div class="phase2-stat">${due.length}</div><div class="phase2-label">Questions due now</div></div><div class="phase2-mini-card"><div class="phase2-stat">${cycle}</div><div class="phase2-label">Questions in review cycle</div></div><div class="phase2-mini-card"><div class="phase2-stat">${next?new Date(next).toLocaleDateString():'—'}</div><div class="phase2-label">Next scheduled review</div></div></div><div class="actions" style="margin-top:12px"><button class="btn primary" onclick="startSpacedReview()" ${due.length?'':'disabled'}>Start Spaced Review</button></div></div>`;
+  return `<div class="card dashboard-spaced-review" style="margin-top:16px;margin-bottom:24px"><div class="category-head"><div><strong>Spaced repetition</strong><div class="mini">Review questions again at the right interval based on your previous answers.</div></div><span class="pill">${due.length} due</span></div><div class="phase2-grid spaced-review-stats" style="margin-top:14px"><div class="phase2-mini-card"><div class="phase2-stat">${due.length}</div><div class="phase2-label">Questions due now</div></div><div class="phase2-mini-card"><div class="phase2-stat">${cycle}</div><div class="phase2-label">Questions in review cycle</div></div><div class="phase2-mini-card"><div class="phase2-stat">${next?new Date(next).toLocaleDateString():'—'}</div><div class="phase2-label">Next scheduled review</div></div></div><div class="actions spaced-review-actions" style="margin-top:16px"><button class="btn primary" onclick="startSpacedReview()" ${due.length?'':'disabled'}>Start Spaced Review</button></div></div>`;
 }
 function lecturePerformanceData(){
   const map=new Map();
@@ -953,25 +953,32 @@ function dailyGoalStreakHTML(){
 }
 function renderStudyWeekChart(){
   const data=weekStudyData();
-  const max=Math.max(1,...data.map(d=>Math.max(d.total,d.correct,d.wrong)));
-  const chartH=190, baseY=230, plotTop=28, plotH=190;
-  const barW=26, groupW=82, startX=42;
-  const bars=data.map((d,i)=>{
-    const x=startX+i*groupW;
-    const vals=[d.total,d.correct,d.wrong];
-    const rects=vals.map((v,j)=>{
-      const h=Math.max(v?4:0,Math.round((v/max)*plotH));
-      const y=baseY-h;
-      return `<rect class="study-bar bar-${j}" x="${x+j*30}" y="${y}" width="${barW}" height="${h}" rx="5"><title>${d.label}: ${v}</title></rect>`;
-    }).join('');
-    return `${rects}<text class="study-day" x="${x+38}" y="252" text-anchor="middle">${d.label}</text><text class="study-total" x="${x+38}" y="${Math.max(20,baseY-Math.max(0,Math.round((d.total/max)*plotH))-8)}" text-anchor="middle">${d.total}</text>`;
+  // True + False already equals Total. Use stacked answer bars and a Total line
+  // so the same questions are not visually counted three separate times.
+  const max=Math.max(1,...data.map(d=>Number(d.total||0)));
+  const baseY=230, plotH=190, groupW=82, startX=42, barW=34;
+  const points=[];
+  const groups=data.map((d,i)=>{
+    const x=startX+i*groupW+24;
+    const total=Number(d.total||0);
+    const correct=Math.min(total,Number(d.correct||0));
+    const wrong=Math.max(0,Math.min(total-correct,Number(d.wrong||0)));
+    const correctH=Math.round((correct/max)*plotH);
+    const wrongH=Math.round((wrong/max)*plotH);
+    const totalH=Math.round((total/max)*plotH);
+    const correctY=baseY-correctH;
+    const wrongY=correctY-wrongH;
+    const labelY=Math.max(18,baseY-totalH-10);
+    points.push(`${x+barW/2},${labelY+4}`);
+    return `${correct?`<rect class="study-bar bar-1" x="${x}" y="${correctY}" width="${barW}" height="${correctH}" rx="5"><title>${d.label}: ${correct} true</title></rect>`:''}${wrong?`<rect class="study-bar bar-2" x="${x}" y="${wrongY}" width="${barW}" height="${wrongH}" rx="5"><title>${d.label}: ${wrong} false</title></rect>`:''}<text class="study-total" x="${x+barW/2}" y="${labelY}" text-anchor="middle">${total}</text><text class="study-day" x="${x+barW/2}" y="252" text-anchor="middle">${d.label}</text>`;
   }).join('');
   const grid=[0,.25,.5,.75,1].map(t=>{
     const y=baseY-Math.round(plotH*t);
     const val=Math.round(max*t);
     return `<line class="study-grid" x1="32" y1="${y}" x2="622" y2="${y}"/><text class="study-axis" x="25" y="${y+4}" text-anchor="end">${val}</text>`;
   }).join('');
-  return `<div class="study-chart-wrap"><svg class="study-chart" viewBox="0 0 640 270" role="img" aria-label="Daily solved questions for Sunday through Saturday">${grid}${bars}</svg><div class="study-legend"><span><i class="legend-total"></i>Total solved</span><span><i class="legend-correct"></i>True</span><span><i class="legend-wrong"></i>False</span></div></div>`;
+  const line=points.length>1?`<polyline class="study-total-line" points="${points.join(' ')}" fill="none"/>${points.map(p=>{const [cx,cy]=p.split(',');return `<circle class="study-total-dot" cx="${cx}" cy="${cy}" r="3.5"/>`;}).join('')}`:'';
+  return `<div class="study-chart-wrap"><svg class="study-chart" viewBox="0 0 640 270" role="img" aria-label="Daily solved questions from Sunday through Saturday, with true and false stacked and total shown as a line">${grid}${groups}${line}</svg><div class="study-legend"><span><i class="legend-total"></i>Total solved</span><span><i class="legend-correct"></i>True</span><span><i class="legend-wrong"></i>False</span></div></div>`;
 }
 function saveFlashcardState(){
   try{ localStorage.setItem(CONFIG.flashcardStateKey, JSON.stringify(flashcardState)); }
@@ -1328,7 +1335,7 @@ function renderDashboard(){
   <h2 class="section-title">GitHub question bank</h2>
   <div class="card">
     <div id="syncStatus">Source: <b>questions/index.json</b>${lastSync?` · Last successful sync: ${lastSync.toLocaleString()}`:''}</div>
-    <div class="actions" style="margin-top:12px"><button class="btn primary" onclick="loadFromGitHub()">Refresh from GitHub</button><button class="btn" onclick="go('import')">Upload / Update Questions</button><button class="btn primary btn-lg" onclick="go('exam')">Start an Exam</button></div>
+    <div class="actions" style="margin-top:16px"><button class="btn primary" onclick="loadFromGitHub()">Refresh from GitHub</button><button class="btn" onclick="go('import')">Upload / Update Questions</button><button class="btn primary btn-lg" onclick="go('exam')">Start an Exam</button></div>
   </div>`;
   document.getElementById('app').innerHTML=layout('Dashboard','Your personal progress is stored in this browser.',body,dashboardThemeToggleHTML());
 }
@@ -2442,7 +2449,7 @@ function renderMistakes(){
   const weakHtml=weakTopics.length?weakTopics.map((t,i)=>`<div class="category-card" style="margin-top:10px"><div class="category-head"><div><b>#${i+1} ${esc(t.lecture)}</b><div class="mini">${esc(t.module)} · ${esc(t.subject)} · ${t.questions} question${t.questions===1?'':'s'}</div></div><span class="pill">${t.errorRate}% weak</span></div><div class="mini" style="margin-top:8px">${t.wrong} wrong · ${t.correct} correct · ${t.attempts} attempts</div><div class="bar" style="margin-top:8px"><i style="width:${Math.min(100,t.errorRate)}%"></i></div></div>`).join(''):'<div class="empty">No weak topics yet. Answer some questions incorrectly to build your weakness analytics.</div>';
   const questionHtml=wrong.length?wrong.map(q=>`<div class="category-card"><div class="category-head"><b>${esc(q.question)}</b><span class="pill">${progress[key(q)].wrong} wrong</span></div><div class="mini">${esc(q.module)} · ${esc(q.subject)} · ${esc(q.lecture)} · Correct: ${esc(q.options[q.correctIndex])}</div></div>`).join(''):'<div class="empty">No mistakes yet. Great work.</div>';
   const body=`<div class="card"><div class="category-head"><div><strong>Weak topics</strong><div class="mini">Topics are ranked from most weak to least weak using wrong answers ÷ attempts.</div></div><span class="pill">${weakTopics.length} topics</span></div>${weakHtml}</div>
-  <div class="card" style="margin-top:16px"><div class="category-head"><strong>${wrong.length} questions in your mistakes bank</strong><span class="mini">Wrong answers are retained locally.</span></div><div style="margin-top:14px">${questionHtml}</div>${wrong.length?`<div class="actions" style="margin-top:12px"><button class="btn primary" onclick="startExam(bank.filter(q=>progress[key(q)]&&progress[key(q)].wrong>0))">Practice Mistakes</button></div>`:''}</div>`;
+  <div class="card" style="margin-top:16px"><div class="category-head"><strong>${wrong.length} questions in your mistakes bank</strong><span class="mini">Wrong answers are retained locally.</span></div><div style="margin-top:14px">${questionHtml}</div>${wrong.length?`<div class="actions" style="margin-top:16px"><button class="btn primary" onclick="startExam(bank.filter(q=>progress[key(q)]&&progress[key(q)].wrong>0))">Practice Mistakes</button></div>`:''}</div>`;
   document.getElementById('app').innerHTML=layout('Mistakes','Review incorrect questions and see your weakest topics ranked first.',body);
 }
 
@@ -2474,7 +2481,7 @@ function filterBank(resetPage=true){
 }
 
 function renderImport(){
-  if(!currentUser){ document.getElementById('app').innerHTML=layout('Admin','Question management is restricted to administrators.',`<div class="card"><div class="notice error">Please sign in to an administrator account from the Account page.</div><div class="actions" style="margin-top:12px"><button class="btn primary" onclick="go('account')">Go to Account</button></div></div>`); return; }
+  if(!currentUser){ document.getElementById('app').innerHTML=layout('Admin','Question management is restricted to administrators.',`<div class="card"><div class="notice error">Please sign in to an administrator account from the Account page.</div><div class="actions" style="margin-top:16px"><button class="btn primary" onclick="go('account')">Go to Account</button></div></div>`); return; }
   if(!isAdmin){ document.getElementById('app').innerHTML=layout('Admin','Restricted area',`<div class="card"><div class="notice error">Your account does not have administrator permissions.</div><div class="mini" style="margin-top:8px">Only accounts listed in the Supabase admin_users table can manage the question bank.</div></div>`); return; }
   const body=`<div class="grid two">
     <div class="card">
@@ -2544,7 +2551,7 @@ function renderImport(){
       <div class="field"><label>Notification title</label><input id="adminNoticeTitle" placeholder="e.g. Important announcement"></div>
       <div class="field"><label>Message</label><textarea id="adminNoticeMessage" placeholder="Write the message for students…" style="min-height:90px;font-family:var(--font-sans);font-size:14px"></textarea></div>
     </div>
-    <div class="actions" style="margin-top:12px"><button class="btn primary" onclick="publishDashboardNotification()">Publish notification</button><button class="btn" onclick="loadAdminNotifications()">Refresh notifications</button></div>
+    <div class="actions" style="margin-top:16px"><button class="btn primary" onclick="publishDashboardNotification()">Publish notification</button><button class="btn" onclick="loadAdminNotifications()">Refresh notifications</button></div>
     <div id="adminNotifications" style="margin-top:14px"></div>
   </div>
 
@@ -2984,7 +2991,7 @@ async function renderAdminAnalytics(){
     <div class="card stat"><div class="label">Signed-in submissions</div><div class="value">${Number(analyticsSummary.signedIn||0)}</div><div class="mini">Linked to Supabase accounts</div></div>
     <div class="card stat"><div class="label">Non-signed-in submissions</div><div class="value">${Number(analyticsSummary.anonymous||0)}</div><div class="mini">Anonymous visitor submissions</div></div>
   </div>
-  <div class="card" style="margin-top:16px"><div class="category-head"><div><strong>Question bank quality</strong><div class="mini">Difficulty distribution and aggregate performance signals.</div></div><button class="btn" onclick="renderAdminAnalytics()">Refresh</button></div><div class="phase2-grid" style="margin-top:12px">${difficultyCards||'<div class="empty">No questions loaded.</div>'}</div></div>
+  <div class="card" style="margin-top:16px"><div class="category-head"><div><strong>Question bank quality</strong><div class="mini">Difficulty distribution and aggregate performance signals.</div></div><button class="btn" onclick="renderAdminAnalytics()">Refresh</button></div><div class="phase2-grid" style="margin-top:14px">${difficultyCards||'<div class="empty">No questions loaded.</div>'}</div></div>
   <div class="card" style="margin-top:16px"><div class="category-head"><strong>Hardest questions</strong><span class="mini">Lowest aggregate accuracy · minimum 3 attempts</span></div><div style="margin-top:10px;overflow-x:auto"><table class="phase2-table"><thead><tr><th>Question</th><th>Attempts</th><th>Correct</th><th>Accuracy</th></tr></thead><tbody>${hardest}</tbody></table></div></div>
   <div class="card" style="margin-top:16px"><div class="category-head"><strong>Reported questions</strong><span class="mini">Question-quality signals from student reports</span></div><div style="margin-top:10px;overflow-x:auto"><table class="phase2-table"><thead><tr><th>Question ID</th><th>Reports</th><th>Open</th><th>Resolved</th></tr></thead><tbody>${reported}</tbody></table></div></div>
   <div class="card" style="margin-top:16px"><div class="category-head"><strong>Submission coverage</strong><button class="btn" onclick="renderAdminAnalytics()">Refresh</button></div><p class="mini" style="margin:8px 0 0">This page is restricted to administrators. Anonymous exams are counted when Supabase is connected and the analytics migration has been applied. Aggregate question-quality data uses the Phase 2 Supabase function.</p></div>`;
@@ -3471,7 +3478,7 @@ Rules:
     if(resultBox) resultBox.innerHTML=`<div class="card" style="margin-top:14px"><div class="notice ok">Generated ${stamped.length} question${stamped.length===1?'':'s'} from ${sourceType==='website'?'your website question bank':'AI medical knowledge'}.</div>
     <div class="mini" style="margin-top:8px">${esc(module+' AI generated')} · ${esc(subject)} · ${esc(lecture)} · ${esc(aiProviderLabel(aiSettings.provider))}</div>
     <div style="margin-top:12px">${stamped.map(q=>aiQuestionPreviewCard(q)).join('')}</div>
-    <div class="actions" style="margin-top:12px"><button class="btn primary" onclick="go('aiquestions')">Review in AI Questions</button></div></div>`;
+    <div class="actions" style="margin-top:16px"><button class="btn primary" onclick="go('aiquestions')">Review in AI Questions</button></div></div>`;
     toast(`Generated ${stamped.length} questions with ${aiProviderLabel(aiSettings.provider)}.`,'ok');
   }catch(e){
     if(resultBox) resultBox.innerHTML=`<div class="card" style="margin-top:14px"><div class="notice error">Generation failed: ${esc(e.message)}</div></div>`;
@@ -3546,10 +3553,10 @@ function renderAIQuestions(){
     </div>
     <div class="field" style="margin-top:10px"><label>Question source</label><select id="genSourceType" onchange="updateAIGeneratorSourceUI()"><option value="knowledge">AI medical knowledge</option><option value="website">Questions in this website</option></select></div>
     <div id="genSourceInfo" class="notice" style="margin-top:12px">The AI will create original higher-order questions using medical knowledge for the selected lecture.</div>
-    <div class="actions" style="margin-top:12px"><button class="btn primary" id="genBtn" onclick="generateAIQuestions()">Generate questions</button></div><div id="genResult"></div>
+    <div class="actions" style="margin-top:16px"><button class="btn primary" id="genBtn" onclick="generateAIQuestions()">Generate questions</button></div><div id="genResult"></div>
   </div>`;
   const body=`${generator}<div class="card" style="margin-top:16px"><div class="category-head"><strong>${aiQuestions.length} AI-generated question${aiQuestions.length===1?'':'s'}</strong><span class="mini">Admin-only question bank.</span></div>
-  ${aiQuestions.length?`<div class="actions" style="margin-top:12px"><button class="btn primary" onclick="startExam(aiQuestions,null,'AI questions practice')">Practice these questions</button><button class="btn ok" onclick="addAllAIQuestionsToBank()">Add all to Question Bank</button><button class="btn primary" onclick="uploadAIQuestionsToSupabase()">Upload to Supabase</button><button class="btn" onclick="exportAIQuestions()">Export as JSON</button><button class="btn danger" onclick="clearAllAIQuestions()">Delete all</button></div>`:''}</div>
+  ${aiQuestions.length?`<div class="actions" style="margin-top:16px"><button class="btn primary" onclick="startExam(aiQuestions,null,'AI questions practice')">Practice these questions</button><button class="btn ok" onclick="addAllAIQuestionsToBank()">Add all to Question Bank</button><button class="btn primary" onclick="uploadAIQuestionsToSupabase()">Upload to Supabase</button><button class="btn" onclick="exportAIQuestions()">Export as JSON</button><button class="btn danger" onclick="clearAllAIQuestions()">Delete all</button></div>`:''}</div>
   <div style="margin-top:16px">${aiQuestions.length?aiQuestions.slice().reverse().map(q=>renderAIQuestionRow(q)).join(''):'<div class="card empty">No AI questions yet. Use the generator above.</div>'}</div>`;
   document.getElementById('app').innerHTML=layout('AI Questions','Admin-only generator and AI question bank.',body);
 }
