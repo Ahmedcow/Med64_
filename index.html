@@ -3021,8 +3021,8 @@ function printAdminQuestionBankPDF(){
     .medex-print-title span{display:block;font-size:8.5pt;font-weight:800;color:#0c7c8c;margin-top:1mm}
     .medex-print-meta{font-family:Arial,sans-serif;font-size:7.4pt;line-height:1.35;color:#5b6b72;text-align:right}
     .medex-print-meta b{color:#101826}
-    .medex-print-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4mm;flex:1;min-height:0;overflow:hidden}
-    .medex-print-column{display:flex;flex-direction:column;gap:1.35mm;min-width:0;min-height:0;overflow:hidden}
+    .medex-print-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4mm;flex:1 1 auto;min-height:0;height:auto;overflow:hidden}
+    .medex-print-column{display:flex;flex-direction:column;gap:1.35mm;min-width:0;min-height:0;height:100%;overflow:hidden}
     .medex-print-q{display:grid;grid-template-columns:minmax(0,1fr) 10mm;width:100%;border:1px solid #7f9da2;background:#fff;break-inside:avoid;page-break-inside:avoid;flex:0 0 auto}
     .medex-print-qbody{padding:1.75mm 2.25mm;min-width:0}
     .medex-print-qtext{font-family:Arial,sans-serif;font-size:8.15pt;line-height:1.16;font-weight:700;margin-bottom:1.15mm;color:#101826}
@@ -3052,23 +3052,60 @@ function printAdminQuestionBankPDF(){
     function makeMeasure(g){
       const page=document.createElement('section'); page.className='medex-print-page measure-page';
       page.innerHTML=header(g)+'<div class="medex-print-columns"><div class="medex-print-column" id="measureCol"></div><div class="medex-print-column"></div></div>'+footer(g,1,1,g.rows.length);
-      document.body.appendChild(page); return page;
+      document.body.appendChild(page);
+      return page;
+    }
+    function measureQuestion(col,q){
+      const holder=document.createElement('div');
+      holder.innerHTML=qHTML(q);
+      const article=holder.firstElementChild;
+      col.appendChild(article);
+      // Force layout before reading height. This is the real printed height
+      // of the question at the exact A4 column width.
+      const h=article.getBoundingClientRect().height;
+      article.remove();
+      return h;
     }
     function packGroup(g){
-      const measure=makeMeasure(g); const col=measure.querySelector('#measureCol');
-      const available=col.clientHeight; const gap=parseFloat(getComputedStyle(col).rowGap||getComputedStyle(col).gap||'0');
-      const pages=[]; let left=[],right=[],leftH=0,rightH=0;
+      const measure=makeMeasure(g);
+      const columns=measure.querySelector('.medex-print-columns');
+      const col=measure.querySelector('#measureCol');
+      const available=Math.max(1, columns.getBoundingClientRect().height);
+      const styles=getComputedStyle(col);
+      const gap=parseFloat(styles.rowGap||styles.gap||'0')||0;
+      // Keep a small physical safety margin so browser PDF rounding can never
+      // clip the final line of a question at the bottom of a column.
+      const safe=available-2.2;
+      const pages=[];
+      let left=[],right=[],leftH=0,rightH=0;
+      const pushPage=()=>{
+        if(left.length||right.length) pages.push({g,left,right});
+        left=[];right=[];leftH=0;rightH=0;
+      };
       for(const q of g.rows){
-        const node=document.createElement('div'); node.innerHTML=qHTML(q); const article=node.firstElementChild; col.appendChild(article);
-        const h=article.getBoundingClientRect().height; article.remove();
-        if(!left.length){left.push(q);leftH=h;continue;}
-        if(leftH+gap+h<=available+0.5){left.push(q);leftH+=gap+h;continue;}
-        if(!right.length){right.push(q);rightH=h;continue;}
-        if(rightH+gap+h<=available+0.5){right.push(q);rightH+=gap+h;continue;}
-        pages.push({g,left,right}); left=[q]; right=[]; leftH=h; rightH=0;
+        const h=measureQuestion(col,q);
+        const fits=(used,hv)=>used===0 ? h<=safe : used+gap+h<=safe;
+        if(fits(leftH,h)){
+          left.push(q); leftH=leftH===0?h:leftH+gap+h; continue;
+        }
+        if(fits(rightH,h)){
+          right.push(q); rightH=rightH===0?h:rightH+gap+h; continue;
+        }
+        // Neither column has enough room: finish this A4 page and start a
+        // fresh one. Never put an over-height question into a full column.
+        if(left.length||right.length) pushPage();
+        if(h<=safe){
+          left=[q]; leftH=h;
+        }else{
+          // Extremely long questions are given a dedicated column and the
+          // print font is allowed to wrap naturally; this is the only case
+          // where the question may occupy the full available column.
+          left=[q]; leftH=h;
+        }
       }
-      if(left.length||right.length)pages.push({g,left,right});
-      measure.remove(); return pages;
+      pushPage();
+      measure.remove();
+      return pages;
     }
     function build(){
       const pages=[]; payload.groups.forEach(g=>pages.push(...packGroup(g)));
