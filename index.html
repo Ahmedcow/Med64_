@@ -1729,9 +1729,31 @@ function updateSupportUnreadDot(show){
   const host=document.querySelector('[data-contact-medex]');
   if(host){const dot=document.createElement('span');dot.className='support-unread-dot';dot.title='New message from MedEx team';dot.setAttribute('aria-label','New message from MedEx team');host.appendChild(dot);}
 }
+function leaderboardIsCurrentParticipant(r){
+  const type=String(r.participant_type||'user');
+  const id=String(r.participant_id||'');
+  return type==='visitor'
+    ? (!currentUser && !!getVisitorId() && id===String(getVisitorId()))
+    : (!!currentUser && id===String(currentUser.id));
+}
+function leaderboardRowHTML(r,index){
+  const me=leaderboardIsCurrentParticipant(r);
+  const type=String(r.participant_type||'user');
+  const answered=Number(r.answered_count||0);
+  const correct=Number(r.correct_count||0);
+  const acc=answered?pct(correct,answered):0;
+  const label=type==='visitor'?'Visitor':'Student';
+  const rank=Number(r.rank||index+1);
+  return `<div class="leaderboard-row ${me?'leaderboard-me':''}">
+    <div class="leaderboard-rank">#${rank}</div>
+    <div><div class="leaderboard-name">${esc(r.display_name||'Anonymous')} ${me?'<span class="pill" style="margin-left:6px">You</span>':''}</div><div class="mini">${label} · ${answered} answered</div></div>
+    <div class="leaderboard-score">${correct} true</div>
+    <div class="leaderboard-accuracy">${acc}% accuracy</div>
+  </div>`;
+}
 function renderLeaderboard(){
-  const body=`<div class="card"><div class="category-head"><div><strong>Top Users</strong><div class="mini">One unified ranking for signed-in users and visitors. Everyone competes together.</div></div><button class="btn" onclick="refreshUnifiedLeaderboard()">Refresh</button></div><div id="leaderboardContent" style="margin-top:14px"><div class="empty">Loading leaderboard…</div></div></div>`;
-  document.getElementById('app').innerHTML=layout('Top Users','All MedEx participants ranked together by correct answers.',body);
+  const body=`<div class="card"><div class="category-head"><div><strong>Top Students</strong><div class="mini">Top 10 students and visitors, plus your own rank if you are outside the top 10.</div></div><button class="btn" onclick="refreshUnifiedLeaderboard()">Refresh</button></div><div id="leaderboardContent" style="margin-top:14px"><div class="empty">Loading leaderboard…</div></div></div>`;
+  document.getElementById('app').innerHTML=layout('Top Students','One unified ranking for signed-in students and visitors, ranked by correct answers.',body);
   refreshUnifiedLeaderboard();
 }
 
@@ -1740,34 +1762,33 @@ async function refreshUnifiedLeaderboard(){
   if(!host)return;
   host.innerHTML='<div class="empty">Updating leaderboard…</div>';
   const data=await loadLeaderboard();
-  if(data?.error){
-    host.innerHTML=`<div class="notice error">Could not load leaderboard: ${esc(data.error)}</div>`;
-    return;
-  }
-  const rows=Array.isArray(data?.participants)?data.participants:[];
-  if(!rows.length){
-    host.innerHTML='<div class="empty">No ranked participants yet.</div>';
-    return;
-  }
-  const html=rows.map((r,i)=>{
-    const type=String(r.participant_type||'user');
-    const id=String(r.participant_id||'');
-    const me=type==='visitor'
-      ? (!currentUser && id===String(getVisitorId()))
-      : (!!currentUser && id===String(currentUser.id));
-    const answered=Number(r.answered_count||0);
-    const correct=Number(r.correct_count||0);
-    const acc=answered?pct(correct,answered):0;
-    const label=type==='visitor'?'Visitor':'User';
-    const rank=Number(r.rank||i+1);
-    return `<div class="leaderboard-row ${me?'leaderboard-me':''}">
-      <div class="leaderboard-rank">#${rank}</div>
-      <div><div class="leaderboard-name">${esc(r.display_name||'Anonymous')} ${me?'<span class="pill" style="margin-left:6px">You</span>':''}</div><div class="mini">${label} · ${answered} answered</div></div>
-      <div class="leaderboard-score">${correct} true</div>
-      <div class="leaderboard-accuracy">${acc}% accuracy</div>
-    </div>`;
-  }).join('');
-  host.innerHTML=`<div class="category-card"><div class="category-head"><strong>All Participants</strong><span class="pill">${rows.length}</span></div>${html}</div><div class="mini" style="margin-top:10px">Users and visitors are ranked together. Ranking: correct answers → answered questions → name. Updated ${data.updatedAt?new Date(data.updatedAt).toLocaleString():'now'}.</div>`;
+  if(!document.getElementById('leaderboardContent'))return;
+  if(data?.error){host.innerHTML=`<div class="notice error">Could not load leaderboard: ${esc(data.error)}</div>`;return;}
+  const rows=(Array.isArray(data?.participants)?data.participants:[]).slice().sort((a,b)=>Number(a.rank||0)-Number(b.rank||0));
+  if(!rows.length){host.innerHTML='<div class="empty">No ranked participants yet.</div>';return;}
+  const topTen=rows.slice(0,10);
+  const me=rows.find(leaderboardIsCurrentParticipant);
+  const currentOutsideTopTen=me&&!topTen.some(r=>leaderboardIsCurrentParticipant(r));
+  const shown=[...topTen];
+  if(currentOutsideTopTen)shown.push(me);
+  const html=shown.map((r,i)=>leaderboardRowHTML(r,rows.indexOf(r))).join('');
+  host.innerHTML=`<div class="category-card"><div class="category-head"><strong>Top 10 Students</strong><span class="pill">${Math.min(10,rows.length)}</span></div>${html}</div>${currentOutsideTopTen?'<div class="mini" style="margin-top:12px">Your rank is shown below the top 10.</div>':''}<div class="mini" style="margin-top:10px">Students and visitors are ranked together by correct answers, then answered questions, then name. Updated ${data.updatedAt?new Date(data.updatedAt).toLocaleString():'now'}.</div>`;
+}
+async function refreshDashboardLeaderboardPreview(){
+  const host=document.getElementById('dashboardLeaderboardPreview');
+  if(!host)return;
+  host.innerHTML='<div class="mini" style="margin-top:10px">Loading top students…</div>';
+  const data=await loadLeaderboard();
+  if(!document.getElementById('dashboardLeaderboardPreview'))return;
+  if(data?.error){host.innerHTML='<div class="mini" style="margin-top:10px">Leaderboard is temporarily unavailable.</div>';return;}
+  const rows=(Array.isArray(data?.participants)?data.participants:[]).slice().sort((a,b)=>Number(a.rank||0)-Number(b.rank||0));
+  if(!rows.length){host.innerHTML='<div class="mini" style="margin-top:10px">No ranked students yet.</div>';return;}
+  const topThree=rows.slice(0,3);
+  const me=rows.find(leaderboardIsCurrentParticipant);
+  const meOutsideTopThree=me&&!topThree.some(r=>leaderboardIsCurrentParticipant(r));
+  const shown=[...topThree];
+  if(meOutsideTopThree)shown.push(me);
+  host.innerHTML=`<div style="margin-top:12px;border-top:1px solid var(--line)">${shown.map(r=>leaderboardRowHTML(r,rows.indexOf(r))).join('')}</div>${meOutsideTopThree?'<div class="mini" style="margin-top:7px">Your current rank is included below the top 3.</div>':''}`;
 }
 
 function renderDashboard(){
@@ -1779,7 +1800,7 @@ function renderDashboard(){
   ${siteNotificationsHTML()}
   ${visitorIdentity}
   ${dailyGoalStreakHTML()}
-  <div class="card dashboard-leaderboard-shortcut dashboard-progress-shortcut" style="margin-bottom:12px;cursor:pointer" onclick="go('leaderboard')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')go('leaderboard')"><div class="dashboard-leaderboard-icon">🏆</div><div style="flex:1"><strong>Top Users</strong><div class="mini" style="margin-top:4px">See all users and visitors ranked together by true answers.</div></div><span class="shortcut-arrow" aria-hidden="true">→</span></div>
+  <div class="card dashboard-leaderboard-shortcut dashboard-progress-shortcut" style="margin-bottom:12px;cursor:pointer" onclick="go('leaderboard')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')go('leaderboard')"><div class="dashboard-leaderboard-icon">🏆</div><div style="flex:1;min-width:0"><strong>Top Students</strong><div class="mini" style="margin-top:4px">Top 3 students and your current rank.</div><div id="dashboardLeaderboardPreview" onclick="event.stopPropagation()"><div class="mini" style="margin-top:10px">Loading top students…</div></div></div><span class="shortcut-arrow" aria-hidden="true">→</span></div>
   <div class="card dashboard-progress-shortcut" style="margin-bottom:16px;cursor:pointer" onclick="go('progress')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')go('progress')">
     <div class="dashboard-progress-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,17 8,11 12,14 21,5"/><polyline points="15,5 21,5 21,11"/><line x1="3" y1="20" x2="21" y2="20"/></svg></div>
     <div style="flex:1"><strong>Progress & Accuracy</strong><div class="mini" style="margin-top:4px">View your daily solved, true and false questions.</div></div>
@@ -1818,6 +1839,7 @@ function renderDashboard(){
     <div class="actions" style="margin-top:16px"><button class="btn primary" onclick="loadQuestions()">Refresh from Supabase</button><button class="btn" onclick="go('import')">Upload / Update Questions</button><button class="btn primary btn-lg" onclick="go('exam')">Start an Exam</button></div>
   </div>`;
   document.getElementById('app').innerHTML=layout(welcomeTitle,currentUser?'Your personal progress and performance.':'Your visitor progress is synced to this device and Supabase when connected.',body);
+  refreshDashboardLeaderboardPreview();
 }
 
 function examPathKey(type,module='',subject='',lecture=''){
