@@ -604,6 +604,22 @@ html[data-theme="dark"] input,html[data-theme="dark"] textarea{background:var(--
 </style>
 
 <style>
+/* Dashboard polish: compact visitor name form and use clear study icons. */
+.visitor-welcome{padding:12px 14px!important}
+.visitor-welcome .category-head{gap:10px;align-items:center}
+.visitor-welcome .category-head>div{min-width:0}
+.visitor-welcome .category-head strong{font-size:13px}
+.visitor-welcome .category-head .mini{font-size:10.5px;line-height:1.4;max-width:560px}
+.visitor-name-form{margin-top:9px!important;gap:7px;align-items:flex-end}
+.visitor-name-form .field{flex:0 1 250px;min-width:150px;max-width:280px;gap:4px}
+.visitor-name-form .field label{font-size:10.5px;margin-bottom:2px}
+.visitor-name-form input{min-height:36px;padding:8px 10px;font-size:12px}
+.visitor-name-form .btn{min-height:36px;padding:8px 12px;font-size:11px}
+.dashboard-action-icon svg{display:block;width:23px;height:23px}
+.dashboard-action.exam .dashboard-action-icon{background:var(--primary-soft);color:var(--primary)}
+.dashboard-action.cards .dashboard-action-icon{background:rgba(111,83,174,.12);color:#7960b1}
+@media(max-width:600px){.visitor-welcome{padding:10px 11px!important}.visitor-name-form .field{flex:1 1 165px;max-width:none;min-width:0}.visitor-name-form .btn{flex:0 0 auto}}
+
 /* v41.54 simple layout cleanup */
 /* Keep the full platform name in the sidebar only; the upper bar stays compact. */
 .topbar-brand{font-weight:800}
@@ -632,6 +648,12 @@ html[data-theme="dark"] input,html[data-theme="dark"] textarea{background:var(--
 .phase2-library-main .phase2-note{min-height:34px!important;padding:6px!important}
 @media(max-width:1050px){.phase2-library-main #libraryResults{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:850px){.phase2-library-grid{grid-template-columns:1fr!important}.phase2-library-side{position:static}.phase2-library-main #libraryResults{grid-template-columns:1fr}}
+
+/* Dashboard refresh: use the existing MedEx teal/blue palette and both themes. */
+.dashboard-section{margin:22px 0 26px}.dashboard-section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 12px}.dashboard-section-heading h2{font-family:var(--font-serif);font-size:22px;font-weight:600;letter-spacing:-.02em;margin:3px 0 0}.dashboard-section-heading p{font-size:12px;color:var(--muted);margin:5px 0 0}.dashboard-eyebrow{display:block;font-size:9.5px;font-weight:800;letter-spacing:.13em;color:var(--primary);text-transform:uppercase}.dashboard-section-note{font-size:11px;color:var(--muted)}.dashboard-actions-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.dashboard-action{min-width:0;display:flex;align-items:center;gap:11px;padding:14px 12px;text-align:left;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--text);box-shadow:var(--shadow-sm);transition:transform .15s,border-color .15s,background .15s}.dashboard-action:hover{transform:translateY(-2px);border-color:rgba(var(--primary-rgb),.55);background:var(--primary-soft)}.dashboard-action-icon{width:39px;height:39px;flex:0 0 39px;display:grid;place-items:center;border-radius:12px;background:var(--primary-soft);color:var(--primary);font-size:23px;font-weight:700}.dashboard-action.cards .dashboard-action-icon{background:rgba(111,83,174,.12);color:#7960b1}.dashboard-action.mistakes .dashboard-action-icon{background:var(--danger-soft);color:var(--danger)}.dashboard-action.library .dashboard-action-icon{background:var(--ok-soft);color:var(--ok)}.dashboard-action-copy{display:flex;flex-direction:column;gap:4px;min-width:0}.dashboard-action-copy b{font-size:12px;line-height:1.35}.dashboard-action-copy small{font-size:10px;line-height:1.45;color:var(--muted)}.dashboard-action-arrow{margin-left:auto;color:var(--primary);font-size:18px}.dashboard-stat-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.dashboard-stat-card{position:relative;min-width:0;padding:15px 16px 14px;border-top:3px solid var(--primary);background:linear-gradient(160deg,var(--card),rgba(var(--primary-rgb),.035))}.dashboard-stat-card .value{font-size:25px}.dashboard-stat-symbol{width:30px;height:30px;display:grid;place-items:center;margin-bottom:10px;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-size:19px;font-weight:800}.dashboard-section-link{flex:0 0 auto;font-size:11px!important;padding:8px 10px!important;white-space:nowrap}.dashboard-weak-card{padding:4px 14px}.dashboard-weak-row{display:flex;align-items:center;gap:12px;padding:12px 0}.dashboard-weak-row+.dashboard-weak-row{border-top:1px solid var(--line)}.dashboard-weak-rank{width:29px;height:29px;display:grid;place-items:center;flex:0 0 29px;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:800}.dashboard-weak-copy{flex:1;min-width:0}.dashboard-weak-copy strong{font-size:12.5px}.dashboard-weak-copy .bar{margin-top:7px;height:5px}.dashboard-practice-btn{flex:0 0 auto;font-size:11px!important;padding:8px 12px!important}.dashboard-leaderboard-card{padding:14px 16px}.dashboard-leaderboard-card .leaderboard-row{padding:10px 0}.dashboard-leaderboard-card .dashboard-leaderboard-shortcut{padding-bottom:10px;border-bottom:1px solid var(--line)}.dashboard-modules-details,.dashboard-sync-details{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}.dashboard-modules-details>summary,.dashboard-sync-details>summary{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;list-style:none;font-size:12.5px;font-weight:700}.dashboard-modules-details>summary::-webkit-details-marker,.dashboard-sync-details>summary::-webkit-details-marker{display:none}.dashboard-modules-details>summary:after,.dashboard-sync-details>summary:after{content:'+';color:var(--primary);font-size:20px;font-weight:500}.dashboard-modules-details[open]>summary:after,.dashboard-sync-details[open]>summary:after{content:'−'}.dashboard-modules-grid{padding:0 12px 12px}.dashboard-module-card{padding:14px}.dashboard-sync-details>.card{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;box-shadow:none}.dashboard-contact-section{margin-top:26px}.dashboard-sync-section{margin-top:8px}
+@media(max-width:1050px){.dashboard-actions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.dashboard-section{margin:18px 0 22px}.dashboard-section-heading{align-items:flex-start}.dashboard-section-heading h2{font-size:20px}.dashboard-section-note{display:none}.dashboard-action{padding:12px 10px;gap:9px}.dashboard-action-icon{width:34px;height:34px;flex-basis:34px;font-size:20px}.dashboard-action-copy b{font-size:11px}.dashboard-action-copy small{font-size:9.5px}.dashboard-action-arrow{font-size:16px}.dashboard-stat-card{padding:12px}.dashboard-stat-card .value{font-size:22px}.dashboard-stat-symbol{margin-bottom:7px}.dashboard-section-link{font-size:10px!important;padding:7px 8px!important}.dashboard-weak-row{gap:8px}.dashboard-practice-btn{padding:7px 9px!important}.dashboard-leaderboard-card{padding:12px}.dashboard-modules-grid{grid-template-columns:1fr!important}}
+
 </style>
 </head>
 <body>
@@ -1796,52 +1818,38 @@ function renderDashboard(){
   setTimeout(()=>{updateSupportUnreadDot(false);setNotificationAppBadge(notificationUnreadCount(weeklyNotificationRows()));updateTopbarControls();},0);
   const welcomeTitle=currentUser ? 'Dashboard' : (getVisitorName() ? `Welcome back, ${esc(getVisitorName())}` : 'Welcome to MedEx');
   const visitorIdentity=!currentUser ? `<div class="card visitor-welcome" style="margin-bottom:16px"><div class="category-head"><div><strong>${getVisitorName()?`Welcome back, ${esc(getVisitorName())}`:'Set your visitor name'}</strong><div class="mini" style="margin-top:4px">${getVisitorName()?'Your visitor progress and leaderboard score are synced to Supabase.':'Choose a name so MedEx can keep your visitor progress and show you correctly on the leaderboard.'}</div></div><span class="pill">Visitor</span></div><div class="visitor-name-form" style="margin-top:12px"><div class="field"><label>Visitor name</label><input id="visitorNameInput" maxlength="40" value="${esc(getVisitorName())}" placeholder="Enter your name" onkeydown="if(event.key==='Enter')saveVisitorNameFromInput()"></div><button class="btn primary" onclick="saveVisitorNameFromInput()">Save name</button></div></div>` : '';
+  const stats=accuracyStats(bank);
+  const weakModules=modules.map(m=>{const list=bank.filter(q=>q.module===m);const a=accuracyStats(list);return {name:m,list,accuracy:a.pct,attempts:a.attempts,practiced:practicedCount(list)};}).filter(x=>x.list.length).sort((a,b)=>{if(!!a.attempts!==!!b.attempts)return a.attempts?-1:1;if(a.attempts&&b.attempts&&a.accuracy!==b.accuracy)return a.accuracy-b.accuracy;return a.name.localeCompare(b.name);}).slice(0,3);
+  const mistakeCount=bank.filter(q=>Number(progress[key(q)]?.wrong||0)>0).length;
+  const quickActions=[
+    {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="18" rx="2"/><path d="M9 3.5V2h6v1.5M8.5 9h7M8.5 13h7M8.5 17h4"/></svg>',title:'Start an exam',desc:'Build a focused practice session',view:'exam',tone:'exam'},
+    {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="13" height="16" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10M10 8h7M10 12h7"/></svg>',title:'Study flashcards',desc:'New cards and revision cards',view:'tools',tone:'cards'},
+    {icon:'↻',title:'Review mistakes',desc:`${mistakeCount} questions to revisit`,view:'mistakes',tone:'mistakes'},
+    {icon:'⌕',title:'Study library',desc:'Find questions by topic or lecture',view:'library',tone:'library'}
+  ];
+  const quickHTML=quickActions.map(a=>`<button type="button" class="dashboard-action ${a.tone}" onclick="go('${a.view}')"><span class="dashboard-action-icon" aria-hidden="true">${a.icon}</span><span class="dashboard-action-copy"><b>${a.title}</b><small>${a.desc}</small></span><span class="dashboard-action-arrow" aria-hidden="true">→</span></button>`).join('');
+  const weakHTML=weakModules.length?weakModules.map((m,i)=>`<div class="dashboard-weak-row"><div class="dashboard-weak-rank">${i+1}</div><div class="dashboard-weak-copy"><strong>${esc(m.name)}</strong><div class="mini">${m.attempts?`${m.accuracy}% accuracy · ${m.practiced} of ${m.list.length} practiced`:`${m.list.length} questions · not practiced yet`}</div><div class="bar"><i style="width:${m.practiced?m.accuracy:0}%"></i></div></div><button class="btn dashboard-practice-btn" onclick="startModuleExam('${attrJs(m.name)}')">Practice</button></div>`).join(''):'<div class="empty">No modules are available yet.</div>';
+  const allModulesHTML=modules.map(m=>{const list=bank.filter(q=>q.module===m);return `<div class="card dashboard-module-card"><div class="category-head"><strong>${esc(m)}</strong><div style="display:flex;gap:8px;align-items:center"><span class="pill">${list.length} Q</span><button class="section-start-btn" onclick="startModuleExam('${attrJs(m)}')" title="Start an exam on ${esc(m)}" aria-label="Start an exam on ${esc(m)}"><svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16"/></svg></button></div></div><div class="mini" style="margin:10px 0">Progress ${progressFor(list)}% · Accuracy ${accuracyFor(list)}%</div><div class="bar"><i style="width:${progressFor(list)}%"></i></div><div class="mini" style="margin-top:8px">${practicedCount(list)} of ${list.length} practiced</div></div>`;}).join('');
   const body=`
   ${siteNotificationsHTML()}
   ${visitorIdentity}
   ${dailyGoalStreakHTML()}
-  <div class="card dashboard-leaderboard-shortcut dashboard-progress-shortcut" style="margin-bottom:12px;cursor:pointer" onclick="go('leaderboard')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')go('leaderboard')"><div class="dashboard-leaderboard-icon">🏆</div><div style="flex:1;min-width:0"><strong>Top Students</strong><div class="mini" style="margin-top:4px">Top 3 students and your current rank.</div><div id="dashboardLeaderboardPreview" onclick="event.stopPropagation()"><div class="mini" style="margin-top:10px">Loading top students…</div></div></div><span class="shortcut-arrow" aria-hidden="true">→</span></div>
-  <div class="card dashboard-progress-shortcut" style="margin-bottom:16px;cursor:pointer" onclick="go('progress')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')go('progress')">
-    <div class="dashboard-progress-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,17 8,11 12,14 21,5"/><polyline points="15,5 21,5 21,11"/><line x1="3" y1="20" x2="21" y2="20"/></svg></div>
-    <div style="flex:1"><strong>Progress & Accuracy</strong><div class="mini" style="margin-top:4px">View your daily solved, true and false questions.</div></div>
-    <div class="actions"><span class="shortcut-arrow" aria-hidden="true">→</span></div>
-  </div>
-  <div class="grid stats">
-    <div class="card stat"><div class="label">Questions available</div><div class="value">${bank.length}</div></div>
-    <div class="card stat"><div class="label">Questions practiced</div><div class="value">${practicedCount(bank)}</div></div>
-    <div class="card stat"><div class="label">Overall progress</div><div class="value">${progressFor(bank)}%</div></div>
-    <div class="card stat"><div class="label">Overall accuracy</div><div class="value">${accuracyFor(bank)}%</div></div>
-    <div class="card stat"><div class="label">All-student submitted exams</div><div class="value">${globalAnalytics.submittedExams||0}</div><div class="mini">Average score: ${Number(globalAnalytics.averageScore||0).toFixed(1)}%</div></div>
-  </div>
-  <h2 class="section-title">Modules</h2>
-  <div class="grid three">${modules.map(m=>{
-    const list=bank.filter(q=>q.module===m);
-    return `<div class="card"><div class="category-head"><strong>${esc(m)}</strong><div style="display:flex;gap:8px;align-items:center"><span class="pill">${list.length} Q</span><button class="section-start-btn" onclick="startModuleExam('${attrJs(m)}')" title="Start an exam on ${esc(m)}" aria-label="Start an exam on ${esc(m)}"><svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16"/></svg></button></div></div>
-    <div class="mini" style="margin:10px 0">Progress ${progressFor(list)}% · Accuracy ${accuracyFor(list)}%</div>
-    <div class="bar"><i style="width:${progressFor(list)}%"></i></div>
-    <div class="mini" style="margin-top:8px">${practicedCount(list)} of ${list.length} practiced</div></div>`;
-  }).join('') || '<div class="card empty">No questions loaded yet.</div>'}</div>
-  <h2 class="section-title">Contact MedEx team</h2>
-  <div class="card support-contact-card">
-    <div style="display:flex;align-items:center;gap:12px">
-      <div class="support-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H9l-5 3.5z"/><path d="M7 9h10M7 12h6"/></svg></div>
-      <div><strong class="support-contact-title" data-contact-medex>Contact MedEx team</strong><div class="mini" style="margin-top:4px">Send suggestions, complaints, or questions. You can continue as a visitor.</div></div>
-    </div>
-    <button class="btn primary" onclick="openSupportChat()">Open chat</button>
-  </div>
-  <h2 class="section-title">Recent exams</h2>
-  <div class="card">${renderRecentExamsList(3)}
-    <div class="actions" style="margin-top:12px"><button class="btn" onclick="go('history')">View full history</button></div>
-  </div>
-  <h2 class="section-title">Question bank sync</h2>
-  <div class="card">
-    <div id="syncStatus">Source: <b>Supabase</b>${lastSync?` · Last successful sync: ${lastSync.toLocaleString()}`:''}</div>
-    <div class="actions" style="margin-top:16px"><button class="btn primary" onclick="loadQuestions()">Refresh from Supabase</button><button class="btn" onclick="go('import')">Upload / Update Questions</button><button class="btn primary btn-lg" onclick="go('exam')">Start an Exam</button></div>
-  </div>`;
+  <section class="dashboard-section dashboard-quick-section"><div class="dashboard-section-heading"><div><span class="dashboard-eyebrow">YOUR STUDY SPACE</span><h2>What would you like to do?</h2></div><span class="dashboard-section-note">Pick up where you left off</span></div><div class="dashboard-actions-grid">${quickHTML}</div></section>
+  <section class="dashboard-section"><div class="dashboard-section-heading"><div><span class="dashboard-eyebrow">AT A GLANCE</span><h2>Your performance</h2></div><button class="btn dashboard-section-link" onclick="go('progress')">Detailed progress <span aria-hidden="true">→</span></button></div><div class="grid stats dashboard-stat-grid">
+    <div class="card stat dashboard-stat-card"><div class="dashboard-stat-symbol">✓</div><div class="label">Correct answers</div><div class="value">${stats.correct}</div></div>
+    <div class="card stat dashboard-stat-card"><div class="dashboard-stat-symbol">◷</div><div class="label">Questions attempted</div><div class="value">${stats.attempts}</div></div>
+    <div class="card stat dashboard-stat-card"><div class="dashboard-stat-symbol">◎</div><div class="label">Overall accuracy</div><div class="value">${stats.pct}%</div></div>
+    <div class="card stat dashboard-stat-card"><div class="dashboard-stat-symbol">▤</div><div class="label">Questions available</div><div class="value">${bank.length}</div></div>
+  </div></section>
+  <section class="dashboard-section"><div class="dashboard-section-heading"><div><span class="dashboard-eyebrow">SMART REVISION</span><h2>Continue your revision</h2><p>Start with a module that needs more practice.</p></div><button class="btn dashboard-section-link" onclick="go('mistakes')">Review mistakes <span aria-hidden="true">→</span></button></div><div class="card dashboard-weak-card">${weakHTML}</div></section>
+  <section class="dashboard-section"><div class="dashboard-section-heading"><div><span class="dashboard-eyebrow">COMMUNITY</span><h2>Top students</h2><p>See the top 3 and your own rank.</p></div><button class="btn dashboard-section-link" onclick="go('leaderboard')">Full leaderboard <span aria-hidden="true">→</span></button></div><div class="card dashboard-leaderboard-card"><div class="dashboard-leaderboard-shortcut"><div class="dashboard-leaderboard-icon">🏆</div><div><strong>MedEx leaderboard</strong><div class="mini" style="margin-top:3px">Students and visitors ranked together by correct answers.</div></div></div><div id="dashboardLeaderboardPreview"><div class="mini" style="margin-top:10px">Loading top students…</div></div></div></section>
+  <section class="dashboard-section"><div class="dashboard-section-heading"><div><span class="dashboard-eyebrow">YOUR QUESTION BANK</span><h2>Modules</h2><p>Jump directly into a module exam.</p></div><span class="pill">${modules.length} modules</span></div><details class="dashboard-modules-details"><summary>Browse all modules <span class="mini">${bank.length} questions</span></summary><div class="grid three dashboard-modules-grid">${allModulesHTML || '<div class="card empty">No questions loaded yet.</div>'}</div></details></section>
+  <section class="dashboard-section"><div class="dashboard-section-heading"><div><span class="dashboard-eyebrow">RECENT ACTIVITY</span><h2>Recent exams</h2></div><button class="btn dashboard-section-link" onclick="go('history')">Full history <span aria-hidden="true">→</span></button></div><div class="card">${renderRecentExamsList(3)}</div></section>
+  <section class="dashboard-section dashboard-contact-section"><div class="card support-contact-card"><div style="display:flex;align-items:center;gap:12px"><div class="support-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H9l-5 3.5z"/><path d="M7 9h10M7 12h6"/></svg></div><div><strong class="support-contact-title" data-contact-medex>Contact MedEx team</strong><div class="mini" style="margin-top:4px">Send suggestions, complaints, or questions. You can continue as a visitor.</div></div></div><button class="btn primary" onclick="openSupportChat()">Open chat</button></div></section>
+  <section class="dashboard-section dashboard-sync-section"><details class="dashboard-sync-details"><summary>Question bank sync & admin tools</summary><div class="card"><div id="syncStatus">Source: <b>Supabase</b>${lastSync?` · Last successful sync: ${lastSync.toLocaleString()}`:''}</div><div class="actions" style="margin-top:16px"><button class="btn primary" onclick="loadQuestions()">Refresh from Supabase</button><button class="btn" onclick="go('import')">Upload / Update Questions</button><button class="btn primary btn-lg" onclick="go('exam')">Start an Exam</button></div></div></details></section>`;
   document.getElementById('app').innerHTML=layout(welcomeTitle,currentUser?'Your personal progress and performance.':'Your visitor progress is synced to this device and Supabase when connected.',body);
   refreshDashboardLeaderboardPreview();
 }
-
 function examPathKey(type,module='',subject='',lecture=''){
   return JSON.stringify([type,String(module||''),String(subject||''),String(lecture||'')]);
 }
