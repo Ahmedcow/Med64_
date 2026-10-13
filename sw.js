@@ -1,4 +1,4 @@
-const CACHE='medex-v41.60-full-width-admin-flashcard-bank-flagged-lists';
+const CACHE='medex-v41.61-supabase-flashcards-full-width';
 const APP_SHELL=['./','./index.html','./manifest.webmanifest','./icons/medex-192.png','./icons/medex-512.png'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(CACHE);
