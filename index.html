@@ -2006,7 +2006,10 @@ async function loadQuestionsFromSupabase(){
 
     // 3) Safety net: if the count is unknown or rows are missing, walk the table by id
     //    (keyset pagination). It does not depend on the server's page size.
-    if(total===null||rowsById.size<total){
+    // Always attempt a direct table walk when the count is zero/unknown or the
+    // paged result is incomplete. A HEAD/count request can report zero under some
+    // proxy/RLS configurations even when the regular SELECT endpoint returns rows.
+    if(total===null||total===0||rowsById.size<total){
       rowsById.clear();
       let lastId=null;
       for(let guard=0;guard<200;guard++){
@@ -2018,12 +2021,17 @@ async function loadQuestionsFromSupabase(){
         if(!rows.length)break;
         addRows(rows);
         const nextId=rows[rows.length-1].id;
-        if(nextId===lastId)break;
+        if(nextId===lastId)throw new Error('Question pagination stopped making progress; check that questions.id is sortable and unique.');
         lastId=nextId;
       }
     }
 
-    if(rowsById.size===0){console.warn('Supabase question table returned zero rows.');return false;}
+    if(rowsById.size===0){
+      const detail=total===0?'Supabase count returned zero and SELECT returned no rows. Check the questions table and SELECT policies.':'Supabase returned no question rows. Check the questions table, column names, and SELECT permissions.';
+      console.warn(detail);
+      window.__medexQuestionLoadInfo={total,loaded:0,error:detail};
+      return false;
+    }
 
     // 4) Validate per question. A bad row is skipped and reported; it no longer rejects the whole bank
     //    (which used to leave students on a stale, incomplete cache).
