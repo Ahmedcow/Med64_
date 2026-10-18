@@ -1918,7 +1918,9 @@ function sanitizeImageUrl(value){
   return '';
 }
 function normalizeQuestion(q, source=''){
-  const options = Array.isArray(q.options) ? q.options.map(x=>String(x)) : [];
+  let rawOptions=q.options;
+  if(typeof rawOptions==='string'){try{rawOptions=JSON.parse(rawOptions);}catch(_){rawOptions=[];}}
+  const options = Array.isArray(rawOptions) ? rawOptions.map(x=>String(x)) : [];
   let ci = Number.isInteger(q.correctIndex) ? q.correctIndex : Number(q.correctIndex);
   if(!Number.isInteger(ci)) ci = -1;
   return {
@@ -1969,66 +1971,92 @@ async function fetchJSON(url){
 async function loadQuestionsFromSupabase(){
   if(!SUPABASE_ENABLED)return false;
   try{
-    const PAGE_SIZE=1000;
-    const BATCH_PAGES=4;
-    const allRows=[];
-    // Fetch the first page, then fetch remaining pages in small parallel batches.
-    // This avoids a long serial round-trip for banks with thousands of questions.
-    const first = await supabaseClient
-      .from('questions')
-      .select('id,module,subject,lecture,question,options,correct_index,explanation,difficulty,reference,image_url,semester')
-      .order('id',{ascending:true})
-      .range(0,PAGE_SIZE-1);
-    if(first.error)throw first.error;
-    if(!Array.isArray(first.data))throw new Error('Invalid questions response.');
-    allRows.push(...first.data);
-    let nextFrom=PAGE_SIZE;
-    let keepGoing=first.data.length===PAGE_SIZE;
-    while(keepGoing){
-      const starts=Array.from({length:BATCH_PAGES},(_,i)=>nextFrom+i*PAGE_SIZE);
-      const pages=await Promise.all(starts.map(async from=>{
-        const {data,error}=await supabaseClient
-          .from('questions')
-          .select('id,module,subject,lecture,question,options,correct_index,explanation,difficulty,reference,image_url,semester')
-          .order('id',{ascending:true})
-          .range(from,from+PAGE_SIZE-1);
-        if(error)throw error;
-        if(!Array.isArray(data))throw new Error('Invalid questions response.');
-        return {from,data};
-      }));
-      pages.sort((a,b)=>a.from-b.from);
-      for(const page of pages){
-        allRows.push(...page.data);
-        if(page.data.length<PAGE_SIZE){keepGoing=false;break;}
+    const COLS='id,module,subject,lecture,question,options,correct_index,explanation,difficulty,reference,image_url,semester';
+    const PAGE=500; // stays under any server-side row cap
+    const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+    // Retry transient failures so one dropped request cannot silently lose a block of questions.
+    const withRetry=async(fn)=>{
+      let last;
+      for(let t=0;t<3;t++){
+        try{const r=await fn();if(r.error)throw r.error;return r.data||[];}
+        catch(e){last=e;await sleep(300*(t+1));}
       }
-      nextFrom+=BATCH_PAGES*PAGE_SIZE;
+      throw last;
+    };
+    const byOffset=from=>withRetry(()=>supabaseClient.from('questions').select(COLS).order('id',{ascending:true}).range(from,from+PAGE-1));
+
+    // 1) Exact server-side total, used to verify nothing is missing.
+    let total=null;
+    try{
+      const head=await supabaseClient.from('questions').select('id',{count:'exact',head:true});
+      if(!head.error&&Number.isFinite(head.count))total=head.count;
+    }catch(_){}
+
+    const rowsById=new Map();
+    const addRows=rows=>rows.forEach(r=>{if(r&&r.id!=null)rowsById.set(String(r.id),r);});
+
+    // 2) Fast path: parallel pages when the total is known.
+    if(total!==null&&total>0){
+      const starts=[];for(let f=0;f<total;f+=PAGE)starts.push(f);
+      for(let i=0;i<starts.length;i+=4){
+        const chunk=await Promise.all(starts.slice(i,i+4).map(byOffset));
+        chunk.forEach(addRows);
+      }
     }
-    const data=allRows;
-    // An empty Supabase result is not a successful question-bank load.
-    // Return false so loadQuestions() can show a Supabase loading error.
-    if(data.length===0){
-      console.warn('Supabase question table returned zero rows.');
-      return false;
+
+    // 3) Safety net: if the count is unknown or rows are missing, walk the table by id
+    //    (keyset pagination). It does not depend on the server's page size.
+    if(total===null||rowsById.size<total){
+      rowsById.clear();
+      let lastId=null;
+      for(let guard=0;guard<200;guard++){
+        const rows=await withRetry(()=>{
+          let q=supabaseClient.from('questions').select(COLS).order('id',{ascending:true}).limit(PAGE);
+          if(lastId!==null)q=q.gt('id',lastId);
+          return q;
+        });
+        if(!rows.length)break;
+        addRows(rows);
+        const nextId=rows[rows.length-1].id;
+        if(nextId===lastId)break;
+        lastId=nextId;
+      }
     }
-    const all=data.map(q=>normalizeQuestion({
-      id:q.id,module:q.module,semester:q.semester,subject:q.subject,lecture:q.lecture,question:q.question,
-      options:q.options,correctIndex:q.correct_index,explanation:q.explanation,
-      difficulty:q.difficulty,reference:q.reference,imageUrl:q.image_url,source:'Supabase'
-    },'Supabase'));
-    const errors=validateBank(all);
-    if(errors.length)throw new Error(errors.slice(0,8).join('\n'));
-    const githubIds=new Set(all.map(q=>q.id));
-    const retainedLocal=localQuestions.filter(q=>!githubIds.has(q.id));
+
+    if(rowsById.size===0){console.warn('Supabase question table returned zero rows.');return false;}
+
+    // 4) Validate per question. A bad row is skipped and reported; it no longer rejects the whole bank
+    //    (which used to leave students on a stale, incomplete cache).
+    const all=[],skipped=[];
+    rowsById.forEach(row=>{
+      const q=normalizeQuestion({
+        id:row.id,module:row.module,semester:row.semester,subject:row.subject,lecture:row.lecture,question:row.question,
+        options:row.options,correctIndex:row.correct_index,explanation:row.explanation,
+        difficulty:row.difficulty,reference:row.reference,imageUrl:row.image_url,source:'Supabase'
+      },'Supabase');
+      const err=validateQuestion(q,0);
+      if(err)skipped.push({id:row.id,reason:err}); else all.push(q);
+    });
+    if(!all.length)throw new Error('No valid questions were returned.');
+    if(skipped.length)console.warn(`Skipped ${skipped.length} malformed question(s):`,skipped.slice(0,30));
+
+    const loadedIds=new Set(all.map(q=>q.id));
+    const retainedLocal=localQuestions.filter(q=>!loadedIds.has(q.id));
     allQuestionBank=[...all,...retainedLocal];
     localQuestions=retainedLocal;
     applyModuleVisibility();
     sourceFiles=['Supabase'];
     lastSync=new Date();
+    const unassigned=all.filter(q=>q.semester==null).length;
+    window.__medexQuestionLoadInfo={total,loaded:all.length,skipped,unassigned,visible:bank.length};
     safeSetItem(CONFIG.localQuestionsKey,JSON.stringify(localQuestions));
     safeSetItem(CONFIG.cacheKey,JSON.stringify({updatedAt:lastSync.toISOString(),sourceFiles,questions:allQuestionBank}));
+    if(isAdmin&&(skipped.length||unassigned)){
+      setTimeout(()=>toast(`${skipped.length?skipped.length+' malformed question(s) were skipped (see browser console). ':''}${unassigned?unassigned+' question(s) have no semester and are hidden from students.':''}`,'error'),600);
+    }
     return true;
   }catch(e){
-    console.warn('Supabase question load failed:',e.message);
+    console.warn('Supabase question load failed:',e.message||e);
     return false;
   }
 }
