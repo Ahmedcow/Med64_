@@ -1629,12 +1629,7 @@ async function loadModuleVisibility(){
 function applyModuleVisibility(){
   if(!Array.isArray(allQuestionBank)||!allQuestionBank.length){ allQuestionBank=bank.slice(); }
   const selectedSemester=getSelectedSemester();
-  // Older question banks may predate semester tagging. In that case, showing
-  // only the selected semester would incorrectly make the whole bank appear empty.
-  const hasSemesterAssignments=allQuestionBank.some(q=>q.semester!=null&&Number.isFinite(Number(q.semester)));
-  bank=isAdmin ? allQuestionBank.slice() : allQuestionBank.filter(q=>
-    isModuleVisible(q.module) && (!selectedSemester || !hasSemesterAssignments || Number(q.semester)===Number(selectedSemester))
-  );
+  bank=isAdmin ? allQuestionBank.slice() : allQuestionBank.filter(q=>isModuleVisible(q.module) && (!selectedSemester || q.semester==null || Number(q.semester)===Number(selectedSemester)));
 }
 
 function authCard(){
@@ -1973,125 +1968,132 @@ async function fetchJSON(url){
   if(!r.ok) throw new Error(`HTTP ${r.status} while loading ${url}`);
   return await r.json();
 }
+function setQuestionSyncStatus(msg,isError){
+  window.__medexQuestionSyncMsg=msg;
+  const el=document.getElementById('syncStatus');
+  if(el){el.textContent=msg;el.style.color=isError?'#b42318':'';}
+}
 async function loadQuestionsFromSupabase(){
-  if(!SUPABASE_ENABLED)return false;
+  if(!SUPABASE_ENABLED){
+    const m=window.supabase?'Supabase is not configured.':'The Supabase library failed to load (blocked network or CDN). Showing saved questions.';
+    window.__medexQuestionLoadError=m;setQuestionSyncStatus(m,true);return false;
+  }
   try{
-    const PAGE=500;
-    const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-    const withRetry=async request=>{
-      let lastError;
-      for(let attempt=0;attempt<3;attempt++){
+    const COLS='id,module,subject,lecture,question,options,correct_index,explanation,difficulty,reference,image_url,semester';
+    const PAGE=250; // small pages: avoid response-size / statement-timeout failures
+    const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+    const lastErrors=[];
+    const runPage=async(from,to)=>{
+      let last;
+      for(let t=0;t<3;t++){
         try{
-          const result=await request();
-          if(result?.error)throw result.error;
-          return result;
-        }catch(error){
-          lastError=error;
-          if(attempt<2)await sleep(300*(attempt+1));
-        }
+          const r=await supabaseClient.from('questions').select(COLS).order('id',{ascending:true}).range(from,to);
+          if(r.error)throw r.error;
+          return r.data||[];
+        }catch(e){last=e;await sleep(400*(t+1));}
       }
-      throw lastError||new Error('Supabase request failed.');
+      throw last;
     };
-    // Do not name optional columns here. A schema change (for example, the
-    // newer semester/image fields not existing in an older database) must not
-    // make the entire question bank fail to load.
-    let total=null;
+    // A failing range is split in halves so one bad/huge row cannot take its neighbours down with it.
+    const fetchRange=async(from,to)=>{
+      try{return await runPage(from,to);}
+      catch(e){
+        if(to-from<=0){lastErrors.push(`row ${from}: ${e.message||e}`);return [];}
+        const mid=Math.floor((from+to)/2);
+        const a=await fetchRange(from,mid), b=await fetchRange(mid+1,to);
+        return a.concat(b);
+      }
+    };
+
+    setQuestionSyncStatus('Syncing questions from Supabase…',false);
+    let total=null,countError='';
     try{
-      const countResult=await supabaseClient.from('questions').select('id',{count:'exact',head:true});
-      if(!countResult.error&&Number.isFinite(countResult.count))total=countResult.count;
-    }catch(_){ /* The row walk below does not depend on an exact count. */ }
+      const head=await supabaseClient.from('questions').select('id',{count:'exact',head:true});
+      if(head.error)countError=head.error.message||String(head.error);
+      else if(Number.isFinite(head.count))total=head.count;
+    }catch(e){countError=e.message||String(e);}
 
     const rowsById=new Map();
-    const addRows=rows=>(rows||[]).forEach(row=>{
-      if(row&&row.id!=null)rowsById.set(String(row.id),row);
-    });
+    let rawFetched=0,noId=0;
+    const addRows=rows=>rows.forEach(r=>{rawFetched++;if(r&&r.id!=null)rowsById.set(String(r.id),r);else noId++;});
 
-    // Sequential pages are more reliable than parallel offsets when the table
-    // changes while loading or the API applies a row cap.
     if(total!==null&&total>0){
-      for(let offset=0;offset<total;offset+=PAGE){
-        const result=await withRetry(()=>supabaseClient.from('questions')
-          .select('*').order('id',{ascending:true}).range(offset,offset+PAGE-1));
-        addRows(result.data);
+      const starts=[];for(let f=0;f<total;f+=PAGE)starts.push(f);
+      for(let i=0;i<starts.length;i+=3){
+        const chunk=await Promise.all(starts.slice(i,i+3).map(f=>fetchRange(f,f+PAGE-1)));
+        chunk.forEach(addRows);
+        setQuestionSyncStatus(`Syncing questions… ${rowsById.size}/${total}`,false);
       }
-    }
-
-    // Always walk by ID if count is unavailable/zero or the offset result is
-    // incomplete. This also recovers from an inaccurate HEAD/count response.
-    if(total===null||total===0||rowsById.size<total){
-      let lastId=null;
-      for(let page=0;page<10000;page++){
-        const result=await withRetry(()=>{
-          let query=supabaseClient.from('questions').select('*').order('id',{ascending:true}).limit(PAGE);
-          if(lastId!==null)query=query.gt('id',lastId);
-          return query;
-        });
-        const rows=result.data||[];
-        if(!rows.length)break;
+    }else{
+      // Count unavailable: walk pages until one comes back empty/short.
+      for(let f=0,guard=0;guard<400;guard++,f+=PAGE){
+        const rows=await fetchRange(f,f+PAGE-1);
         addRows(rows);
-        const nextId=rows[rows.length-1].id;
-        if(nextId==null||String(nextId)===String(lastId)){
-          throw new Error('Question pagination stopped making progress; check that questions.id is unique and sortable.');
-        }
-        lastId=nextId;
         if(rows.length<PAGE)break;
       }
     }
 
-    if(!rowsById.size){
-      const detail=total===0
-        ?'Supabase count and SELECT returned no questions. Check the questions table and SELECT/RLS policy.'
-        :'Supabase returned no question rows. Check the questions table, connection, and SELECT/RLS policy.';
-      window.__medexQuestionLoadError=detail;
-      window.__medexQuestionLoadInfo={total,loaded:0,error:detail};
-      console.warn(detail);
-      return false;
+    if(rowsById.size===0){
+      const m='Supabase returned 0 questions'+(lastErrors.length?': '+lastErrors[0]:countError?': '+countError:' (check the SELECT policy / sign-in).');
+      window.__medexQuestionLoadError=m;console.warn(m);setQuestionSyncStatus(m+' Showing saved questions.',true);return false;
     }
 
     const all=[],skipped=[];
     rowsById.forEach(row=>{
-      // Support both database snake_case and older/imported camelCase fields.
       const q=normalizeQuestion({
-        id:row.id,module:row.module,semester:row.semester,subject:row.subject,lecture:row.lecture,
-        question:row.question,options:row.options,
-        correctIndex:row.correct_index??row.correctIndex,
-        explanation:row.explanation,difficulty:row.difficulty,reference:row.reference,
-        imageUrl:row.image_url??row.imageUrl??row.illustration,source:'Supabase'
+        id:row.id,module:row.module,semester:row.semester,subject:row.subject,lecture:row.lecture,question:row.question,
+        options:row.options,correctIndex:row.correct_index,explanation:row.explanation,
+        difficulty:row.difficulty,reference:row.reference,imageUrl:row.image_url,source:'Supabase'
       },'Supabase');
-      const error=validateQuestion(q,0);
-      if(error)skipped.push({id:row.id,reason:error});
-      else all.push(q);
+      const err=validateQuestion(q,0);
+      if(err)skipped.push({id:row.id,reason:err}); else all.push(q);
     });
-    if(!all.length){
-      const detail=`Supabase returned ${rowsById.size} row(s), but none had valid question data. Check the question, options, and correct_index fields.`;
-      window.__medexQuestionLoadError=detail;
-      window.__medexQuestionLoadInfo={total,loaded:0,skipped,error:detail};
-      throw new Error(detail);
-    }
+    if(!all.length)throw new Error('No valid questions were returned.');
+    if(skipped.length)console.warn(`Skipped ${skipped.length} malformed question(s):`,skipped.slice(0,30));
 
-    const loadedIds=new Set(all.map(q=>String(q.id)));
-    const retainedLocal=localQuestions.filter(q=>!loadedIds.has(String(q.id)));
-    allQuestionBank=[...all,...retainedLocal];
+    const partial=total!==null&&rowsById.size<total;
+    const loadedIds=new Set(all.map(q=>q.id));
+    // If some rows could not be fetched, keep their previously saved copies instead of losing them.
+    const keepOld=partial?allQuestionBank.filter(q=>!loadedIds.has(q.id)&&q.source==='Supabase'):[];
+    const retainedLocal=localQuestions.filter(q=>!loadedIds.has(q.id));
+    allQuestionBank=[...all,...keepOld,...retainedLocal];
     localQuestions=retainedLocal;
     applyModuleVisibility();
     sourceFiles=['Supabase'];
     lastSync=new Date();
+    const duplicateIds=rawFetched-noId-rowsById.size;
     const unassigned=all.filter(q=>q.semester==null).length;
-    window.__medexQuestionLoadInfo={total,loaded:all.length,skipped,unassigned,visible:bank.length};
-    window.__medexQuestionLoadError=null;
+    const hiddenModules=all.filter(q=>!isModuleVisible(q.module)).length;
+    const sel=getSelectedSemester();
+    const otherSemester=sel?all.filter(q=>q.semester!=null&&Number(q.semester)!==sel).length:0;
+    window.__medexQuestionLoadError=partial?`Only ${rowsById.size} of ${total} questions could be fetched. ${lastErrors[0]||''}`:'';
+    window.__medexQuestionLoadInfo={total,rawFetched,duplicateIds,noId,fetched:rowsById.size,loaded:all.length,skipped,unassigned,hiddenModules,otherSemester,selectedSemester:sel,visible:bank.length,errors:lastErrors.slice(0,10)};
+    console.info('MedEx question load:',window.__medexQuestionLoadInfo);
     safeSetItem(CONFIG.localQuestionsKey,JSON.stringify(localQuestions));
     safeSetItem(CONFIG.cacheKey,JSON.stringify({updatedAt:lastSync.toISOString(),sourceFiles,questions:allQuestionBank}));
-    if(isAdmin&&(skipped.length||unassigned)){
-      setTimeout(()=>toast(`${skipped.length?skipped.length+' malformed question(s) were skipped (see browser console). ':''}${unassigned?unassigned+' question(s) have no semester assignment.':''}`,'error'),600);
+    if(partial){
+      setQuestionSyncStatus(`Partial sync: ${rowsById.size} of ${total} questions fetched. ${lastErrors[0]||''}`,true);
+      setTimeout(()=>toast(`Only ${rowsById.size} of ${total} questions synced. ${lastErrors[0]||'Tap Refresh to retry.'}`,'error'),600);
+    }else if(isAdmin){
+      const bits=[`${all.length} loaded from Supabase`+(total!==null?` of ${total}`:'')];
+      if(skipped.length)bits.push(`${skipped.length} malformed (skipped, see console)`);
+      if(duplicateIds>0)bits.push(`${duplicateIds} share a duplicate ID (only one kept)`);
+      if(noId)bits.push(`${noId} have no ID`);
+      if(unassigned)bits.push(`${unassigned} have no semester`);
+      setTimeout(()=>toast(bits.join(' · '),skipped.length||duplicateIds>0||noId?'error':'ok'),600);
     }
-    console.info(`MedEx question sync: ${all.length} valid Supabase questions loaded${total===null?' (exact count unavailable)':` of ${total} rows`}.`);
     return true;
-  }catch(error){
-    window.__medexQuestionLoadError=error?.message||String(error);
-    console.warn('Supabase question load failed:',window.__medexQuestionLoadError);
+  }catch(e){
+    const m='Question sync failed: '+(e.message||e);
+    console.warn(m);
+    window.__medexQuestionLoadError=m;
+    setQuestionSyncStatus(m+'. Showing saved questions.',true);
+    setTimeout(()=>toast(m+'. Showing saved questions.','error'),600);
     return false;
   }
 }
+
+function total_visible_note(){const i=window.__medexQuestionLoadInfo;if(!i)return '.';return i.visible<allQuestionBank.length?` (${i.visible} available for your semester/modules).`:'.';}
 async function loadQuestions(){
   // Render a saved copy immediately for faster startup, then refresh from Supabase only.
   try{
@@ -2114,7 +2116,7 @@ async function loadQuestions(){
   if(ok){
     render();
     const status=document.getElementById('syncStatus');
-    if(status)status.textContent=`Loaded ${allQuestionBank.length} questions from Supabase.`;
+    if(status){ if(window.__medexQuestionLoadError)setQuestionSyncStatus(window.__medexQuestionSyncMsg||window.__medexQuestionLoadError,true); else status.textContent=`Loaded ${allQuestionBank.length} questions from Supabase`+total_visible_note(); }
     return;
   }
   // No GitHub fallback: question bank is Supabase-only.
@@ -2123,8 +2125,7 @@ async function loadQuestions(){
     applyModuleVisibility();
     render();
   }
-  const status=document.getElementById('syncStatus');
-  if(status)status.textContent='Could not load questions from Supabase. Check your connection and Supabase permissions.';
+  setQuestionSyncStatus((window.__medexQuestionLoadError||'Could not load questions from Supabase')+' Check your connection and Supabase permissions.',true);
 }
 
 function getModules(){ return [...new Set(bank.map(q=>q.module))].sort((a,b)=>a.localeCompare(b)); }
@@ -6258,7 +6259,7 @@ if('serviceWorker' in navigator){
 if('serviceWorker' in navigator){
   window.addEventListener('load',async()=>{
     try{
-      const registration=await navigator.serviceWorker.register(new URL('./sw.js?v=42.8',document.baseURI),{scope:new URL('./',document.baseURI).pathname});
+      const registration=await navigator.serviceWorker.register(new URL('./sw.js?v=42.6',document.baseURI),{scope:new URL('./',document.baseURI).pathname});
       watchPWARegistration(registration);
       registration.update().catch(()=>{});
     }catch(e){ console.warn('PWA service worker:',e); }
