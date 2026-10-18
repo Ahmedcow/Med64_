@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/medex-192.png">
 <link rel="apple-touch-icon" href="./icons/medex-512.png">
 <title>MedEX — Medical Examination Platform</title>
-<meta name="medex-build" content="v42.0-audit-fixes-exam-tools">
+<meta name="medex-build" content="v42.6-flashcards-tour">
 
 <!-- Vercel Web Analytics: enabled when deployed on Vercel -->
 <script>
@@ -570,6 +570,32 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:600;letter-spacing:-.01em;mar
 .study-tools-columns{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}.study-plan-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:13px;margin-top:9px;background:var(--bg)}.study-plan-row .actions{grid-column:1/-1}
 .study-local-pill{display:inline-flex;align-items:center;border-radius:999px;padding:6px 9px;background:var(--primary-soft);color:var(--primary);font-size:10.5px;font-weight:700;white-space:nowrap}
 .study-achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.study-achievement{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}.study-achievement span{font-size:11px;color:var(--muted)}
+/* Flashcards UX polish: clearer hierarchy, simpler controls, less secondary copy. */
+.study-tools-page .study-tools-hero{padding:clamp(16px,2.4vw,26px);gap:16px}
+.study-tools-page .study-tools-hero h2{font-size:clamp(23px,3vw,30px);line-height:1.2}
+.study-tools-page .study-tools-hero p,.study-tools-page .study-card-heading p{display:none!important}
+.study-tools-page .study-tools-card{padding:clamp(14px,2vw,22px)}
+.study-tools-page .study-builder-card{border-top:3px solid var(--primary)}
+.study-tools-page .study-builder-card .study-card-heading{align-items:center}
+.study-tools-page .study-builder-card .study-count-badge{min-width:100px}
+.study-tools-page .study-filter-grid .field label{color:var(--text);font-size:12px;font-weight:700}
+.study-tools-page .study-filter-grid select{min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);padding:10px;width:100%}
+.study-tools-page .study-selection-summary span{flex:1 1 150px}
+.study-tools-page .study-builder-actions .btn-lg{min-height:48px}
+@media(max-width:650px){.study-tools-page .study-tools-hero{align-items:stretch;flex-direction:column}.study-tools-page .study-hero-actions{justify-content:stretch}.study-tools-page .study-hero-actions .btn{flex:1 1 140px}.study-tools-page .study-filter-grid{grid-template-columns:1fr;gap:9px}.study-tools-page .study-card-heading{gap:10px}.study-tools-page .study-count-badge{min-width:84px}}
+
+
+/* Flashcards revision-first layout: prioritize the next useful study action. */
+.fc-revision-first{margin-bottom:16px;border:1px solid var(--line);border-top:4px solid var(--primary);box-shadow:0 8px 24px rgba(15,40,70,.07)}
+.study-tools-page .study-tools-hero{margin-bottom:12px}
+.study-tools-page .study-builder-card{order:-1}
+.study-tools-page .study-builder-card .study-card-heading h3{font-size:clamp(19px,2.4vw,24px);line-height:1.25}
+.study-tools-page .study-selection-summary{display:flex;flex-wrap:wrap;gap:8px}
+.study-tools-page .study-selection-summary span{padding:8px 10px;border-radius:9px;background:var(--surface, var(--card));border:1px solid var(--line);font-size:13px}
+.study-tools-page .study-builder-actions{display:flex;flex-wrap:wrap;gap:10px}
+.study-tools-page .study-builder-actions .btn{min-height:44px}
+@media(max-width:640px){.study-tools-page .study-tools-hero{gap:12px}.study-tools-page .study-hero-actions{display:flex;flex-wrap:wrap}.study-tools-page .study-hero-actions .btn{flex:1 1 130px}.study-tools-page .study-builder-card{padding:14px}.study-tools-page .study-filter-grid{gap:10px}.study-tools-page .study-selection-summary span{flex:1 1 100%}}
+
 /* Flashcard session — native MedEx shell, with the four reference rating meanings retained. */
 .study-session-shell{max-width:900px;margin:0 auto}.study-flashcard-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
 .study-flash-toolbar{display:flex;align-items:center;min-height:56px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--bg)}.study-tool-icon{width:38px;height:38px;border:0;border-radius:10px;background:transparent;color:var(--text);font-size:22px;display:grid;place-items:center}.study-tool-icon:hover{background:var(--primary-soft);color:var(--primary)}.study-tool-icon.is-favorite{color:#d66b83}.study-flash-progress{display:flex;align-items:baseline;gap:4px;margin-left:8px;font-family:var(--font-mono)}.study-flash-progress b{font-size:15px}.study-flash-progress span{font-size:11px;color:var(--muted)}.study-flash-toolbar-actions{display:flex;gap:2px;margin-left:auto}
@@ -743,6 +769,304 @@ html[data-theme="dark"] input,html[data-theme="dark"] textarea{background:var(--
 .quiz-tools .kbd-hint{margin-left:auto;font-size:11.5px;color:var(--muted)}
 @media(max-width:640px){.quiz-tools .kbd-hint{display:none}}
 </style>
+<style id="medex-ui-polish">
+/* =====================================================================
+   MedEx UI polish v42.2 — appearance only. No markup, IDs, handlers or logic are changed.
+   To revert completely, delete this <style id="medex-ui-polish"> block (and the small
+   helper script with id medex-ui-polish-js at the end of the body).
+   ===================================================================== */
+
+/* 1. Missing design tokens (these were referenced by existing CSS but never defined,
+      which made progress tracks and some borders render transparent). */
+:root{
+  --panel:var(--card);
+  --border:var(--line);
+  --panel2:rgba(91,107,114,.16);
+  --focus-ring:0 0 0 3px rgba(var(--primary-rgb),.22);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+html[data-theme="dark"]{ --panel2:rgba(255,255,255,.10); }
+
+/* 2. Base readability */
+html{scroll-padding-top:calc(var(--topbar-h) + 12px)}
+body{line-height:1.5;-webkit-tap-highlight-color:transparent;text-rendering:optimizeLegibility}
+.mini{font-size:12.5px;line-height:1.45}
+.sub{font-size:14.5px;line-height:1.5}
+.top{margin-bottom:20px}
+.top h1{font-size:clamp(23px,4.6vw,30px);line-height:1.2}
+.main{padding-bottom:calc(96px + env(safe-area-inset-bottom))}   /* floating chat button never covers the last card */
+p{line-height:1.55}
+::selection{background:rgba(var(--primary-rgb),.25)}
+
+/* 3. Cards: calmer, consistent surfaces */
+.card{border-color:color-mix(in srgb,var(--line) 85%,transparent);box-shadow:0 1px 2px rgba(16,24,38,.05),0 6px 18px -12px rgba(16,24,38,.18)}
+html[data-theme="dark"] .card{box-shadow:0 1px 2px rgba(0,0,0,.35)}
+.card h3,.card h2{line-height:1.3}
+.card>h3:first-child,.card>h2:first-child{margin-bottom:6px}
+
+/* 4. Form controls: one consistent, touch-friendly style (zero specificity so any
+      specific existing rule still wins) */
+:where(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):not([type=file]):not([type=button]):not([type=submit]):not([type=hidden]),select,textarea){
+  background-color:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;line-height:1.35;color:var(--text);
+  transition:border-color .15s var(--ease),box-shadow .15s var(--ease)}
+:where(input,select,textarea):focus{outline:none;border-color:var(--primary);box-shadow:var(--focus-ring)}
+:where(input,textarea)::placeholder{color:var(--muted);opacity:.8}
+:where(input,select,textarea):disabled{opacity:.55;cursor:not-allowed}
+select:not([multiple]):not([size]){
+  -webkit-appearance:none;appearance:none;padding-right:36px;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235b6b72' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;background-size:16px}
+html[data-theme="dark"] select:not([multiple]):not([size]){
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238fa0a5' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}
+.field label{font-size:12.5px;letter-spacing:.01em}
+
+:where(input[type=checkbox],input[type=radio]){accent-color:var(--primary);width:18px;height:18px;flex:0 0 auto;vertical-align:-3px;margin:0 8px 0 0;cursor:pointer}
+
+:where(label:has(>input[type=checkbox]:first-child),label:has(>input[type=radio]:first-child)){display:flex;align-items:flex-start;gap:10px;line-height:1.4;cursor:pointer;margin:4px 0}
+
+@media(max-width:700px){
+  :where(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):not([type=file]):not([type=button]):not([type=submit]),select,textarea){font-size:16px} /* stops iOS zoom-on-focus */
+}
+
+/* 5. Buttons: clearer states */
+.btn{box-shadow:0 1px 0 rgba(16,24,38,.04)}
+:where(.btn:not(.primary):not(.danger):not(.ok)):hover{background:color-mix(in srgb,var(--primary) 6%,var(--card))}
+.btn.primary:hover{background:var(--primary2)}
+.btn.danger:hover{background:color-mix(in srgb,var(--danger) 88%,#000)}
+.btn.ok:hover{background:color-mix(in srgb,var(--ok) 88%,#000)}
+.btn.primary{box-shadow:0 1px 2px rgba(var(--primary-rgb),.35)}
+.btn:focus-visible,.icon-btn:focus-visible,.option:focus-visible,.qnav-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.btn:disabled,.btn[disabled]{opacity:.45;box-shadow:none}
+.pill{letter-spacing:.01em}
+
+/* 6. Progress bars: readable in dark mode (track was a hard-coded light grey) */
+.bar{background:var(--panel2)}
+.goal-track{background:var(--panel2)}
+.bar>i,.goal-track i{transition:width .35s var(--ease)}
+html[data-theme="dark"] .notice.error{color:#ffb4a9}
+html[data-theme="dark"] .notice.ok{color:#8be3b3}
+
+/* 7. Exam screen */
+.quiz{max-width:860px}
+.quiz .card{padding:clamp(12px,3vw,22px)}
+.quiz .question{line-height:1.55}
+.quiz .options{gap:10px}
+.quiz .option{display:flex;align-items:center;gap:10px;min-height:52px;padding:13px 16px;line-height:1.4;border-width:1.5px;
+  transition:border-color .15s var(--ease),background .15s var(--ease),box-shadow .15s var(--ease),transform .08s var(--ease)}
+.quiz .option:hover:not(.correct):not(.wrong){background:color-mix(in srgb,var(--primary) 5%,var(--card))}
+.quiz .option:active{transform:scale(.995)}
+.quiz .option.selected{box-shadow:inset 4px 0 0 var(--primary)}
+.quiz .option.correct{box-shadow:inset 4px 0 0 var(--ok)}
+.quiz .option.wrong{box-shadow:inset 4px 0 0 var(--danger)}
+/* answer state is no longer conveyed by colour alone */
+.quiz .option.correct::after{content:"✓";margin-left:auto;padding-left:10px;font-weight:800;color:var(--ok)}
+.quiz .option.wrong::after{content:"✗";margin-left:auto;padding-left:10px;font-weight:800;color:var(--danger)}
+.quiz .review{border-radius:12px;padding:14px 16px;line-height:1.55}
+.exam-annotation-stage{border-style:solid;border-color:color-mix(in srgb,var(--line) 70%,transparent);margin:8px 0}
+.question-nav{background:color-mix(in srgb,var(--bg) 70%,var(--card))}
+.qnav-btn{width:40px;height:40px;font-size:13.5px}
+.qnav-btn.current{transform:scale(1.06)}
+.nav-legend{flex-wrap:wrap;row-gap:4px}
+
+/* Previous / Next stay reachable without scrolling back down (esp. on phones) */
+.quiz-footer{position:sticky;bottom:0;z-index:25;margin:16px calc(-1*clamp(12px,3vw,22px)) calc(-1*clamp(12px,3vw,22px));padding-left:clamp(12px,3vw,22px);padding-right:clamp(12px,3vw,22px);border-radius:0 0 var(--radius) var(--radius);padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom));
+  background:var(--card);border-top:1px solid var(--line);}
+.quiz-footer .btn{flex:1 1 0;min-height:46px;font-size:15px;padding:11px 18px}
+.quiz-footer .btn.primary{flex:1.4 1 0}
+@media(min-width:900px){.quiz-footer .btn{flex:0 0 auto;min-width:140px}.quiz-footer .btn.primary{flex:0 0 auto}}
+
+@media(max-width:700px){
+  .main{padding:14px 14px calc(96px + env(safe-area-inset-bottom))}
+  /* long usage hint is not needed once the exam is on screen */
+  .main:has(.quiz) .top .sub{display:none}
+  .main:has(.quiz) .top{margin-bottom:10px}
+  .main:has(.quiz) .top h1{font-size:20px}
+  /* tall navigators (30–100 questions) scroll inside their own box instead of pushing the question off screen */
+  .quiz .question-nav{max-height:152px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;gap:6px}
+  .qnav-btn{width:38px;height:38px}
+  .quiz .option{min-height:54px;font-size:15px}
+  .quiz .question{font-size:18px}
+}
+
+/* 8. Dashboard: on phones, the things students actually tap come first */
+@media(max-width:700px){
+  #app:has(.dashboard-quick-section)>.dashboard-quick-section{margin-top:0}
+  #app:has(.dashboard-quick-section){display:flex;flex-direction:column}
+  #app:has(.dashboard-quick-section)>.top{order:-3}
+  #app:has(.dashboard-quick-section)>.dashboard-quick-section{order:-2}
+  #app:has(.dashboard-quick-section)>.study-goal-card{order:-1}
+}
+.site-notifications-card .empty,.site-notifications-list .empty{padding:14px 10px}
+.dashboard-action{transition:transform .12s var(--ease),border-color .15s var(--ease),box-shadow .15s var(--ease)}
+.dashboard-action:hover{transform:translateY(-1px)}
+.dashboard-action:active{transform:translateY(0) scale(.995)}
+.dashboard-section-heading{margin-top:6px}
+
+/* 9. Settings / lists */
+.card>h3:first-child+label,.card>h3:first-child+div{margin-top:10px}
+.empty{padding:28px 18px}
+.stat .value{font-variant-numeric:tabular-nums}
+
+/* 10. Topbar & sidebar finish */
+.topbar{box-shadow:0 1px 0 var(--line)}
+.nav button{transition:background .15s var(--ease),color .15s var(--ease)}
+.nav button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+.nav button.active{box-shadow:inset 3px 0 0 var(--primary2)}
+
+
+/* 12. Print: hide chrome */
+@media print{.topbar,.sidebar,.scrim,.support-floating-btn,.quiz-footer{display:none!important}}
+</style>
+<style id="medex-nav-css">
+/* MedEx navigation v42.3 — organisation only. Revert by deleting this block and the script id="medex-nav-js". */
+
+/* Sidebar groups */
+.nav-group-label{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7f929a;padding:14px 12px 5px;line-height:1}
+.nav-group-label[hidden]{display:none}
+.nav button{padding-top:9px;padding-bottom:9px}
+
+/* Section tabs: sibling pages of one task sit together (like UWorld's Create Test / Previous Tests / Performance) */
+.section-tabs{display:flex;gap:6px;overflow-x:auto;margin:-6px 0 18px;padding:4px 2px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.section-tabs::-webkit-scrollbar{display:none}
+.section-tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--muted);font:inherit;font-size:13.5px;font-weight:600;
+  padding:8px 15px;border-radius:999px;cursor:pointer;white-space:nowrap;line-height:1.2;transition:background .15s,color .15s,border-color .15s}
+.section-tabs button:hover{color:var(--text);border-color:var(--primary)}
+.section-tabs button[aria-current="page"]{background:var(--primary);border-color:var(--primary);color:#fff}
+.section-tabs button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+/* Phone bottom tab bar (3–5 top-level destinations; everything else under “More”) */
+.bottom-tabs{display:none}
+@media(max-width:880px){
+  .bottom-tabs{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:35;gap:2px;background:var(--card);border-top:1px solid var(--line);
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -6px 18px -12px rgba(16,24,38,.35)}
+  .bottom-tabs button{flex:1 1 0;min-width:0;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;background:transparent;
+    color:var(--muted);font:inherit;font-size:11px;font-weight:600;padding:4px 2px;border-radius:12px;cursor:pointer;line-height:1.1;transition:background .15s,color .15s}
+  .bottom-tabs svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6}
+  .bottom-tabs button[aria-current="page"]{color:var(--primary);background:rgba(var(--primary-rgb),.10)}
+  .bottom-tabs button:focus-visible{outline:2px solid var(--primary);outline-offset:-2px}
+  .main{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+  .support-floating-btn{bottom:calc(76px + env(safe-area-inset-bottom))}
+  /* no bottom bar while taking an exam or on first-run setup: more room, no accidental exits */
+  body:has(.quiz) .bottom-tabs,body:has(#visitorStartName) .bottom-tabs{display:none}
+  body:has(.quiz) .main{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+  body:has(.quiz) .support-floating-btn{bottom:max(14px,env(safe-area-inset-bottom))}
+}
+@media print{.bottom-tabs,.section-tabs{display:none!important}}
+</style>
+<style id="medex-simple-css">
+/* MedEx simplification v42.4 — progressive disclosure. Nothing is deleted: secondary sections are folded into
+   "More" panels, empty cards are hidden, and idle controls are tucked away.
+   Revert by deleting this block and the script id="medex-simple-js". */
+
+/* Folded "More" panels */
+.more-details{margin:18px 0 8px}
+.more-details>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:14px 18px;
+  border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--text);font-weight:700;font-size:14.5px;line-height:1.3;
+  box-shadow:0 1px 2px rgba(16,24,38,.05);transition:border-color .15s,background .15s}
+.more-details>summary::-webkit-details-marker{display:none}
+.more-details>summary:hover{border-color:var(--primary)}
+.more-details>summary:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.more-details>summary::after{content:"";flex:0 0 auto;width:9px;height:9px;margin-right:4px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.more-details[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+.more-details[open]>summary{margin-bottom:18px}
+.more-details .more-hint{font-weight:500;color:var(--muted);font-size:12.5px;display:block;margin-top:2px}
+
+/* Dashboard: one clear path — next step, quick actions, daily goal; everything else is one tap away */
+#app.dash-main{display:flex;flex-direction:column}
+#app.dash-main>.top{order:-6}
+#app.dash-main>.site-notifications-card{order:-5}
+#app.dash-main>.dashboard-smart-section{order:-4;margin-top:4px}
+#app.dash-main>.dashboard-quick-section{order:-3;margin-top:4px}
+#app.dash-main>.study-goal-card{order:-2}
+#app.dash-main>.more-details{order:0}
+.dash-main .dashboard-section{margin-top:4px}
+
+
+/* Study Library: "Show more" row spans the whole results grid */
+.library-more{grid-column:1/-1;display:flex;justify-content:center;padding:6px 0 2px}
+</style>
+<style id="medex-focus-css">
+/* MedEx focus timer v42.5 — top-bar timer is always visible again, with a quick-start panel.
+   Revert by deleting this block and the script id="medex-focus-js". */
+.global-focus-timer{position:relative;overflow:hidden;transition:border-color .2s,background .2s}
+.global-focus-timer .focus-time-btn{border:0;background:transparent;color:inherit;font:inherit;font-size:13px;font-weight:800;min-width:52px;text-align:center;padding:4px 2px;border-radius:6px;cursor:pointer}
+.global-focus-timer .focus-time-btn:hover{background:rgba(var(--primary-rgb),.10)}
+.global-focus-timer .focus-time-btn:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+.global-focus-timer .focus-progress{position:absolute;left:0;right:0;bottom:0;height:3px;pointer-events:none}
+.global-focus-timer .focus-progress i{display:block;height:100%;width:var(--fp,0%);background:var(--primary);transition:width 1s linear}
+.global-focus-timer.running{border-color:var(--primary)}
+.global-focus-timer.break .focus-global-label{color:var(--ok)}
+.global-focus-timer.break .focus-progress i{background:var(--ok)}
+.global-focus-timer.break.running{border-color:var(--ok)}
+.global-focus-timer.done{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,var(--card));animation:focusDone 1.6s ease-in-out 3}
+.global-focus-timer.done .focus-global-label{color:var(--ok)}
+@keyframes focusDone{50%{box-shadow:0 0 0 4px rgba(31,138,92,.25)}}
+
+.focus-popover{position:fixed;right:18px;top:calc(var(--topbar-h) + 9px);width:min(340px,calc(100vw - 24px));max-height:calc(100vh - var(--topbar-h) - 24px);overflow:auto;
+  background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px;z-index:10000;text-align:left;font-family:var(--font-sans)}
+@media(max-width:700px){.focus-popover{right:12px;left:12px;width:auto}}
+.focus-pop-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.focus-pop-head strong{font-size:15px}
+.focus-pop-x{border:0;background:transparent;color:var(--muted);font-size:18px;line-height:1;padding:6px 8px;border-radius:8px;cursor:pointer}
+.focus-pop-x:hover{background:var(--bg);color:var(--text)}
+.focus-pop-sec{margin-top:12px}
+.focus-pop-sec>.mini{display:block;margin-bottom:6px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:10.5px}
+.focus-pop-row{display:flex;gap:6px;flex-wrap:wrap}
+.focus-chip{flex:1 1 0;min-width:64px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;font-size:13.5px;font-weight:700;padding:10px 6px;border-radius:10px;cursor:pointer;transition:border-color .15s,background .15s}
+.focus-chip:hover{border-color:var(--primary);background:rgba(var(--primary-rgb),.07)}
+.focus-chip.break:hover{border-color:var(--ok);background:rgba(31,138,92,.08)}
+.focus-chip.solid{background:var(--primary);border-color:var(--primary);color:#fff}
+.focus-chip.solid:hover{background:var(--primary2)}
+.focus-pop-input{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:14px;background:var(--card);color:var(--text)}
+.focus-pop-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(var(--primary-rgb),.2)}
+.focus-pop-custom{display:flex;gap:6px}
+.focus-pop-custom input{flex:1;min-width:0}
+.focus-pop-custom .focus-chip{flex:0 0 auto;padding:10px 16px}
+.focus-done-box{background:color-mix(in srgb,var(--ok) 12%,var(--card));border:1px solid color-mix(in srgb,var(--ok) 40%,var(--line));border-radius:12px;padding:12px;margin-bottom:4px}
+.focus-done-box b{display:block;margin-bottom:8px}
+.focus-pop-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.focus-pop-foot label{display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--text);font-weight:600}
+@media(prefers-reduced-motion:reduce){.global-focus-timer.done{animation:none}.global-focus-timer .focus-progress i{transition:none}}
+</style>
+
+<style id="medex-visitor-guide-and-clean-copy">
+/* Hide page-level subtitles and low-value backend/storage status copy. */
+.top .sub{display:none!important}
+.visitor-welcome .category-head .mini{display:none!important}
+.visitor-guide-backdrop{position:fixed;inset:0;z-index:10050;background:rgba(8,18,38,.48);display:flex;align-items:flex-end;justify-content:flex-end;padding:clamp(12px,3vw,28px);backdrop-filter:blur(2px)}
+.visitor-guide-window{width:min(390px,100%);border:1px solid var(--line);border-radius:18px;background:var(--card);color:var(--text);box-shadow:0 20px 65px rgba(0,0,0,.24);padding:20px;animation:medexGuideIn .18s ease-out}
+.visitor-guide-window .guide-kicker{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--primary);margin-bottom:8px}
+.visitor-guide-window h2{font-size:20px;line-height:1.25;margin:0 0 8px}
+.visitor-guide-window p{font-size:14px;line-height:1.55;color:var(--muted);margin:0 0 16px}
+.visitor-guide-progress{display:flex;gap:5px;margin:0 0 16px}.visitor-guide-progress span{height:4px;flex:1;border-radius:9px;background:var(--line)}.visitor-guide-progress span.active{background:var(--primary)}
+.visitor-guide-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.visitor-guide-actions .guide-spacer{flex:1}.visitor-guide-actions button{min-height:38px}
+.medex-guide-target{position:relative!important;z-index:10051!important;outline:3px solid var(--primary)!important;outline-offset:3px!important;border-radius:12px!important;box-shadow:0 0 0 6px rgba(var(--primary-rgb),.16)!important}
+@keyframes medexGuideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.visitor-guide-backdrop{align-items:flex-end;padding:10px}.visitor-guide-window{width:100%;padding:17px;border-radius:16px}}
+@media(prefers-reduced-motion:reduce){.visitor-guide-window{animation:none}}
+</style>
+
+<style id="medex-flashcards-revision-polish">
+/* Revision-first flashcards workspace: high-priority study action stays above setup and library. */
+.study-tools-page{max-width:1180px}
+.study-tools-page .study-tools-hero{align-items:center;padding:clamp(20px,3vw,30px);background:linear-gradient(120deg,var(--card) 35%,var(--primary-soft));border-color:rgba(var(--primary-rgb),.24)}
+.study-tools-page .study-tools-hero h2{font-size:clamp(25px,3vw,34px);line-height:1.12;letter-spacing:-.035em}
+.study-tools-page .study-tools-hero p{max-width:610px;margin-top:9px;font-size:13.5px}
+.fc-daily-focus{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(180px,.8fr) auto;align-items:center;gap:20px;padding:20px 22px;margin:0 0 16px;border:1px solid rgba(var(--primary-rgb),.3);border-radius:16px;background:var(--card);box-shadow:0 8px 26px rgba(15,40,70,.06)}
+.fc-daily-copy h3{font:600 21px/1.25 var(--font-serif);margin:5px 0}
+.fc-daily-copy p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.5}
+.fc-daily-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fc-daily-metrics>div{padding:11px 12px;border-radius:11px;background:var(--bg);border:1px solid var(--line)}
+.fc-daily-metrics b{display:block;font:700 25px var(--font-mono);color:var(--primary)}
+.fc-daily-metrics span{display:block;margin-top:3px;font-size:11px;color:var(--muted)}
+.fc-daily-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.fc-daily-actions .btn{min-height:42px}
+.study-tools-page .fc-revision-first{border-top-width:4px;box-shadow:0 8px 24px rgba(15,40,70,.06)}
+.study-tools-page .study-filter-grid .field label{font-size:12px}
+.study-tools-page .study-filter-grid select{min-height:43px}
+@media(max-width:900px){.fc-daily-focus{grid-template-columns:1fr 1fr}.fc-daily-copy{grid-column:1/-1}.fc-daily-actions{justify-content:flex-start}}
+@media(max-width:600px){.study-tools-page .study-tools-hero{align-items:flex-start;flex-direction:column}.study-tools-page .study-hero-actions{justify-content:flex-start}.fc-daily-focus{grid-template-columns:1fr;padding:16px;gap:14px}.fc-daily-copy{grid-column:auto}.fc-daily-actions{display:grid;grid-template-columns:1fr 1fr}.fc-daily-actions .btn{padding:10px 8px}.fc-daily-metrics b{font-size:22px}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -768,6 +1092,7 @@ html[data-theme="dark"] input,html[data-theme="dark"] textarea{background:var(--
       <button data-view="import" id="adminNav" style="display:none"><svg viewBox="0 0 20 20" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13V2.5"/><polyline points="6,6.5 10,2.5 14,6.5"/><path d="M3 13v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg><span>Upload / Update Questions</span></button>
       <button data-view="ai"><svg viewBox="0 0 20 20" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5 L11.6 7.2 L16.2 8.8 L11.6 10.4 L10 15.1 L8.4 10.4 L3.8 8.8 L8.4 7.2 Z"/><path d="M16 2.5 L16.7 4.4 L18.6 5.1 L16.7 5.8 L16 7.7 L15.3 5.8 L13.4 5.1 L15.3 4.4 Z"/></svg><span>AI Assistant</span></button>
       <button data-view="aiquestions"><svg viewBox="0 0 20 20" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="4" rx="1.2"/><rect x="3" y="8.5" width="14" height="4" rx="1.2"/><rect x="3" y="14" width="14" height="4" rx="1.2"/><circle cx="6" cy="5" r=".6" fill="currentColor"/><circle cx="6" cy="10.5" r=".6" fill="currentColor"/><circle cx="6" cy="16" r=".6" fill="currentColor"/></svg><span>AI Questions</span></button>
+      <button data-view="semesters" id="semesterAdminNav" style="display:none"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="15" height="14" rx="2"/><path d="M6 7h8M6 10h8M6 13h5"/></svg><span>Semester Manager</span></button>
       <button data-view="flashadmin" id="flashAdminNav" style="display:none"><svg viewBox="0 0 20 20" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M6 8h8M6 11h6M6 14h4"/></svg><span>Flashcard Manager</span></button><button data-view="favorites" id="favoritesNav"><svg viewBox="0 0 20 20" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17.2 3.8 10.8A4.1 4.1 0 0 1 9.6 5l.4.4.4-.4a4.1 4.1 0 0 1 5.8 5.8Z"/></svg><span>Favourite Questions</span></button>
       <button data-view="analytics" id="analyticsNav" style="display:none"><svg viewBox="0 0 20 20" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="17" x2="3" y2="3"/><line x1="3" y1="17" x2="18" y2="17"/><rect x="6" y="10" width="2.5" height="5" rx=".5"/><rect x="10.5" y="7" width="2.5" height="8" rx=".5"/><rect x="15" y="4" width="2.5" height="11" rx=".5"/></svg><span>Admin Analytics</span></button>
       <button data-view="reports" id="adminReportsNav" style="display:none"><svg viewBox="0 0 20 20" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5 17 5v4.7c0 4.2-2.8 6.6-7 7.8-4.2-1.2-7-3.6-7-7.8V5z"/><path d="M10 6.2v4.2"/><circle cx="10" cy="13.2" r=".7" fill="currentColor" stroke="none"/></svg><span>Question Reports</span></button>
@@ -862,7 +1187,8 @@ const DEFAULT_SETTINGS = {
   shuffleQuestions: true,
   shuffleOptions: true,
   darkMode: !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),
-  dailyGoal: 20
+  dailyGoal: 20,
+  semester: null
 };
 
 const DEFAULT_AI_SETTINGS = {
@@ -936,7 +1262,7 @@ let examBuilderSelection = new Set();
 let examBuilderExpanded = new Set();
 let examBuilderSearch = '';
 let flashcardSession = null;
-let flashcardFilter = {module:'',subject:'',lecture:'',mode:'due',count:0};
+let flashcardFilter = {module:'',subject:'',lecture:'',mode:'new',count:0};
 let reportPanelOpen=false;
 let examBuilderMode='simple';
 
@@ -1302,7 +1628,8 @@ async function loadModuleVisibility(){
 }
 function applyModuleVisibility(){
   if(!Array.isArray(allQuestionBank)||!allQuestionBank.length){ allQuestionBank=bank.slice(); }
-  bank=isAdmin ? allQuestionBank.slice() : allQuestionBank.filter(q=>isModuleVisible(q.module));
+  const selectedSemester=getSelectedSemester();
+  bank=isAdmin ? allQuestionBank.slice() : allQuestionBank.filter(q=>isModuleVisible(q.module) && (!selectedSemester || Number(q.semester)===Number(selectedSemester)));
 }
 
 function authCard(){
@@ -1597,6 +1924,7 @@ function normalizeQuestion(q, source=''){
   return {
     id: uid(q),
     module: String(q.module || q.section || 'General').trim() || 'General',
+    semester: Number.isInteger(Number(q.semester)) && Number(q.semester)>=1 && Number(q.semester)<=10 ? Number(q.semester) : null,
     subject: String(q.subject || q.category || 'General').trim() || 'General',
     lecture: String(q.lecture || 'General').trim() || 'General',
     difficulty: String(q.difficulty || '').trim(),
@@ -1648,7 +1976,7 @@ async function loadQuestionsFromSupabase(){
     // This avoids a long serial round-trip for banks with thousands of questions.
     const first = await supabaseClient
       .from('questions')
-      .select('id,module,subject,lecture,question,options,correct_index,explanation,difficulty,reference,image_url')
+      .select('id,module,subject,lecture,question,options,correct_index,explanation,difficulty,reference,image_url,semester')
       .order('id',{ascending:true})
       .range(0,PAGE_SIZE-1);
     if(first.error)throw first.error;
@@ -1661,7 +1989,7 @@ async function loadQuestionsFromSupabase(){
       const pages=await Promise.all(starts.map(async from=>{
         const {data,error}=await supabaseClient
           .from('questions')
-          .select('id,module,subject,lecture,question,options,correct_index,explanation,difficulty,reference,image_url')
+          .select('id,module,subject,lecture,question,options,correct_index,explanation,difficulty,reference,image_url,semester')
           .order('id',{ascending:true})
           .range(from,from+PAGE_SIZE-1);
         if(error)throw error;
@@ -1683,7 +2011,7 @@ async function loadQuestionsFromSupabase(){
       return false;
     }
     const all=data.map(q=>normalizeQuestion({
-      id:q.id,module:q.module,subject:q.subject,lecture:q.lecture,question:q.question,
+      id:q.id,module:q.module,semester:q.semester,subject:q.subject,lecture:q.lecture,question:q.question,
       options:q.options,correctIndex:q.correct_index,explanation:q.explanation,
       difficulty:q.difficulty,reference:q.reference,imageUrl:q.image_url,source:'Supabase'
     },'Supabase'));
@@ -1779,24 +2107,113 @@ function layout(title,subtitle,body,actions=''){
   <div id="toast" class="notice hidden"></div>${body}`;
 }
 
+function getSelectedSemester(){
+  const raw=settings?.semester;
+  return Number.isInteger(Number(raw)) && Number(raw)>=1 && Number(raw)<=10 ? Number(raw) : null;
+}
+function semesterOptions(selected, includeAll=false){
+  return `${includeAll?'<option value="">Unassigned / All</option>':''}${Array.from({length:10},(_,i)=>i+1).map(n=>`<option value="${n}" ${Number(selected)===n?'selected':''}>Semester ${n}</option>`).join('')}`;
+}
+function renderVisitorOnboarding(){
+  const name=getVisitorName();
+  document.getElementById('app').innerHTML=`<div class="top"><div><h1>Welcome to MedEx</h1><div class="sub">Personalize your study space before you begin.</div></div></div><section class="card" style="max-width:680px;margin:28px auto;padding:clamp(20px,4vw,36px)"><div style="font-size:34px;margin-bottom:8px">🎓</div><h2 style="margin:0 0 8px">Choose your semester</h2><p class="mini" style="margin:0 0 20px">MedEx organizes modules and official flashcards by semester. Your choice filters the study content you see and can be changed later in Settings.</p><div class="field"><label for="visitorStartName">Your name</label><input id="visitorStartName" maxlength="40" value="${esc(name)}" placeholder="Enter your name" autocomplete="name"></div><div class="field" style="margin-top:14px"><label for="visitorStartSemester">Semester</label><select id="visitorStartSemester"><option value="">Choose semester…</option>${semesterOptions(getSelectedSemester())}</select></div><button class="btn primary" style="margin-top:20px;width:100%" onclick="completeVisitorOnboarding()">Enter MedEx</button><p class="mini" style="margin-top:12px">You can change your name or semester any time in Settings.</p></section>`;
+}
+async function completeVisitorOnboarding(){
+  const name=document.getElementById('visitorStartName')?.value||'';
+  const sem=Number(document.getElementById('visitorStartSemester')?.value);
+  if(!String(name).trim()){toast('Please enter your name.','error');return;}
+  if(!Number.isInteger(sem)||sem<1||sem>10){toast('Please choose a semester from 1 to 10.','error');return;}
+  settings.semester=sem;saveState();
+  await saveVisitorName(name);
+  applyModuleVisibility();
+  render();
+}
+async function adminAssignModuleSemester(module,semester){
+  if(!isAdmin||!currentUser||!SUPABASE_ENABLED)return toast('Admin Supabase access is required.','error');
+  const sem=semester===''?null:Number(semester);
+  if(sem!==null&&(!Number.isInteger(sem)||sem<1||sem>10))return toast('Choose a semester from 1 to 10.','error');
+  const {error}=await supabaseClient.from('questions').update({semester:sem}).eq('module',module);
+  if(error)return toast('Could not save module semester. Apply the included Supabase migration first. '+error.message,'error');
+  allQuestionBank=allQuestionBank.map(q=>q.module===module?{...q,semester:sem}:q);
+  safeSetItem(CONFIG.cacheKey,JSON.stringify({updatedAt:new Date().toISOString(),sourceFiles,questions:allQuestionBank}));
+  applyModuleVisibility();renderSemesterManager();toast(`${module} assigned to ${sem?'Semester '+sem:'Unassigned'}.`,'ok');
+}
+async function adminAssignFlashcardSemester(id,semester){
+  if(!isAdmin||!currentUser||!SUPABASE_ENABLED)return toast('Admin Supabase access is required.','error');
+  const sem=semester===''?null:Number(semester);
+  if(sem!==null&&(!Number.isInteger(sem)||sem<1||sem>10))return toast('Choose a semester from 1 to 10.','error');
+  const {error}=await supabaseClient.from('flashcards_public').update({semester:sem,updated_at:new Date().toISOString()}).eq('id',id);
+  if(error)return toast('Could not save flashcard semester. Apply the included Supabase migration first. '+error.message,'error');
+  flashcardCards=flashcardCards.map(c=>String(c.id)===String(id)?{...c,semester:sem,updatedAt:Date.now()}:c);saveFlashcardCards();publicFlashcardsLoaded=false;await loadPublicFlashcards(true);renderSemesterManager();toast('Flashcard semester updated.','ok');
+}
+async function adminAssignFlashcardModuleSemester(module,semester){
+  if(!isAdmin||!currentUser||!SUPABASE_ENABLED)return toast('Admin Supabase access is required.','error');
+  const sem=semester===''?null:Number(semester);
+  if(sem!==null&&(!Number.isInteger(sem)||sem<1||sem>10))return toast('Choose a semester from 1 to 10.','error');
+  let query=supabaseClient.from('flashcards_public').update({semester:sem,updated_at:new Date().toISOString()});
+  query = module==='General' ? query.is('module',null) : query.eq('module',module);
+  const {error}=await query;
+  if(error)return toast('Could not save flashcard module semester. Apply the updated Supabase migration first. '+error.message,'error');
+  flashcardCards=flashcardCards.map(c=>c.source==='public'&&(String(c.module||'General')===module)?{...c,semester:sem,updatedAt:Date.now()}:c);saveFlashcardCards();publicFlashcardsLoaded=false;await loadPublicFlashcards(true);renderSemesterManager();toast(`All published flashcards in ${module} assigned to ${sem?'Semester '+sem:'Unassigned'}.`,'ok');
+}
+async function renderSemesterManager(){
+  if(!isAdmin)return;
+  await loadPublicFlashcards();
+  const modules=[...new Set(allQuestionBank.map(q=>String(q.module||'General')))].sort((a,b)=>a.localeCompare(b));
+  const official=flashcardCards.filter(c=>c.source==='public');
+  const cardModules=[...new Set(official.map(c=>String(c.module||'General')))].sort((a,b)=>a.localeCompare(b));
+  const body=`<div class="card"><div class="category-head"><div><h3 style="margin:0">Modules by semester</h3><p class="mini" style="margin:6px 0 0">Assign each module once; all questions in that module will inherit the selected semester for every visitor.</p></div><span class="pill">${modules.length} modules</span></div><div style="margin-top:14px;display:grid;gap:10px">${modules.map(m=>{const q=allQuestionBank.find(x=>x.module===m);const sem=q?.semester;return `<div class="category-card"><div class="category-head"><div><b>${esc(m)}</b><div class="mini">${allQuestionBank.filter(x=>x.module===m).length} questions</div></div><div class="actions"><select id="moduleSemester-${attrJs(m)}" aria-label="Semester for ${attrJs(m)}">${semesterOptions(sem,true)}</select><button class="btn primary" onclick="adminAssignModuleSemester('${attrJs(m)}',document.getElementById('moduleSemester-${attrJs(m)}').value)">Save</button></div></div></div>`}).join('')||'<div class="empty">No modules found.</div>'}</div></div><div class="card" style="margin-top:16px"><div class="category-head"><div><h3 style="margin:0">Flashcards by module</h3><p class="mini" style="margin:6px 0 0">Choose a semester for a module and all published flashcards assigned to that module will be categorized together.</p></div><span class="pill">${official.length} cards · ${cardModules.length} modules</span></div><div style="display:grid;gap:10px;margin-top:14px">${cardModules.map(m=>{const cards=official.filter(c=>String(c.module||'General')===m);const sems=[...new Set(cards.map(c=>c.semester).filter(x=>x!=null).map(Number))];const selected=sems.length===1?sems[0]:'';return `<div class="category-card"><div class="category-head"><div><b>${esc(m)}</b><div class="mini">${cards.length} published flashcards${sems.length>1?' · mixed semester assignments':''}</div></div><div class="actions"><select id="flashModuleSemester-${attrJs(m)}" aria-label="Semester for flashcards in ${attrJs(m)}">${semesterOptions(selected,true)}</select><button class="btn primary" onclick="adminAssignFlashcardModuleSemester('${attrJs(m)}',document.getElementById('flashModuleSemester-${attrJs(m)}').value)">Apply to module</button></div></div><div class="mini" style="margin-top:7px">${cards.slice(0,3).map(c=>esc(c.front)).join(' · ')}${cards.length>3?' · …':''}</div></div>`}).join('')||'<div class="empty">No published flashcards yet. Assign a module when creating cards, then publish them.</div>'}</div></div><div class="notice" style="margin-top:14px">Unassigned content will not appear in a visitor's semester-filtered question bank or official flashcard list until categorized. Flashcard categorization is applied in bulk by module.</div>`;
+  document.getElementById('app').innerHTML=layout('Semester Manager','Organize modules and flashcard modules into Semesters 1–10.',body);
+}
+
+const MEDEx_VISITOR_GUIDE_KEY='medexVisitorGuideSeen_v2';
+let medexVisitorGuideStep=0, medexVisitorGuideStarted=false;
+const medexVisitorGuideSteps=[
+ {view:'dashboard',title:'Your study dashboard',body:'Start here for your study overview and quick links to the main MedEx features.',icon:'🏠',target:'[data-view="dashboard"]'},
+ {view:'exam',title:'Practice questions',body:'Build an exam by module, subject and lecture. Answer questions and review results to find what needs more work.',icon:'📝',target:'[data-view="exam"]'},
+ {view:'flashcards',title:'Flashcards and revision',body:'Choose New cards to learn material, reveal each answer, then rate how well you remembered it to plan your next review.',icon:'🗂️',target:'[data-view="flashcards"]'},
+ {view:'tools',title:'Study Tools',body:'Use the focus timer and study-planning tools to structure your revision sessions.',icon:'🎯',target:'[data-view="tools"]'},
+ {view:'progress',title:'Progress & Accuracy',body:'Check your performance and identify topics that deserve another practice session.',icon:'📈',target:'[data-view="progress"]'},
+ {view:'ai',title:'Ask AI',body:'Ask for help understanding a medical concept or request an explanation when a question is difficult.',icon:'✨',target:'[data-view="ai"]'}
+];
+function closeVisitorGuide(){safeSetItem(MEDEx_VISITOR_GUIDE_KEY,'1');medexVisitorGuideStarted=false;document.getElementById('medexVisitorGuide')?.remove();document.querySelectorAll('.medex-guide-target').forEach(el=>el.classList.remove('medex-guide-target'));}
+function renderVisitorGuide(){
+ if(currentUser||safeGetItem(MEDEx_VISITOR_GUIDE_KEY)==='1')return;
+ const step=medexVisitorGuideSteps[medexVisitorGuideStep];if(!step)return closeVisitorGuide();
+ document.querySelectorAll('.medex-guide-target').forEach(el=>el.classList.remove('medex-guide-target'));
+ const target=document.querySelector(step.target);if(target){target.classList.add('medex-guide-target');if(window.innerWidth<=880)target.scrollIntoView({block:'nearest',behavior:'smooth'});}
+ let root=document.getElementById('medexVisitorGuide');if(!root){root=document.createElement('div');root.id='medexVisitorGuide';root.className='visitor-guide-backdrop';root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','MedEx quick guide');document.body.appendChild(root);}
+ root.innerHTML=`<section class="visitor-guide-window"><div class="guide-kicker">${step.icon} QUICK GUIDE · ${medexVisitorGuideStep+1} OF ${medexVisitorGuideSteps.length}</div><div class="visitor-guide-progress">${medexVisitorGuideSteps.map((_,i)=>`<span class="${i<=medexVisitorGuideStep?'active':''}"></span>`).join('')}</div><h2>${step.title}</h2><p>${step.body}</p><div class="visitor-guide-actions"><button class="btn" onclick="closeVisitorGuide()">Skip guide</button><span class="guide-spacer"></span>${medexVisitorGuideStep>0?'<button class="btn" onclick="visitorGuideBack()">Back</button>':''}<button class="btn primary" onclick="visitorGuideNext()">${medexVisitorGuideStep===medexVisitorGuideSteps.length-1?'Finish':'Next feature'}</button></div></section>`;
+}
+function visitorGuideGoToStep(){const step=medexVisitorGuideSteps[medexVisitorGuideStep];if(!step)return closeVisitorGuide();if(location.hash!=='#'+step.view)location.hash=step.view;render();renderVisitorGuide();}
+function visitorGuideNext(){if(medexVisitorGuideStep<medexVisitorGuideSteps.length-1){medexVisitorGuideStep++;visitorGuideGoToStep();}else closeVisitorGuide();}
+function visitorGuideBack(){if(medexVisitorGuideStep>0){medexVisitorGuideStep--;visitorGuideGoToStep();}}
+function maybeShowVisitorGuide(view){if(currentUser||safeGetItem(MEDEx_VISITOR_GUIDE_KEY)==='1'||!getVisitorName()||!getSelectedSemester())return;if(view==='dashboard'&&!medexVisitorGuideStarted){medexVisitorGuideStarted=true;medexVisitorGuideStep=0;}if(medexVisitorGuideStarted)renderVisitorGuide();}
+function removeDistractingSystemSubtitles(){
+ const noisy=/(progress|answers?|history|data|revision|favourites?|flashcards?).{0,80}(sync(?:ed|ing)?|supabase|cloud|local(?:ly)?|stored|saved)|(sync(?:ed|ing)?|supabase|cloud|local(?:ly)?|stored|saved).{0,80}(progress|answers?|history|data|revision|favourites?|flashcards?)/i;
+ document.querySelectorAll('#app p,#app small,#app .mini,#app .sub').forEach(el=>{if(el.closest('label,button,input,select,textarea,option,script,style'))return;const txt=(el.innerText||el.textContent||'').replace(/\s+/g,' ').trim();if(txt&&txt.length<260&&noisy.test(txt))el.style.setProperty('display','none','important');});
+}
+
 function render(){
   updateSidebarFoot();
   updateTopbarControls();
   const view=location.hash.replace('#','')||'dashboard';
-  const allowed=['dashboard','leaderboard','exam','progress','tools','flashcards','library','materials','materialreader','mistakes','bank','import','ai','aiquestions','settings','account','results','history','favorites','analytics','reports','replies','notifications','weeklynotifications','flashadmin'];
+  const allowed=['dashboard','leaderboard','exam','progress','tools','flashcards','library','materials','materialreader','mistakes','bank','import','ai','aiquestions','settings','account','results','history','favorites','analytics','reports','replies','notifications','weeklynotifications','flashadmin','semesters'];
   const v=allowed.includes(view)?view:'dashboard';
+  if(!currentUser && (!getVisitorName() || !getSelectedSemester())){ renderVisitorOnboarding(); return; }
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
   const materialsNav=document.querySelector('[data-view="materials"]'); if(materialsNav) materialsNav.style.display=isAdmin?'flex':'none';
   const adminNav=document.getElementById('adminNav'); if(adminNav) adminNav.style.display=isAdmin?'flex':'none';
   const bankNav=document.getElementById('bankNav'); if(bankNav) bankNav.style.display=isAdmin?'flex':'none';
   const aiQuestionsNav=document.querySelector('[data-view="aiquestions"]'); if(aiQuestionsNav) aiQuestionsNav.style.display=isAdmin?'flex':'none';
   const flashAdminNav=document.getElementById('flashAdminNav'); if(flashAdminNav) flashAdminNav.style.display=isAdmin?'flex':'none';
+  const semesterAdminNav=document.getElementById('semesterAdminNav'); if(semesterAdminNav) semesterAdminNav.style.display=isAdmin?'flex':'none';
   const analyticsNav=document.getElementById('analyticsNav'); if(analyticsNav) analyticsNav.style.display=isAdmin?'flex':'none';
   const adminReportsNav=document.getElementById('adminReportsNav'); if(adminReportsNav) adminReportsNav.style.display=isAdmin?'flex':'none';
   const adminRepliesNav=document.getElementById('adminRepliesNav'); if(adminRepliesNav) adminRepliesNav.style.display=isAdmin?'flex':'none';
   const adminNotificationsNav=document.getElementById('adminNotificationsNav'); if(adminNotificationsNav) adminNotificationsNav.style.display=isAdmin?'flex':'none';
   const adminWeeklyNotificationsNav=document.getElementById('adminWeeklyNotificationsNav'); if(adminWeeklyNotificationsNav) adminWeeklyNotificationsNav.style.display=isAdmin?'flex':'none';
-  const adminOnlyViews=['materials','materialreader','bank','import','aiquestions','analytics','reports','replies','notifications','weeklynotifications','flashadmin'];
+  const adminOnlyViews=['materials','materialreader','bank','import','aiquestions','analytics','reports','replies','notifications','weeklynotifications','flashadmin','semesters'];
   if(adminOnlyViews.includes(v)){
     if(!adminCheckLoaded){
       document.getElementById('app').innerHTML=layout('Checking access','Verifying your MedEx administrator permissions…','<div class="card" role="status" aria-live="polite">Please wait while MedEx verifies your account.</div>');
@@ -1825,6 +2242,7 @@ function render(){
   else if(v==='import') renderImport();
   else if(v==='ai') renderAIAssistant();
   else if(v==='flashadmin') renderFlashcardAdmin();
+  else if(v==='semesters') renderSemesterManager();
   else if(v==='aiquestions') renderAIQuestions();
   else if(v==='favorites') renderFavorites();
   else if(v==='analytics') renderAdminAnalytics();
@@ -1836,6 +2254,8 @@ function render(){
   else if(v==='account') renderAccount();
   else renderResults();
   if(v==='settings') updatePWAInstallButton();
+  removeDistractingSystemSubtitles();
+  maybeShowVisitorGuide(v);
 }
 function go(v){
   // Leaving the Exam page intentionally ends the in-progress exam.
@@ -2004,7 +2424,7 @@ function smartStudyPlan(){
   return {plan,dueQuestions:dueQuestions.length,dueCards,wrongQuestions:wrongQuestions.length,weakTopics};
 }
 function startSmartStudyAction(type){
-  if(type==='flashcards'){flashcardFilter={module:'',subject:'',lecture:'',mode:'due',count:0};go('flashcards');return;}
+  if(type==='flashcards'){flashcardFilter={module:'',subject:'',lecture:'',mode:'new',count:0};go('flashcards');return;}
   if(type==='spaced'){startSpacedReview();return;}
   if(type==='mistakes'){const list=bank.filter(q=>Number(progress[key(q)]?.wrong||0)>0);if(!list.length){toast('No recorded mistakes to practise yet.','ok');return;}startExam(list,null,'Mistakes Review');return;}
   if(type==='topic'){
@@ -2025,7 +2445,7 @@ function renderDashboard(){
   const modules=getModules();
   setTimeout(()=>{updateSupportUnreadDot(false);setNotificationAppBadge(notificationUnreadCount(weeklyNotificationRows()));updateTopbarControls();},0);
   const welcomeTitle=currentUser ? 'Dashboard' : (getVisitorName() ? `Welcome back, ${esc(getVisitorName())}` : 'Welcome to MedEx');
-  const visitorIdentity=!currentUser ? `<div class="card visitor-welcome" style="margin-bottom:16px"><div class="category-head"><div><strong>${getVisitorName()?`Welcome back, ${esc(getVisitorName())}`:'Set your visitor name'}</strong><div class="mini" style="margin-top:4px">${getVisitorName()?'Your visitor progress and leaderboard score are synced to Supabase.':'Choose a name so MedEx can keep your visitor progress and show you correctly on the leaderboard.'}</div></div><span class="pill">Visitor</span></div><div class="visitor-name-form" style="margin-top:12px"><div class="field"><label>Visitor name</label><input id="visitorNameInput" maxlength="40" value="${esc(getVisitorName())}" placeholder="Enter your name" onkeydown="if(event.key==='Enter')saveVisitorNameFromInput()"></div><button class="btn primary" onclick="saveVisitorNameFromInput()">Save name</button></div></div>` : '';
+  const visitorIdentity=!currentUser ? `<div class="card visitor-welcome" style="margin-bottom:16px"><div class="category-head"><div><strong>${getVisitorName()?`Welcome back, ${esc(getVisitorName())}`:'Set your visitor name'}</strong><div class="mini" style="margin-top:4px">${getVisitorName()?'':'Choose a name to appear on the leaderboard.'}</div></div><span class="pill">Visitor</span></div><div class="visitor-name-form" style="margin-top:12px"><div class="field"><label>Visitor name</label><input id="visitorNameInput" maxlength="40" value="${esc(getVisitorName())}" placeholder="Enter your name" onkeydown="if(event.key==='Enter')saveVisitorNameFromInput()"></div><button class="btn primary" onclick="saveVisitorNameFromInput()">Save name</button></div></div>` : '';
   const stats=accuracyStats(bank);
   const weakModules=modules.map(m=>{const list=bank.filter(q=>q.module===m);const a=accuracyStats(list);return {name:m,list,accuracy:a.pct,attempts:a.attempts,practiced:practicedCount(list)};}).filter(x=>x.list.length).sort((a,b)=>{if(!!a.attempts!==!!b.attempts)return a.attempts?-1:1;if(a.attempts&&b.attempts&&a.accuracy!==b.accuracy)return a.accuracy-b.accuracy;return a.name.localeCompare(b.name);}).slice(0,3);
   const mistakeCount=bank.filter(q=>Number(progress[key(q)]?.wrong||0)>0).length;
@@ -2038,7 +2458,9 @@ function renderDashboard(){
   const quickHTML=quickActions.map(a=>`<button type="button" class="dashboard-action ${a.tone}" onclick="go('${a.view}')"><span class="dashboard-action-icon" aria-hidden="true">${a.icon}</span><span class="dashboard-action-copy"><b>${a.title}</b><small>${a.desc}</small></span><span class="dashboard-action-arrow" aria-hidden="true">→</span></button>`).join('');
   const weakHTML=weakModules.length?weakModules.map((m,i)=>`<div class="dashboard-weak-row"><div class="dashboard-weak-rank">${i+1}</div><div class="dashboard-weak-copy"><strong>${esc(m.name)}</strong><div class="mini">${m.attempts?`${m.accuracy}% accuracy · ${m.practiced} of ${m.list.length} practiced`:`${m.list.length} questions · not practiced yet`}</div><div class="bar"><i style="width:${m.practiced?m.accuracy:0}%"></i></div></div><button class="btn dashboard-practice-btn" onclick="startModuleExam('${attrJs(m.name)}')">Practice</button></div>`).join(''):'<div class="empty">No modules are available yet.</div>';
   const allModulesHTML=modules.map(m=>{const list=bank.filter(q=>q.module===m);return `<div class="card dashboard-module-card"><div class="category-head"><strong>${esc(m)}</strong><div style="display:flex;gap:8px;align-items:center"><span class="pill">${list.length} Q</span><button class="section-start-btn" onclick="startModuleExam('${attrJs(m)}')" title="Start an exam on ${esc(m)}" aria-label="Start an exam on ${esc(m)}"><svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16"/></svg></button></div></div><div class="mini" style="margin:10px 0">Progress ${progressFor(list)}% · Accuracy ${accuracyFor(list)}%</div><div class="bar"><i style="width:${progressFor(list)}%"></i></div><div class="mini" style="margin-top:8px">${practicedCount(list)} of ${list.length} practiced</div></div>`;}).join('');
+  const semesterDashboardBar=`<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;margin-bottom:14px"><div style="display:flex;align-items:center;gap:9px;min-width:0"><span aria-hidden="true" style="font-size:18px">🎓</span><div><div class="mini" style="line-height:1.2">YOUR CONTENT</div><strong style="font-size:14px">Semester ${getSelectedSemester()||'Not selected'}</strong></div></div><button class="btn" style="padding:6px 10px;font-size:11px;white-space:nowrap" onclick="go('settings')">Change semester</button></div>`;
   const body=`
+  ${semesterDashboardBar}
   ${siteNotificationsHTML()}
   ${visitorIdentity}
   ${dailyGoalStreakHTML()}
@@ -2056,7 +2478,7 @@ function renderDashboard(){
   <section class="dashboard-section"><div class="dashboard-section-heading"><div><span class="dashboard-eyebrow">RECENT ACTIVITY</span><h2>Recent exams</h2></div><button class="btn dashboard-section-link" onclick="go('history')">Full history <span aria-hidden="true">→</span></button></div><div class="card">${renderRecentExamsList(3)}</div></section>
   <button type="button" class="support-floating-btn" data-contact-medex onclick="openSupportChat()" title="Contact MedEx team" aria-label="Contact MedEx team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h16v10H9l-5 3.5z"/><path d="M7 9h10M7 12h6"/></svg></button>
   <section class="dashboard-section dashboard-sync-section"><details class="dashboard-sync-details"><summary>Question bank sync & admin tools</summary><div class="card"><div id="syncStatus">Source: <b>Supabase</b>${lastSync?` · Last successful sync: ${lastSync.toLocaleString()}`:''}</div><div class="actions" style="margin-top:16px"><button class="btn primary" onclick="loadQuestions()">Refresh from Supabase</button><button class="btn" onclick="go('import')">Upload / Update Questions</button><button class="btn primary btn-lg" onclick="go('exam')">Start an Exam</button></div></div></details></section>`;
-  document.getElementById('app').innerHTML=layout(welcomeTitle,currentUser?'Your personal progress and performance.':'Your visitor progress is synced to this device and Supabase when connected.',body);
+  document.getElementById('app').innerHTML=layout(welcomeTitle,'',body);
   refreshDashboardLeaderboardPreview();
 }
 function examPathKey(type,module='',subject='',lecture=''){
@@ -3272,11 +3694,23 @@ function deleteQuestionFolder(folderId){const f=folderData().find(x=>x.id===fold
 function practiceSingleQuestion(qid){const q=questionById(qid);if(!q)return;startExam([q],{answerMode:settings.showAnswerImmediately?'immediate':'finish',minutes:0});}
 function libraryFolderControlsHTML(qid){const folders=folderData();if(!folders.length)return `<div class="mini" style="margin-top:8px">No folders yet. <button class="btn" onclick="createQuestionFolder();renderStudyLibrary()">+ Create folder</button></div>`;const active=folders.find(f=>f.id===activeLibraryFolder);const current=active&&active.questionIds.includes(String(qid));return `<div class="phase2-library-folders" style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">${folders.map(f=>{const has=f.questionIds.includes(String(qid));return `<button class="btn ${has?'danger':'primary'}" type="button" onclick="toggleQuestionFolder('${attrJs(qid)}','${attrJs(f.id)}')">${has?'Remove from ': 'Add to '}${esc(f.name)}</button>`;}).join('')}${current?`<button class="btn danger" type="button" onclick="removeQuestionFromFolder('${attrJs(qid)}','${attrJs(active.id)}')">Remove from current folder</button>`:''}</div>`;}
 function normalizeLibrarySearchText(v){return String(v||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]+/gi,' ').replace(/\s+/g,' ').trim();}
-function librarySearchChanged(value){librarySearchTerm=String(value||'');clearTimeout(window.__librarySearchTimer);window.__librarySearchTimer=setTimeout(()=>{const host=document.getElementById('libraryResults');const count=document.getElementById('libraryResultCount');if(host){const results=librarySearchResults();host.innerHTML=renderLibraryResultsHTML(results);if(count)count.textContent=`${results.length} shown`;}else renderStudyLibrary();},80);}
-function libraryFilterChanged(value,which){if(which==='module'){librarySearchModule=String(value||'');librarySearchSubject='';}else librarySearchSubject=String(value||'');renderStudyLibrary();}
+function librarySearchChanged(value){libraryShowCount=10;librarySearchTerm=String(value||'');clearTimeout(window.__librarySearchTimer);window.__librarySearchTimer=setTimeout(()=>{const host=document.getElementById('libraryResults');const count=document.getElementById('libraryResultCount');if(host){const results=librarySearchResults();host.innerHTML=renderLibraryResultsHTML(results);if(count)count.textContent=`${results.length} shown`;}else renderStudyLibrary();},80);}
+function libraryFilterChanged(value,which){libraryShowCount=10;if(which==='module'){librarySearchModule=String(value||'');librarySearchSubject='';}else librarySearchSubject=String(value||'');renderStudyLibrary();}
 function librarySearchResults(){const raw=normalizeLibrarySearchText(librarySearchTerm),terms=raw?raw.split(' ').filter(Boolean):[],module=String(librarySearchModule||'').trim(),subject=String(librarySearchSubject||'').trim(),folder=folderData().find(f=>f.id===activeLibraryFolder);return questionUniverse().filter(q=>{const hay=normalizeLibrarySearchText([q.id,q.question,q.module,q.subject,q.lecture,getQuestionNote(q.id),q.sourceEvidence,q.reference,q.source].map(x=>String(x||'')).join(' '));if(terms.length&&!terms.every(t=>hay.includes(t)))return false;if(module&&String(q.module)!==module)return false;if(subject&&String(q.subject)!==subject)return false;if(folder&&!folder.questionIds.map(String).includes(String(q.id)))return false;return true;}).slice(0,120);}
 function editLibraryQuestionNote(qid){const current=getQuestionNote(qid);const value=prompt('Personal note for this question:',current);if(value===null)return;saveQuestionNote(qid,value);renderStudyLibrary();toast(value.trim()?'Note saved locally.':'Note removed.','ok');}
-function renderLibraryResultsHTML(results){return results.length?results.map(q=>{const note=getQuestionNote(q.id);return `<article class="phase2-result"><div class="phase2-result-top"><div style="min-width:0"><b>${esc(q.question)}</b><div class="phase2-result-meta">${esc(q.module||'')} · ${esc(q.subject||'')} · ${esc(q.lecture||'')}</div></div><span class="pill">${isFavorite(q)?'★ Favourite':''}</span></div><div style="margin-top:10px">${(q.options||[]).map((o,i)=>`<div class="review-choice"><b>${String.fromCharCode(65+i)}.</b> ${esc(o)}</div>`).join('')}</div><div class="actions" style="margin-top:10px"><button class="btn primary" onclick="practiceSingleQuestion('${attrJs(q.id)}')">Practice</button><button class="btn" onclick="toggleFavorite('${attrJs(q.id)}')">${isFavorite(q)?'★ Favourite':'☆ Favourite'}</button></div>${libraryFolderControlsHTML(q.id)}<div style="margin-top:10px"><div class="category-head"><label class="mini">Personal note · saved locally</label><button type="button" class="btn" onclick="editLibraryQuestionNote('${attrJs(q.id)}')">${note?'Edit note':'Add note'}</button></div>${note?`<div class="phase2-review-note" style="margin-top:7px">${esc(note)}</div>`:'<div class="mini" style="margin-top:7px">No note saved for this question.</div>'}</div></article>`}).join(''):'<div class="empty">No questions match your search.</div>';}
+let libraryShowCount=10;
+function libraryShowMore(){
+  libraryShowCount+=10;
+  const host=document.getElementById('libraryResults');
+  if(host)host.innerHTML=renderLibraryResultsHTML(librarySearchResults()); else renderStudyLibrary();
+}
+function renderLibraryResultsHTML(results){
+  const total=results.length, shown=results.slice(0,libraryShowCount);
+  let html=renderLibraryResultsAllHTML(shown);
+  if(total>shown.length) html+=`<div class="library-more"><button type="button" class="btn" onclick="libraryShowMore()">Show ${Math.min(10,total-shown.length)} more · ${total-shown.length} left</button></div>`;
+  return html;
+}
+function renderLibraryResultsAllHTML(results){return results.length?results.map(q=>{const note=getQuestionNote(q.id);return `<article class="phase2-result"><div class="phase2-result-top"><div style="min-width:0"><b>${esc(q.question)}</b><div class="phase2-result-meta">${esc(q.module||'')} · ${esc(q.subject||'')} · ${esc(q.lecture||'')}</div></div><span class="pill">${isFavorite(q)?'★ Favourite':''}</span></div><div style="margin-top:10px">${(q.options||[]).map((o,i)=>`<div class="review-choice"><b>${String.fromCharCode(65+i)}.</b> ${esc(o)}</div>`).join('')}</div><div class="actions" style="margin-top:10px"><button class="btn primary" onclick="practiceSingleQuestion('${attrJs(q.id)}')">Practice</button><button class="btn" onclick="toggleFavorite('${attrJs(q.id)}')">${isFavorite(q)?'★ Favourite':'☆ Favourite'}</button></div>${libraryFolderControlsHTML(q.id)}<div style="margin-top:10px"><div class="category-head"><label class="mini">Personal note · saved locally</label><button type="button" class="btn" onclick="editLibraryQuestionNote('${attrJs(q.id)}')">${note?'Edit note':'Add note'}</button></div>${note?`<div class="phase2-review-note" style="margin-top:7px">${esc(note)}</div>`:'<div class="mini" style="margin-top:7px">No note saved for this question.</div>'}</div></article>`}).join(''):'<div class="empty">No questions match your search.</div>';}
 function renderStudyLibrary(){
   const universe=questionUniverse();
   const modules=[...new Set(universe.map(q=>String(q.module||'')).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
@@ -3400,10 +3834,10 @@ async function loadPublicFlashcards(force=false){
   publicFlashcardsLoading=true;publicFlashcardsLastAttempt=Date.now();publicFlashcardsError='';
   try{
     const {data,error}=await supabaseClient.from('flashcards_public')
-      .select('id,front,back,module,subject,lecture,tags,deck,created_at,updated_at')
+      .select('id,front,back,module,subject,lecture,tags,deck,semester,created_at,updated_at')
       .eq('active',true).order('created_at',{ascending:true});
     if(error){publicFlashcardsError=error.message||'Supabase query failed.';console.warn('Public flashcards load failed:',error);return false;}
-    const remote=(data||[]).map(c=>({id:String(c.id),front:String(c.front||''),back:String(c.back||''),module:String(c.module||''),subject:String(c.subject||''),lecture:String(c.lecture||''),tags:Array.isArray(c.tags)?c.tags.join(', '):String(c.tags||''),deck:String(c.deck||''),source:'public',createdAt:c.created_at?Date.parse(c.created_at):Date.now(),updatedAt:c.updated_at?Date.parse(c.updated_at):Date.now()})).filter(c=>c.front&&c.back);
+    const remote=(data||[]).map(c=>({id:String(c.id),front:String(c.front||''),back:String(c.back||''),module:String(c.module||''),subject:String(c.subject||''),lecture:String(c.lecture||''),tags:Array.isArray(c.tags)?c.tags.join(', '):String(c.tags||''),deck:String(c.deck||''),semester:c.semester==null?null:Number(c.semester),source:'public',createdAt:c.created_at?Date.parse(c.created_at):Date.now(),updatedAt:c.updated_at?Date.parse(c.updated_at):Date.now()})).filter(c=>c.front&&c.back);
     const locals=flashcardCards.filter(c=>c.source!=='public');
     const byId=new Map(remote.map(c=>[c.id,c]));
     locals.forEach(c=>byId.has(String(c.id))&&byId.delete(String(c.id)));
@@ -3448,7 +3882,7 @@ function importFlashcardsCSV(inputId='flashcardCSVInput'){
   const file=document.getElementById(inputId)?.files?.[0];if(!file)return toast('Choose a CSV file first.','error');
   const reader=new FileReader();reader.onload=()=>{try{const rows=parseFlashcardCSV(reader.result);let added=0;for(const c of rows){const dup=flashcardCards.some(x=>x.front.toLowerCase()===c.front.toLowerCase()&&x.back.toLowerCase()===c.back.toLowerCase());if(!dup){flashcardCards.push(c);added++;}}saveFlashcardCards();renderFlashcards();toast(`Imported ${added} local flashcard${added===1?'':'s'}. They were not uploaded to Supabase.`,'ok');}catch(e){toast(e.message||'Invalid CSV.','error');}};reader.readAsText(file);
 }
-function importAdminFlashcardsCSV(inputId='adminFlashcardCSV'){const file=document.getElementById(inputId)?.files?.[0];if(!file)return toast('Choose a CSV file first.','error');const reader=new FileReader();reader.onload=()=>{try{const rows=parseFlashcardCSV(reader.result).map(c=>({...c,source:'admin-draft',selected:true}));flashcardAdminDrafts=[...flashcardAdminDrafts,...rows];saveFlashcardAdminDrafts();renderFlashcardAdmin();toast(`Imported ${rows.length} draft cards for review.`,'ok');}catch(e){toast(e.message||'Invalid CSV.','error');}};reader.readAsText(file);}
+function importAdminFlashcardsCSV(inputId='adminFlashcardCSV'){const file=document.getElementById(inputId)?.files?.[0];if(!file)return toast('Choose a CSV file first.','error');const reader=new FileReader();reader.onload=()=>{try{const rows=parseFlashcardCSV(reader.result).map(c=>({...c,semester:getSelectedSemester()||null,source:'admin-draft',selected:true}));flashcardAdminDrafts=[...flashcardAdminDrafts,...rows];saveFlashcardAdminDrafts();renderFlashcardAdmin();toast(`Imported ${rows.length} draft cards for review.`,'ok');}catch(e){toast(e.message||'Invalid CSV.','error');}};reader.readAsText(file);}
 function updateAIFlashcardSubjects(){
   const m=document.getElementById('aiFlashModule')?.value||'';
   const s=document.getElementById('aiFlashSubject');
@@ -3520,20 +3954,20 @@ ${JSON.stringify(sourceQuestions)}`;
   }catch(e){toast(e.message||'AI flashcard generation failed.','error');}
   finally{if(btn)btn.disabled=false;}
 }
-function adminDraftAddCard(){const front=document.getElementById('adminDraftFront')?.value.trim()||'',back=document.getElementById('adminDraftBack')?.value.trim()||'';if(!front||!back)return toast('Front and back are required.','error');flashcardAdminDrafts.push({id:flashcardCardId(),front,back,module:document.getElementById('adminDraftModule')?.value.trim()||'',subject:document.getElementById('adminDraftSubject')?.value.trim()||'',lecture:document.getElementById('adminDraftLecture')?.value.trim()||'',tags:document.getElementById('adminDraftTags')?.value.trim()||'',deck:document.getElementById('adminDraftDeck')?.value.trim()||'',source:'admin-draft',selected:true,createdAt:Date.now(),updatedAt:Date.now()});saveFlashcardAdminDrafts();renderFlashcardAdmin();}
+function adminDraftAddCard(){const front=document.getElementById('adminDraftFront')?.value.trim()||'',back=document.getElementById('adminDraftBack')?.value.trim()||'';if(!front||!back)return toast('Front and back are required.','error');flashcardAdminDrafts.push({id:flashcardCardId(),front,back,module:document.getElementById('adminDraftModule')?.value.trim()||'',subject:document.getElementById('adminDraftSubject')?.value.trim()||'',lecture:document.getElementById('adminDraftLecture')?.value.trim()||'',tags:document.getElementById('adminDraftTags')?.value.trim()||'',deck:document.getElementById('adminDraftDeck')?.value.trim()||'',semester:Number(document.getElementById('adminDraftSemester')?.value)||null,source:'admin-draft',selected:true,createdAt:Date.now(),updatedAt:Date.now()});saveFlashcardAdminDrafts();renderFlashcardAdmin();}
 function toggleAdminDraft(id){const c=flashcardAdminDrafts.find(x=>x.id===id);if(c)c.selected=!c.selected;saveFlashcardAdminDrafts();renderFlashcardAdmin();}
 function removeAdminDraft(id){flashcardAdminDrafts=flashcardAdminDrafts.filter(x=>x.id!==id);saveFlashcardAdminDrafts();renderFlashcardAdmin();}
 async function publishSelectedFlashcards(){
   if(!isAdmin||!currentUser||!SUPABASE_ENABLED)return toast('Admin Supabase access is required.','error');
   const selected=flashcardAdminDrafts.filter(c=>c.selected);if(!selected.length)return toast('Select cards to publish after reviewing them.','error');
-  const rows=selected.map(c=>({id:c.id,front:c.front,back:c.back,module:c.module||null,subject:c.subject||null,lecture:c.lecture||null,tags:c.tags?c.tags.split(',').map(x=>x.trim()).filter(Boolean):[],deck:c.deck||null,created_by:currentUser.id,active:true,updated_at:new Date().toISOString()}));
+  const rows=selected.map(c=>({id:c.id,front:c.front,back:c.back,module:c.module||null,subject:c.subject||null,lecture:c.lecture||null,semester:c.semester==null?null:Number(c.semester),tags:c.tags?c.tags.split(',').map(x=>x.trim()).filter(Boolean):[],deck:c.deck||null,created_by:currentUser.id,active:true,updated_at:new Date().toISOString()}));
   const {error}=await supabaseClient.from('flashcards_public').insert(rows);if(error)return toast(`Publish failed: ${error.message}`,'error');
   flashcardAdminDrafts=flashcardAdminDrafts.filter(c=>!c.selected);saveFlashcardAdminDrafts();publicFlashcardsLoaded=false;await loadPublicFlashcards(true);renderFlashcardAdmin();toast(`Published ${selected.length} flashcard${selected.length===1?'':'s'} for all users.`,'ok');
 }
 async function deletePublicFlashcard(id){if(!isAdmin)return toast('Admin access required.','error');if(!confirm('Remove this published flashcard for all users?'))return;const {error}=await supabaseClient.from('flashcards_public').update({active:false,updated_at:new Date().toISOString()}).eq('id',id);if(error)return toast(error.message,'error');flashcardCards=flashcardCards.filter(c=>String(c.id)!==String(id));saveFlashcardCards();publicFlashcardsLoaded=false;await loadPublicFlashcards(true);renderFlashcardAdmin();}
 function selectAllAdminDrafts(){flashcardAdminDrafts=flashcardAdminDrafts.map(c=>({...c,selected:true}));saveFlashcardAdminDrafts();renderFlashcardAdmin();}
 function clearAllAdminDrafts(){flashcardAdminDrafts=flashcardAdminDrafts.map(c=>({...c,selected:false}));saveFlashcardAdminDrafts();renderFlashcardAdmin();}
-async function renderFlashcardAdmin(){if(!isAdmin){location.hash='dashboard';return;}await loadPublicFlashcards();const publicCards=flashcardCards.filter(c=>c.source==='public');const drafts=flashcardAdminDrafts;const body=`<div class="flashcard-admin-grid"><section class="study-tools-card"><div class="study-card-heading"><div><span class="study-eyebrow">ADMIN · REVIEW & PUBLISH</span><h3>Flashcard drafts</h3><p>Review cards here first. Only cards you explicitly select are uploaded to Supabase and become available to all users.</p></div><span class="study-count-badge"><b>${drafts.length}</b><span>drafts</span></span></div><div class="card" style="margin-top:14px"><div class="field"><label>Import CSV for review</label><input id="adminFlashcardCSV" type="file" accept=".csv,text/csv" onchange="importAdminFlashcardsCSV()"></div><div class="grid two" style="margin-top:8px"><div class="field"><label>Front</label><textarea id="adminDraftFront" placeholder="Front"></textarea></div><div class="field"><label>Back</label><textarea id="adminDraftBack" placeholder="Back"></textarea></div></div><div class="grid four" style="margin-top:8px"><input id="adminDraftModule" placeholder="Module"><input id="adminDraftSubject" placeholder="Subject"><input id="adminDraftLecture" placeholder="Lecture"><input id="adminDraftTags" placeholder="Tags"></div><input id="adminDraftDeck" placeholder="Deck" style="margin-top:8px"><button class="btn primary" style="margin-top:10px" onclick="adminDraftAddCard()">Add draft</button></div><div class="flashcard-admin-list" style="margin-top:12px">${drafts.length?drafts.map(c=>`<div class="flashcard-admin-row ${c.selected?'selected':''}"><label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" ${c.selected?'checked':''} onchange="toggleAdminDraft('${attrJs(c.id)}')"><span><b>${esc(c.front)}</b><div class="mini" style="margin-top:5px">${esc(c.back)}</div><div class="fc-meta"><span class="flashcard-chip">${esc(c.deck||'Draft')}</span>${c.tags?`<span class="flashcard-chip">${esc(c.tags)}</span>`:''}</div></span></label><div class="actions" style="margin-top:8px"><button class="btn danger" onclick="removeAdminDraft('${attrJs(c.id)}')">Remove</button></div></div>`).join(''):'<div class="tutor-empty">No drafts yet. Import CSV or add cards above.</div>'}</div><div class="actions" style="margin-top:12px"><button class="btn" onclick="selectAllAdminDrafts()">Select all</button><button class="btn" onclick="clearAllAdminDrafts()">Clear selection</button><button class="btn primary" onclick="publishSelectedFlashcards()">Publish selected for all users</button></div></section><section class="study-tools-card"><div class="study-card-heading"><div><span class="study-eyebrow">PUBLISHED LIBRARY</span><h3>Cards available to all users</h3><p>These are stored in Supabase. User-created/imported cards are never shown here.</p></div><span class="study-count-badge"><b>${publicCards.length}</b><span>published</span></span></div><div class="flashcard-admin-list" style="margin-top:14px">${publicCards.length?publicCards.map(c=>`<div class="flashcard-admin-row"><b>${esc(c.front)}</b><div class="mini" style="margin-top:5px">${esc(c.back)}</div><div class="fc-meta"><span class="flashcard-chip">${esc(c.module||'General')}</span>${c.subject?`<span class="flashcard-chip">${esc(c.subject)}</span>`:''}${c.lecture?`<span class="flashcard-chip">${esc(c.lecture)}</span>`:''}</div><button class="btn danger" style="margin-top:8px" onclick="deletePublicFlashcard('${attrJs(c.id)}')">Unpublish</button></div>`).join(''):'<div class="tutor-empty">No published flashcards yet.</div>'}</div></section></div>`;document.getElementById('app').innerHTML=layout('Flashcard Manager','Review and publish flashcards for the whole MedEx community.',body);}
+async function renderFlashcardAdmin(){if(!isAdmin){location.hash='dashboard';return;}await loadPublicFlashcards();const publicCards=flashcardCards.filter(c=>c.source==='public');const drafts=flashcardAdminDrafts;const body=`<div class="flashcard-admin-grid"><section class="study-tools-card"><div class="study-card-heading"><div><span class="study-eyebrow">ADMIN · REVIEW & PUBLISH</span><h3>Flashcard drafts</h3><p>Review cards here first. Only cards you explicitly select are uploaded to Supabase and become available to all users.</p></div><span class="study-count-badge"><b>${drafts.length}</b><span>drafts</span></span></div><div class="card" style="margin-top:14px"><div class="field"><label>Import CSV for review</label><input id="adminFlashcardCSV" type="file" accept=".csv,text/csv" onchange="importAdminFlashcardsCSV()"></div><div class="grid two" style="margin-top:8px"><div class="field"><label>Front</label><textarea id="adminDraftFront" placeholder="Front"></textarea></div><div class="field"><label>Back</label><textarea id="adminDraftBack" placeholder="Back"></textarea></div></div><div class="grid four" style="margin-top:8px"><input id="adminDraftModule" placeholder="Module"><input id="adminDraftSubject" placeholder="Subject"><input id="adminDraftLecture" placeholder="Lecture"><input id="adminDraftTags" placeholder="Tags"></div><div class="grid two" style="margin-top:8px"><input id="adminDraftDeck" placeholder="Deck"><div class="field"><label>Semester</label><select id="adminDraftSemester">${semesterOptions(getSelectedSemester())}</select></div></div><button class="btn primary" style="margin-top:10px" onclick="adminDraftAddCard()">Add draft</button></div><div class="flashcard-admin-list" style="margin-top:12px">${drafts.length?drafts.map(c=>`<div class="flashcard-admin-row ${c.selected?'selected':''}"><label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" ${c.selected?'checked':''} onchange="toggleAdminDraft('${attrJs(c.id)}')"><span><b>${esc(c.front)}</b><div class="mini" style="margin-top:5px">${esc(c.back)}</div><div class="fc-meta"><span class="flashcard-chip">${esc(c.deck||'Draft')}</span>${c.tags?`<span class="flashcard-chip">${esc(c.tags)}</span>`:''}</div></span></label><div class="actions" style="margin-top:8px"><button class="btn danger" onclick="removeAdminDraft('${attrJs(c.id)}')">Remove</button></div></div>`).join(''):'<div class="tutor-empty">No drafts yet. Import CSV or add cards above.</div>'}</div><div class="actions" style="margin-top:12px"><button class="btn" onclick="selectAllAdminDrafts()">Select all</button><button class="btn" onclick="clearAllAdminDrafts()">Clear selection</button><button class="btn primary" onclick="publishSelectedFlashcards()">Publish selected for all users</button></div></section><section class="study-tools-card"><div class="study-card-heading"><div><span class="study-eyebrow">PUBLISHED LIBRARY</span><h3>Cards available to all users</h3><p>These are stored in Supabase. User-created/imported cards are never shown here.</p></div><span class="study-count-badge"><b>${publicCards.length}</b><span>published</span></span></div><div class="flashcard-admin-list" style="margin-top:14px">${publicCards.length?publicCards.map(c=>`<div class="flashcard-admin-row"><b>${esc(c.front)}</b><div class="mini" style="margin-top:5px">${esc(c.back)}</div><div class="fc-meta"><span class="flashcard-chip">${esc(c.module||'General')}</span>${c.subject?`<span class="flashcard-chip">${esc(c.subject)}</span>`:''}${c.lecture?`<span class="flashcard-chip">${esc(c.lecture)}</span>`:''}<span class="flashcard-chip">${c.semester?'Semester '+c.semester:'Unassigned'}</span></div><button class="btn danger" style="margin-top:8px" onclick="deletePublicFlashcard('${attrJs(c.id)}')">Unpublish</button></div>`).join(''):'<div class="tutor-empty">No published flashcards yet.</div>'}</div></section></div>`;document.getElementById('app').innerHTML=layout('Flashcard Manager','Review and publish flashcards for the whole MedEx community.',body);}
 function saveFlashcardCards(){try{safeSetItem(CONFIG.flashcardCardsKey,JSON.stringify(flashcardCards));}catch(e){console.warn('Could not save flashcard cards:',e.message);}}
 function flashcardCardId(){return 'fc_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,9);}
 function flashcardRecord(card){
@@ -3549,6 +3983,8 @@ function saveFlashcardDailyStats(row){if(!flashcardState.__daily)flashcardState.
 function saveFlashcardState(){try{safeSetItem(CONFIG.flashcardStateKey,JSON.stringify(flashcardState));}catch(e){console.warn('Could not save flashcard progress:',e.message);}}
 function flashcardScopeCards(filters=flashcardFilter){
   let list=flashcardCards.filter(c=>c&&c.front&&c.back);
+  const sem=getSelectedSemester();
+  if(sem&&!isAdmin)list=list.filter(c=>c.source==='public'?Number(c.semester)===Number(sem):(!c.semester||Number(c.semester)===Number(sem)));
   if(filters.module)list=list.filter(c=>String(c.module||'')===String(filters.module));
   if(filters.subject)list=list.filter(c=>String(c.subject||'')===String(filters.subject));
   if(filters.lecture)list=list.filter(c=>String(c.lecture||'')===String(filters.lecture));
@@ -3584,13 +4020,13 @@ function flashcardRatingSchedule(card,rating){
   }
   row[rating]=Number(row[rating]||0)+1;row.reviews=Number(row.reviews||0)+1;if(wasNew)row.newCards=Number(row.newCards||0)+1;saveFlashcardDailyStats(row);p.lastRating=rating;p.lastReviewedAt=Date.now();saveFlashcardState();return p;
 }
-function getFlashcardModules(){return [...new Set(flashcardCards.map(c=>String(c.module||'')).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
-function getFlashcardSubjects(module){return [...new Set(flashcardCards.filter(c=>!module||String(c.module||'')===String(module)).map(c=>String(c.subject||'')).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
-function getFlashcardLectures(module,subject){return [...new Set(flashcardCards.filter(c=>(!module||String(c.module||'')===String(module))&&(!subject||String(c.subject||'')===String(subject))).map(c=>String(c.lecture||'')).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
+function getFlashcardModules(){return [...new Set(flashcardScopeCards({module:'',subject:'',lecture:''}).map(c=>String(c.module||'')).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
+function getFlashcardSubjects(module){return [...new Set(flashcardScopeCards({module:module||'',subject:'',lecture:''}).map(c=>String(c.subject||'')).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
+function getFlashcardLectures(module,subject){return [...new Set(flashcardScopeCards({module:module||'',subject:subject||'',lecture:''}).map(c=>String(c.lecture||'')).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
 function createFlashcard(front,back,module='',subject='',lecture='',tags=''){
   front=String(front||'').trim();back=String(back||'').trim();if(!front||!back){toast('Both front and back are required.','error');return false;}
   const duplicate=flashcardCards.some(c=>c.front.trim().toLowerCase()===front.toLowerCase()&&c.back.trim().toLowerCase()===back.toLowerCase());if(duplicate){toast('An identical flashcard already exists.','error');return false;}
-  flashcardCards.push({id:flashcardCardId(),front,back,module:String(module||'').trim(),subject:String(subject||'').trim(),lecture:String(lecture||'').trim(),tags:String(tags||'').trim(),createdAt:Date.now(),updatedAt:Date.now()});saveFlashcardCards();return true;
+  flashcardCards.push({id:flashcardCardId(),front,back,module:String(module||'').trim(),subject:String(subject||'').trim(),lecture:String(lecture||'').trim(),semester:getSelectedSemester()||null,tags:String(tags||'').trim(),createdAt:Date.now(),updatedAt:Date.now()});saveFlashcardCards();return true;
 }
 function editFlashcard(id){const c=flashcardCards.find(x=>x.id===id);if(!c)return;const front=prompt('Flashcard front',c.front);if(front===null)return;const back=prompt('Flashcard back',c.back);if(back===null)return;c.front=front.trim();c.back=back.trim();c.updatedAt=Date.now();saveFlashcardCards();renderFlashcards();toast('Flashcard updated.','ok');}
 function deleteFlashcard(id){const c=flashcardCards.find(x=>x.id===id);if(!c)return;if(!confirm('Delete this flashcard? Its review history will also be deleted.'))return;flashcardCards=flashcardCards.filter(x=>x.id!==id);delete flashcardState[id];saveFlashcardCards();saveFlashcardState();renderFlashcards();}
@@ -3599,7 +4035,7 @@ async function uploadFlashcardToSupabase(id){
   if(!SUPABASE_ENABLED||!currentUser)return toast('Supabase login is required.','error');
   const c=flashcardCards.find(x=>String(x.id)===String(id));
   if(!c||c.source==='public')return toast('This flashcard is already published.','error');
-  const row={id:String(c.id),front:String(c.front||'').trim(),back:String(c.back||'').trim(),module:c.module||null,subject:c.subject||null,lecture:c.lecture||null,tags:c.tags?String(c.tags).split(',').map(x=>x.trim()).filter(Boolean):[],deck:c.deck||'Admin published',created_by:currentUser.id,active:true,updated_at:new Date().toISOString()};
+  const row={id:String(c.id),front:String(c.front||'').trim(),back:String(c.back||'').trim(),module:c.module||null,subject:c.subject||null,lecture:c.lecture||null,tags:c.tags?String(c.tags).split(',').map(x=>x.trim()).filter(Boolean):[],deck:c.deck||'Admin published',semester:Number(c.semester||getSelectedSemester())||null,created_by:currentUser.id,active:true,updated_at:new Date().toISOString()};
   if(!row.front||!row.back)return toast('Flashcard front and back are required.','error');
   const {error}=await supabaseClient.from('flashcards_public').upsert(row,{onConflict:'id'});
   if(error){toast(`Upload failed: ${error.message}`,'error');return;}
@@ -3618,7 +4054,7 @@ function flashcardAnswerPointsHTML(value,library=false){
 function renderFlashcardLibrary(){
   const cards=flashcardScopeCards({module:flashcardFilter.module,subject:flashcardFilter.subject,lecture:flashcardFilter.lecture});
   const mods=getFlashcardModules();
-  return `<section class="study-tools-card"><div class="study-card-heading"><div><span class="study-eyebrow">INDEPENDENT FLASHCARD LIBRARY</span><h3>Your flashcards</h3><p>Every card is independent. User-created and imported cards stay local to this browser and are never uploaded to Supabase.</p></div><span class="study-count-badge"><b>${flashcardCards.length}</b><span>cards</span></div><div class="flashcard-library-grid" style="margin-top:14px"><div class="flashcard-form"><div class="card" style="margin:0"><h4 style="margin-top:0">Create a card</h4><div class="field"><label>Front</label><textarea id="fcFront" placeholder="Prompt, term or question"></textarea></div><div class="field" style="margin-top:8px"><label>Back</label><textarea id="fcBack" placeholder="Answer, definition or explanation"></textarea></div><div class="grid three" style="margin-top:8px"><div class="field"><label>Module</label><input id="fcModule" placeholder="Optional"></div><div class="field"><label>Subject</label><input id="fcSubject" placeholder="Optional"></div><div class="field"><label>Lecture</label><input id="fcLecture" placeholder="Optional"></div></div><div class="field" style="margin-top:8px"><label>Tags</label><input id="fcTags" placeholder="e.g. high-yield, anatomy"></div><button class="btn primary" style="margin-top:10px" onclick="createManualFlashcard()">Create flashcard</button></div><div class="card" style="margin:12px 0 0"><h4 style="margin-top:0">Import CSV</h4><input id="flashcardCSVInput" type="file" accept=".csv,text/csv"><button class="btn" style="margin-top:10px" onclick="importFlashcardsCSV()">Import locally</button></div><details class="card fc-ai-import" style="margin:12px 0 0"><summary>Generate flashcards with AI</summary><div class="fc-ai-import-body"><div class="study-filter-grid"><div class="field"><label>Module</label><select id="aiFlashModule" onchange="updateAIFlashcardSubjects()"><option value="">Select module</option>${getModules().filter(isModuleVisible).map(x=>`<option value="${attrJs(x)}">${esc(x)}</option>`).join('')}</select></div><div class="field"><label>Subject</label><select id="aiFlashSubject" disabled onchange="updateAIFlashcardLectures()"><option value="">Select subject</option></select></div><div class="field"><label>Lecture</label><select id="aiFlashLecture" disabled onchange="updateAIFlashcardSourceInfo()"><option value="">Select lecture</option></select></div></div><div id="aiFlashSourceInfo" class="notice" style="margin-top:10px">Select a module, subject and lecture.</div><div class="grid two" style="margin-top:8px"><div class="field"><label>Number</label><input id="aiFlashCount" type="number" min="1" max="50" value="10"></div><div class="field"><label>Level</label><select id="aiFlashLevel"><option>medical student</option><option>pre-clinical medical student</option><option>clinical medical student</option></select></div></div><button id="aiFlashGenerateBtn" class="btn primary" style="margin-top:10px" onclick="generateFlashcardsWithAI()">Generate flashcards</button></div></details></div><div><div class="study-filter-grid"><div class="field"><label>View module</label><select id="flashLibraryModule" onchange="updateFlashLibraryFilter()"><option value="">All</option>${mods.map(x=>`<option value="${attrJs(x)}" ${flashcardFilter.module===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div><div class="field"><label>View subject</label><select id="flashLibrarySubject" onchange="updateFlashLibraryFilter()"><option value="">All</option>${getFlashcardSubjects(flashcardFilter.module).map(x=>`<option value="${attrJs(x)}" ${flashcardFilter.subject===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div><div class="field"><label>View lecture</label><select id="flashLibraryLecture" onchange="updateFlashLibraryFilter()"><option value="">All</option>${getFlashcardLectures(flashcardFilter.module,flashcardFilter.subject).map(x=>`<option value="${attrJs(x)}" ${flashcardFilter.lecture===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div></div><div class="flashcard-list" style="margin-top:12px">${cards.length?cards.map(c=>{const st=flashcardRecord(c);return `<div class="flashcard-library-row"><div class="fc-front">${esc(c.front)}</div><div class="fc-back">${flashcardAnswerPointsHTML(c.back,true)}</div><div class="fc-meta"><span class="flashcard-chip">${esc(c.source==='public'?'MedEx official':c.deck||'Personal')}</span>${c.module?`<span class="flashcard-chip">${esc(c.module)}</span>`:''}${c.subject?`<span class="flashcard-chip">${esc(c.subject)}</span>`:''}${c.lecture?`<span class="flashcard-chip">${esc(c.lecture)}</span>`:''}<span class="flashcard-chip">${esc(flashcardDueLabel(c))}</span><span class="flashcard-chip">${st.reviews||0} reviews</span></div><div class="actions" style="margin-top:8px">${c.source!=='public'?`<button class="btn" onclick="editFlashcard('${attrJs(c.id)}')">Edit</button>${isAdmin?`<button class="btn primary" onclick="uploadFlashcardToSupabase('${attrJs(c.id)}')">Upload to Supabase</button>`:''}<button class="btn danger" onclick="deleteFlashcard('${attrJs(c.id)}')">Delete</button>`:'<span class="mini">Official MedEx card · Published</span>'}</div></div>`}).join(''):'<div class="tutor-empty">No flashcards yet. Create one, import CSV, or generate cards with AI.</div>'}</div></div></div></section>`;
+  return `<section class="study-tools-card"><div class="study-card-heading"><div><span class="study-eyebrow">INDEPENDENT FLASHCARD LIBRARY</span><h3>Your flashcards</h3></div><span class="study-count-badge"><b>${flashcardCards.length}</b><span>cards</span></div><div class="flashcard-library-grid" style="margin-top:14px"><div class="flashcard-form"><div class="card" style="margin:0"><h4 style="margin-top:0">Create a card</h4><div class="field"><label>Front</label><textarea id="fcFront" placeholder="Prompt, term or question"></textarea></div><div class="field" style="margin-top:8px"><label>Back</label><textarea id="fcBack" placeholder="Answer, definition or explanation"></textarea></div><div class="grid three" style="margin-top:8px"><div class="field"><label>Module</label><input id="fcModule" placeholder="Optional"></div><div class="field"><label>Subject</label><input id="fcSubject" placeholder="Optional"></div><div class="field"><label>Lecture</label><input id="fcLecture" placeholder="Optional"></div></div><div class="field" style="margin-top:8px"><label>Tags</label><input id="fcTags" placeholder="e.g. high-yield, anatomy"></div><button class="btn primary" style="margin-top:10px" onclick="createManualFlashcard()">Create flashcard</button></div><div class="card" style="margin:12px 0 0"><h4 style="margin-top:0">Import CSV</h4><input id="flashcardCSVInput" type="file" accept=".csv,text/csv"><button class="btn" style="margin-top:10px" onclick="importFlashcardsCSV()">Import locally</button></div><details class="card fc-ai-import" style="margin:12px 0 0"><summary>Generate flashcards with AI</summary><div class="fc-ai-import-body"><div class="study-filter-grid"><div class="field"><label>Module</label><select id="aiFlashModule" onchange="updateAIFlashcardSubjects()"><option value="">Select module</option>${getModules().filter(isModuleVisible).map(x=>`<option value="${attrJs(x)}">${esc(x)}</option>`).join('')}</select></div><div class="field"><label>Subject</label><select id="aiFlashSubject" disabled onchange="updateAIFlashcardLectures()"><option value="">Select subject</option></select></div><div class="field"><label>Lecture</label><select id="aiFlashLecture" disabled onchange="updateAIFlashcardSourceInfo()"><option value="">Select lecture</option></select></div></div><div id="aiFlashSourceInfo" class="notice" style="margin-top:10px">Select a module, subject and lecture.</div><div class="grid two" style="margin-top:8px"><div class="field"><label>Number</label><input id="aiFlashCount" type="number" min="1" max="50" value="10"></div><div class="field"><label>Level</label><select id="aiFlashLevel"><option>medical student</option><option>pre-clinical medical student</option><option>clinical medical student</option></select></div></div><button id="aiFlashGenerateBtn" class="btn primary" style="margin-top:10px" onclick="generateFlashcardsWithAI()">Generate flashcards</button></div></details></div><div><div class="study-filter-grid"><div class="field"><label>View module</label><select id="flashLibraryModule" onchange="updateFlashLibraryFilter()"><option value="">All</option>${mods.map(x=>`<option value="${attrJs(x)}" ${flashcardFilter.module===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div><div class="field"><label>View subject</label><select id="flashLibrarySubject" onchange="updateFlashLibraryFilter()"><option value="">All</option>${getFlashcardSubjects(flashcardFilter.module).map(x=>`<option value="${attrJs(x)}" ${flashcardFilter.subject===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div><div class="field"><label>View lecture</label><select id="flashLibraryLecture" onchange="updateFlashLibraryFilter()"><option value="">All</option>${getFlashcardLectures(flashcardFilter.module,flashcardFilter.subject).map(x=>`<option value="${attrJs(x)}" ${flashcardFilter.lecture===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div></div><div class="flashcard-list" style="margin-top:12px">${cards.length?cards.map(c=>{const st=flashcardRecord(c);return `<div class="flashcard-library-row"><div class="fc-front">${esc(c.front)}</div><div class="fc-back">${flashcardAnswerPointsHTML(c.back,true)}</div><div class="fc-meta"><span class="flashcard-chip">${esc(c.source==='public'?'MedEx official':c.deck||'Personal')}</span>${c.module?`<span class="flashcard-chip">${esc(c.module)}</span>`:''}${c.subject?`<span class="flashcard-chip">${esc(c.subject)}</span>`:''}${c.lecture?`<span class="flashcard-chip">${esc(c.lecture)}</span>`:''}<span class="flashcard-chip">${esc(flashcardDueLabel(c))}</span><span class="flashcard-chip">${st.reviews||0} reviews</span></div><div class="actions" style="margin-top:8px">${c.source!=='public'?`<button class="btn" onclick="editFlashcard('${attrJs(c.id)}')">Edit</button>${isAdmin?`<button class="btn primary" onclick="uploadFlashcardToSupabase('${attrJs(c.id)}')">Upload to Supabase</button>`:''}<button class="btn danger" onclick="deleteFlashcard('${attrJs(c.id)}')">Delete</button>`:'<span class="mini">Official MedEx card · Published</span>'}</div></div>`}).join(''):'<div class="tutor-empty">No flashcards yet. Create one, import CSV, or generate cards with AI.</div>'}</div></div></div></section>`;
 }
 
 function updateFlashLibraryFilter(){flashcardFilter.module=document.getElementById('flashLibraryModule')?.value||'';flashcardFilter.subject=document.getElementById('flashLibrarySubject')?.value||'';flashcardFilter.lecture=document.getElementById('flashLibraryLecture')?.value||'';renderFlashcards();}
@@ -3631,11 +4067,12 @@ function renderFlashcardSetup(){
   const effectiveLimit=Number(flashcardFilter.count||0)>0?Math.min(Number(flashcardFilter.count),selected.length):selected.length;
   const typeLabel=flashcardFilter.mode==='new'?'New cards':'Revision cards';
   const select=(id,items,value,placeholder)=>`<select id="${id}" onchange="updateFlashcardFilter('${id}')"><option value="">${placeholder}</option>${items.map(x=>`<option value="${attrJs(x)}" ${String(x)===String(value)?'selected':''}>${esc(x)}</option>`).join('')}</select>`;
-  return `<section class="study-tools-card study-builder-card"><div class="study-card-heading"><div><span class="study-eyebrow">SPACED REPETITION</span><h3>Review your independent flashcards</h3><p>New cards are studied for the first time. Revision cards are learning/review cards that are due now.</p></div><div class="study-count-badge"><b>${revision.length}</b><span>revision due</span></div></div><div class="study-filter-grid"><div class="field"><label>Module</label>${select('flashModule',mods,flashcardFilter.module,'All modules')}</div><div class="field"><label>Subject</label>${select('flashSubject',subjects,flashcardFilter.subject,'All subjects')}</div><div class="field"><label>Lecture</label>${select('flashLecture',lectures,flashcardFilter.lecture,'All lectures')}</div></div><div class="study-selection-summary" style="margin-top:12px"><span><b>Selected:</b> ${esc(scopeLabel)}</span><span><b>${selected.length}</b> ${typeLabel.toLowerCase()}</span><span><b>${effectiveLimit}</b> max this session</span></div><div class="study-filter-grid study-filter-grid-2"><div class="field"><label>Card type</label><select id="flashMode" onchange="updateFlashcardFilter('flashMode')"><option value="new" ${flashcardFilter.mode==='new'?'selected':''}>New cards</option><option value="due" ${flashcardFilter.mode!=='new'?'selected':''}>Revision cards</option></select></div><div class="field"><label>Card limit</label><select id="flashCount" onchange="updateFlashcardFilter('flashCount')">${[5,10,20,50,100].map(n=>`<option value="${n}" ${Number(flashcardFilter.count)===n?'selected':''}>${n} cards</option>`).join('')}<option value="0" ${Number(flashcardFilter.count)===0?'selected':''}>All ${typeLabel.toLowerCase()}</option></select></div></div><div class="actions study-builder-actions"><button class="btn primary btn-lg" onclick="startFlashcardSession()" ${selected.length?'':'disabled'}>Start ${typeLabel}</button><button class="btn" onclick="resetFlashcardFilter()">Reset filters</button></div></section>`;
+  return `<section class="study-tools-card study-builder-card fc-revision-first"><div class="study-card-heading"><div><span class="study-eyebrow">SPACED REPETITION</span><h3>Review your independent flashcards</h3></div><div class="study-count-badge"><b>${revision.length}</b><span>Ready to review</span></div></div><div class="study-filter-grid"><div class="field"><label>Module</label>${select('flashModule',mods,flashcardFilter.module,'All modules')}</div><div class="field"><label>Subject</label>${select('flashSubject',subjects,flashcardFilter.subject,'All subjects')}</div><div class="field"><label>Lecture</label>${select('flashLecture',lectures,flashcardFilter.lecture,'All lectures')}</div></div><div class="study-selection-summary" style="margin-top:12px"><span><b>Selected:</b> ${esc(scopeLabel)}</span><span><b>${selected.length}</b> ${typeLabel.toLowerCase()}</span><span><b>${effectiveLimit}</b> max this session</span></div><div class="study-filter-grid study-filter-grid-2"><div class="field"><label>Card type</label><select id="flashMode" onchange="updateFlashcardFilter('flashMode')"><option value="new" ${flashcardFilter.mode==='new'?'selected':''}>New cards</option><option value="due" ${flashcardFilter.mode!=='new'?'selected':''}>Ready to review</option></select></div><div class="field"><label>Card limit</label><select id="flashCount" onchange="updateFlashcardFilter('flashCount')">${[5,10,20,50,100].map(n=>`<option value="${n}" ${Number(flashcardFilter.count)===n?'selected':''}>${n} cards</option>`).join('')}<option value="0" ${Number(flashcardFilter.count)===0?'selected':''}>All ${typeLabel.toLowerCase()}</option></select></div></div><div class="actions study-builder-actions"><button class="btn primary btn-lg" onclick="startFlashcardSession()" ${selected.length?'':'disabled'}>Start ${typeLabel}</button><button class="btn" onclick="resetFlashcardFilter()">Reset filters</button></div></section>`;
 }
 function updateFlashcardFilter(id){if(id==='flashModule'){flashcardFilter.module=document.getElementById('flashModule')?.value||'';flashcardFilter.subject='';flashcardFilter.lecture='';}else if(id==='flashSubject'){flashcardFilter.subject=document.getElementById('flashSubject')?.value||'';flashcardFilter.lecture='';}else if(id==='flashLecture')flashcardFilter.lecture=document.getElementById('flashLecture')?.value||'';else if(id==='flashMode')flashcardFilter.mode=document.getElementById('flashMode')?.value==='new'?'new':'due';else if(id==='flashCount')flashcardFilter.count=Number(document.getElementById('flashCount')?.value||0);renderFlashcards();}
-function resetFlashcardFilter(){flashcardFilter={module:'',subject:'',lecture:'',mode:'due',count:0};renderFlashcards();}
+function resetFlashcardFilter(){flashcardFilter={module:'',subject:'',lecture:'',mode:'new',count:0};renderFlashcards();}
 function flashcardQueueForSession(){const mode=flashcardFilter.mode==='new'?'new':'due';let list=flashcardItems({...flashcardFilter,mode});list.sort((a,b)=>{const pa=flashcardRecord(a),pb=flashcardRecord(b);if(pa.difficult!==pb.difficult)return pa.difficult?-1:1;if(Number(pa.due||0)!==Number(pb.due||0))return Number(pa.due||0)-Number(pb.due||0);return Number(pa.lastReviewedAt||0)-Number(pb.lastReviewedAt||0);});return list;}
+function startDueFlashcardSession(){flashcardFilter.mode='due';startFlashcardSession();}
 function startFlashcardSession(){const mode=flashcardFilter.mode==='new'?'new':'due';let list=flashcardQueueForSession();const count=Number(flashcardFilter.count||0);if(count>0)list=list.slice(0,count);if(!list.length){toast(mode==='new'?'No new cards are available for this selection.':'No revision cards are due for this selection.','error');return;}flashcardSession={list,index:0,revealed:false,ratings:{again:0,hard:0,good:0,easy:0},startedAt:Date.now()};renderFlashcardSession();}
 function studyFlashIcon(type){const icons={back:'←',menu:'⋮',flag:'⚐',heart:'♡',filledHeart:'♥'};return icons[type]||'';}
 function flashcardKeyboardHandler(e){if(!flashcardSession)return;const tag=document.activeElement?.tagName||'';if(['INPUT','TEXTAREA','SELECT'].includes(tag))return;if(e.code==='Space'){e.preventDefault();if(flashcardSession.revealed)rateFlashcard('again');else revealFlashcard();}if(flashcardSession.revealed&&['Digit1','Digit2','Digit3','Digit4'].includes(e.code)){e.preventDefault();const map={Digit1:'again',Digit2:'hard',Digit3:'good',Digit4:'easy'};rateFlashcard(map[e.code]);}}
@@ -3654,7 +4091,7 @@ function revealFlashcard(){if(flashcardSession){flashcardSession.revealed=true;r
 function toggleStudyFlashFavorite(){const s=flashcardSession;if(!s)return;const p=flashcardRecord(s.list[s.index]);p.favorite=!p.favorite;saveFlashcardState();renderFlashcardSession();}
 function markStudyFlashDifficult(){const s=flashcardSession;if(!s)return;const p=flashcardRecord(s.list[s.index]);p.difficult=!p.difficult;saveFlashcardState();renderFlashcardSession();toast(p.difficult?'Card marked difficult.':'Difficulty mark removed.','ok');}
 function rateFlashcard(rating){const s=flashcardSession;if(!s||!s.revealed)return;const card=s.list[s.index];flashcardRatingSchedule(card,rating);s.ratings[rating]=(s.ratings[rating]||0)+1;s.index++;s.revealed=false;renderFlashcardSession();}
-function flashcardSummaryHTML(){const all=flashcardCards,now=Date.now();const due=all.filter(c=>{const p=flashcardRecord(c);return !p.suspended&&p.state!=='new'&&Number(p.due||0)<=now;}).length;const learning=all.filter(c=>['learning','relearning'].includes(flashcardRecord(c).state)).length;const mature=all.filter(c=>flashcardRecord(c).state==='review'&&Number(flashcardRecord(c).intervalDays||0)>=21).length;return `<section class="study-tools-card study-progress-card"><div class="study-card-heading"><div><span class="study-eyebrow">YOUR REVIEW</span><h3>Spaced-repetition progress</h3><p>Every flashcard has its own schedule. The Question Bank and flashcard library are separate.</p></div></div><div class="study-progress-grid"><div><b>${due}</b><span>Due now</span></div><div><b>${learning}</b><span>Learning / relearning</span></div><div><b>${mature}</b><span>Mature cards</span></div></div></section>`;}
+function flashcardSummaryHTML(){const all=flashcardCards,now=Date.now();const due=all.filter(c=>{const p=flashcardRecord(c);return !p.suspended&&p.state!=='new'&&Number(p.due||0)<=now;}).length;const learning=all.filter(c=>['learning','relearning'].includes(flashcardRecord(c).state)).length;const mature=all.filter(c=>flashcardRecord(c).state==='review'&&Number(flashcardRecord(c).intervalDays||0)>=21).length;return `<section class="study-tools-card study-progress-card"><div class="study-card-heading"><div><span class="study-eyebrow">YOUR REVIEW</span><h3>Spaced-repetition progress</h3></div></div><div class="study-progress-grid"><div><b>${due}</b><span>Ready to review</span></div><div><b>${learning}</b><span>Learning / relearning</span></div><div><b>${mature}</b><span>Mature cards</span></div></div></section>`;}
 function renderFlashcards(){
   // Flashcards is a focused workspace; suppress the unrelated plan/test panel if another
   // dashboard component injects it into the shared app shell.
@@ -3668,14 +4105,18 @@ function renderFlashcards(){
     loadPublicFlashcards().then(()=>{if(location.hash.replace('#','')==='flashcards'&&!flashcardSession)renderFlashcards();});
   }
   const body=`<div class="study-tools-page">
-    <section class="study-tools-hero"><div><span class="study-eyebrow">MEDEX FLASHCARDS</span><h2>Recall, reveal, and review</h2><p>Create personal cards, import CSV, and review new or due cards with local spaced repetition.</p></div><div class="study-hero-actions"><button class="btn primary" onclick="startFlashcardSession()">Start review</button><button class="btn" onclick="enableMedExPhoneNotifications()">Enable phone notifications</button><button class="btn" onclick="go('tools')">Study Tools</button></div></section>
-    ${flashcardCloudStatusHTML()}
-    <div class="study-phase2-grid">${flashcardSummaryHTML()}</div>
+    <section class="study-tools-hero"><div><span class="study-eyebrow">MEDEX FLASHCARDS · ACTIVE RECALL</span><h2>Make every review count.</h2><p>Start with cards due today, then learn new material. Rate each answer honestly so your next review is timed to your memory.</p></div><div class="study-hero-actions"><button class="btn primary" onclick="startDueFlashcardSession()">Review due cards</button><button class="btn" onclick="enableMedExPhoneNotifications()">Enable reminders</button></div></section>
+    <section class="fc-daily-focus" aria-label="Daily flashcard revision">
+      <div class="fc-daily-copy"><span class="study-eyebrow">YOUR DAILY REVISION</span><h3>What needs your attention?</h3><p>Prioritise scheduled reviews before adding more cards.</p></div>
+      <div class="fc-daily-metrics"><div><b>${flashcardItems({...flashcardFilter,mode:'due'}).length}</b><span>Due to review</span></div><div><b>${flashcardItems({...flashcardFilter,mode:'new'}).length}</b><span>New to learn</span></div></div>
+      <div class="fc-daily-actions"><button class="btn primary" onclick="startDueFlashcardSession()">Start revision</button><button class="btn" onclick="flashcardFilter.mode='new';renderFlashcards()">Learn new cards</button></div>
+    </section>
     ${renderFlashcardSetup()}
+    <div class="study-phase2-grid">${flashcardSummaryHTML()}</div>
     ${typeof renderFlashcardFlagSections==='function'?renderFlashcardFlagSections():''}
     ${renderFlashcardLibrary()}
   </div>`;
-  document.getElementById('app').innerHTML=layout('Flashcards','A dedicated workspace for creating, organizing and reviewing flashcards.',body);
+  document.getElementById('app').innerHTML=layout('Flashcards','',body);
 }
 
 function studyPlans(){return loadJSON('med64_study_plans_v1',[]);}
@@ -3702,7 +4143,7 @@ function studyHubSelection(){return {...studyHubFilter};}
 function updateStudyHubSubjects(){const m=document.getElementById('studyHubModule'),s=document.getElementById('studyHubSubject'),l=document.getElementById('studyHubLecture');if(!m||!s||!l)return;studyHubFilter.module=m.value||'';studyHubFilter.subject='';studyHubFilter.lecture='';const subs=getSubjects(studyHubFilter.module||undefined).filter(Boolean);s.innerHTML='<option value="">All subjects</option>'+subs.map(x=>`<option value="${attrJs(x)}">${esc(x)}</option>`).join('');l.innerHTML='<option value="">All lectures</option>';}
 function updateStudyHubLectures(){const m=document.getElementById('studyHubModule'),s=document.getElementById('studyHubSubject'),l=document.getElementById('studyHubLecture');if(!m||!s||!l)return;studyHubFilter.module=m.value||'';studyHubFilter.subject=s.value||'';studyHubFilter.lecture='';const lecs=getLectures(studyHubFilter.module||undefined,studyHubFilter.subject||undefined).filter(Boolean);l.innerHTML='<option value="">All lectures</option>'+lecs.map(x=>`<option value="${attrJs(x)}">${esc(x)}</option>`).join('');}
 function updateStudyHubLecture(){studyHubFilter.module=document.getElementById('studyHubModule')?.value||'';studyHubFilter.subject=document.getElementById('studyHubSubject')?.value||'';studyHubFilter.lecture=document.getElementById('studyHubLecture')?.value||'';renderStudyTools();}
-function startStudyHubFlashcards(){flashcardFilter.module=studyHubFilter.module;flashcardFilter.subject=studyHubFilter.subject;flashcardFilter.lecture=studyHubFilter.lecture;flashcardFilter.mode='due';flashcardFilter.count=0;go('flashcards');}
+function startStudyHubFlashcards(){flashcardFilter.module=studyHubFilter.module;flashcardFilter.subject=studyHubFilter.subject;flashcardFilter.lecture=studyHubFilter.lecture;flashcardFilter.mode='new';flashcardFilter.count=0;go('flashcards');}
 function studyHubQuestions(){const f=studyHubSelection();return bank.filter(q=>(!f.module||String(q.module)===f.module)&&(!f.subject||String(q.subject)===f.subject)&&(!f.lecture||String(q.lecture)===f.lecture));}
 function startStudyHubExam(){const qs=studyHubQuestions();if(!qs.length){toast('No questions match this lecture selection.','error');return;}startExam(qs,null,'Study Hub practice');}
 function startStudyHubImageReview(){const qs=studyHubQuestions().filter(q=>q.imageUrl);if(!qs.length){toast('No image-based questions are available in this selection.','error');return;}startExam(qs,null,'Image-based review');}
@@ -3746,7 +4187,7 @@ function runFocusTimer(){
 function focusPreset(seconds){focusTimerState.preset=seconds;focusTimerState.remaining=seconds;focusTimerState.running=false;focusTimerState.startedAt=0;saveFocusState();updateTopbarControls();if(location.hash.replace('#','')==='tools')renderStudyTools();}
 function requestFocusNotifications(){if('Notification' in window&&Notification.permission==='default')Notification.requestPermission().catch(()=>{});}
 function focusTimerHTML(){const remain=Math.max(0,Number(focusTimerState.remaining||1500));const presets=[1500,3000,3600];return `<section class="study-tools-card focus-timer-card"><span class="study-eyebrow">FOCUS MODE</span><h3 style="margin-top:5px">One task. No distractions.</h3><input class="field" style="max-width:320px;width:100%;margin-top:8px;text-align:center" value="${esc(focusTimerState.label||'Focused study')}" onchange="focusLabelChanged(this.value)" placeholder="What are you studying?"><div id="focusTimerDisplay" class="focus-timer">${formatTime(remain)}</div><div class="focus-status">${focusTimerState.running?'Session running':'Ready to focus'}</div><div class="focus-presets">${presets.map(x=>`<button class="btn focus-preset ${focusTimerState.preset===x?'active':''}" onclick="focusPreset(${x})">${x/60} min</button>`).join('')}</div><div class="actions" style="margin-top:12px;justify-content:center"><button class="btn primary" onclick="${focusTimerState.running?'pauseFocusTimer()':'startFocusTimer()'}">${focusTimerState.running?'Pause':'Start focus'}</button><button class="btn" onclick="resetFocusTimer()">Reset</button><button class="btn" onclick="requestFocusNotifications()">Allow completion alert</button></div></section>`;}
-function studyHubHTML(){const modules=getModules().filter(isModuleVisible);const qs=studyHubQuestions();const imageCount=qs.filter(q=>q.imageUrl).length;const due=flashcardItems({module:studyHubFilter.module,subject:studyHubFilter.subject,lecture:studyHubFilter.lecture,mode:'due'}).length;const mistakes=qs.filter(q=>Number(progress[key(q)]?.wrong||0)>0).length;return `<section class="study-tools-card"><div class="study-card-heading"><div><span class="study-eyebrow">LECTURE STUDY HUB</span><h3>Study one topic from every angle</h3><p>Select a module, subject and lecture, then jump directly to questions, images, written answers or spaced review.</p></div><span class="study-count-badge"><b>${qs.length}</b><span>QUESTIONS</span></span></div><div class="study-filter-grid"><div class="field"><label>Module</label><select id="studyHubModule" onchange="updateStudyHubSubjects()"><option value="">All modules</option>${modules.map(m=>`<option value="${attrJs(m)}" ${studyHubFilter.module===m?'selected':''}>${esc(m)}</option>`).join('')}</select></div><div class="field"><label>Subject</label><select id="studyHubSubject" onchange="updateStudyHubLectures()"><option value="">All subjects</option>${getSubjects(studyHubFilter.module||undefined).map(x=>`<option value="${attrJs(x)}" ${studyHubFilter.subject===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div><div class="field"><label>Lecture</label><select id="studyHubLecture" onchange="updateStudyHubLecture()"><option value="">All lectures</option>${getLectures(studyHubFilter.module||undefined,studyHubFilter.subject||undefined).map(x=>`<option value="${attrJs(x)}" ${studyHubFilter.lecture===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div></div><div class="study-hub-grid"><button class="study-hub-action" onclick="startStudyHubExam()"><b>❓ Practice questions</b><span>${qs.length} questions in this selection.</span></button><button class="study-hub-action" onclick="startStudyHubImageReview()"><b>🖼️ Image review</b><span>${imageCount} image-based questions.</span></button><button class="study-hub-action" onclick="startStudyHubWritten()"><b>✍️ Written answers</b><span>Write answers and get AI feedback.</span></button><button class="study-hub-action" onclick="go('mistakes')"><b>❌ Review mistakes</b><span>${mistakes} questions with previous wrong answers.</span></button><button class="study-hub-action" onclick="startStudyHubFlashcards()"><b>🧠 Flashcards</b><span>${due} due cards in the current selection.</span></button><button class="study-hub-action" onclick="go('progress')"><b>📊 View progress</b><span>Module → subject → lecture analytics.</span></button></div></section>`;}
+function studyHubHTML(){const modules=getModules().filter(isModuleVisible);const qs=studyHubQuestions();const imageCount=qs.filter(q=>q.imageUrl).length;const due=flashcardItems({module:studyHubFilter.module,subject:studyHubFilter.subject,lecture:studyHubFilter.lecture,mode:'due'}).length;const mistakes=qs.filter(q=>Number(progress[key(q)]?.wrong||0)>0).length;return `<section class="study-tools-card"><div class="study-card-heading"><div><span class="study-eyebrow">LECTURE STUDY HUB</span><h3>Study one topic from every angle</h3><p>Select a module, subject and lecture, then jump directly to questions, images, written answers or spaced review.</p></div><span class="study-count-badge"><b>${qs.length}</b><span>QUESTIONS</span></span></div><div class="study-filter-grid"><div class="field"><label>Module</label><select id="studyHubModule" onchange="updateStudyHubSubjects()"><option value="">All modules</option>${modules.map(m=>`<option value="${attrJs(m)}" ${studyHubFilter.module===m?'selected':''}>${esc(m)}</option>`).join('')}</select></div><div class="field"><label>Subject</label><select id="studyHubSubject" onchange="updateStudyHubLectures()"><option value="">All subjects</option>${getSubjects(studyHubFilter.module||undefined).map(x=>`<option value="${attrJs(x)}" ${studyHubFilter.subject===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div><div class="field"><label>Lecture</label><select id="studyHubLecture" onchange="updateStudyHubLecture()"><option value="">All lectures</option>${getLectures(studyHubFilter.module||undefined,studyHubFilter.subject||undefined).map(x=>`<option value="${attrJs(x)}" ${studyHubFilter.lecture===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div></div><div class="study-hub-grid"><button class="study-hub-action" onclick="startStudyHubExam()"><b>❓ Practice questions</b><span>${qs.length} questions in this selection.</span></button><button class="study-hub-action" onclick="startStudyHubImageReview()"><b>🖼️ Image review</b><span>${imageCount} image-based questions.</span></button><button class="study-hub-action" onclick="startStudyHubWritten()"><b>✍️ Written answers</b><span>Write answers and get AI feedback.</span></button><button class="study-hub-action" onclick="go('mistakes')"><b>❌ Review mistakes</b><span>${mistakes} questions with previous wrong answers.</span></button><button class="study-hub-action" onclick="startStudyHubFlashcards()"><b>🧠 Flashcards</b><span>${due} cards ready to review in this selection.</span></button><button class="study-hub-action" onclick="go('progress')"><b>📊 View progress</b><span>Module → subject → lecture analytics.</span></button></div></section>`;}
 function renderWrittenPractice(){if(!writtenPractice)return go('tools');const q=writtenPractice.list[writtenPractice.index];if(!q)return go('tools');const body=`<div class="written-practice-shell"><div class="card"><div class="qhead"><span class="pill">${writtenPractice.index+1} / ${writtenPractice.list.length}</span><span class="mini">${esc(q.module)} · ${esc(q.subject)} · ${esc(q.lecture)}</span></div><h2 style="margin-top:14px">${esc(q.question)}</h2>${q.imageUrl?`<img class="phase2-image-review" src="${esc(q.imageUrl)}" alt="Question illustration">`:''}<textarea id="writtenAnswerInput" class="written-answer-box" style="width:100%;margin-top:16px;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--bg)" placeholder="Write your answer in your own words…"></textarea><div class="actions" style="margin-top:12px"><button class="btn primary" onclick="gradeWrittenAnswer()" ${writtenPractice.busy?'disabled':''}>${writtenPractice.busy?'Grading…':'Check with AI'}</button><button class="btn" onclick="go('tools')">Exit</button></div>${writtenPractice.feedback?`<div class="review good written-answer-feedback">${writtenPractice.feedback}</div>`:''}</div></div>`;document.getElementById('app').innerHTML=layout('Written Answer Practice','Explain the concept in your own words, then compare with AI feedback.',body);}
 async function gradeWrittenAnswer(){if(!writtenPractice||writtenPractice.busy)return;const q=writtenPractice.list[writtenPractice.index],input=document.getElementById('writtenAnswerInput');const answer=(input?.value||'').trim();if(!answer){toast('Write an answer first.','error');return;}writtenPractice.busy=true;renderWrittenPractice();try{const prompt=`You are a medical education tutor grading a student's written answer. Be concise but specific. Do not invent facts. Question: ${q.question}\nExpected correct option: ${q.options?.[q.correctIndex]||''}\nExplanation: ${q.explanation||'No explanation provided.'}\nStudent answer: ${answer}\nGive: 1) a brief verdict, 2) what the student got right, 3) what is missing or incorrect, 4) one improved model answer. Use plain text and bullets.`;const reply=await callAI([{role:'user',parts:[{text:prompt}]}],{maxOutputTokens:1200,responseMimeType:'text/plain'});writtenPractice.feedback=esc(formatAIChatReply(reply));}catch(e){writtenPractice.feedback=`AI grading failed: ${esc(e.message||String(e))}`;}finally{writtenPractice.busy=false;renderWrittenPractice();}}
 
@@ -4660,7 +5101,7 @@ async function addBuiltInQuestion(){
 
   if(SUPABASE_ENABLED && currentUser){
     const {error}=await supabaseClient.from('questions').insert({
-      id:q.id,module:q.module,subject:q.subject,lecture:q.lecture,
+      id:q.id,module:q.module,semester:q.semester,subject:q.subject,lecture:q.lecture,
       question:q.question,options:q.options,correct_index:q.correctIndex,
       explanation:q.explanation,difficulty:q.difficulty||null,reference:q.reference||null,image_url:q.imageUrl||null
     });
@@ -4785,7 +5226,7 @@ async function uploadPreviewToSupabase(){
   const errors=validateBank(pendingImportQuestions);
   if(errors.length){toast('Fix the validation errors before uploading.','error');return;}
   const rows=pendingImportQuestions.map(q=>({
-    id:q.id,module:q.module,subject:q.subject,lecture:q.lecture,
+    id:q.id,module:q.module,semester:q.semester??null,subject:q.subject,lecture:q.lecture,
     question:q.question,options:q.options,correct_index:q.correctIndex,
     explanation:q.explanation||'',difficulty:q.difficulty||null,reference:q.reference||null,image_url:q.imageUrl||null
   }));
@@ -4996,6 +5437,7 @@ function renderSettings(){
   const body=`<div class="card"><h3 style="margin-top:0">Exam settings</h3>
   <label><input type="checkbox" id="sImmediate" ${settings.showAnswerImmediately?'checked':''}> Use “Show answer immediately” as the default exam mode</label><br><br>
   <label><input type="checkbox" id="sAuto" ${settings.autoSubmit?'checked':''}> Auto-submit when timer reaches zero</label>
+  <div class="field" style="margin-top:14px;max-width:360px"><label>My semester / content</label><select id="sSemester">${semesterOptions(getSelectedSemester())}</select><div class="mini" style="margin-top:5px">Change this to switch the modules and official flashcards shown across MedEx.</div></div>
   <div class="field" style="margin-top:14px;max-width:360px"><label>Daily question goal</label><input id="sDailyGoal" type="number" min="1" max="200" value="${getDailyGoal()}"><div class="mini" style="margin-top:5px">Used for your daily progress goal.</div></div>
   <div class="card" style="margin-top:16px;padding:14px">
     <strong>Appearance</strong>
@@ -5019,14 +5461,15 @@ function renderSettings(){
   </div>
   <div class="actions" style="margin-top:16px"><button class="btn primary" onclick="saveSettings()">Save settings</button><button class="btn" onclick="exportProgress()">Export my progress</button>${isAdmin ? '<button class="btn" onclick="exportBank()">Export current bank</button>' : ''}<button class="btn" onclick="exportHistory()">Export exam history</button><button class="btn danger" onclick="clearHistory()">Clear exam history</button></div></div>
   <div class="card" style="margin-top:16px"><h3 style="margin-top:0">Install MedEx</h3><p class="mini" style="margin:8px 0 12px">Install MedEx as an app on a supported browser. On iPhone/iPad, use the browser's Share menu and choose “Add to Home Screen”.</p><button class="btn primary" id="pwaInstallBtn" onclick="installPWA()">Quick setup / Install MedEx</button></div>
-  <div class="card" style="margin-top:16px"><h3 style="margin-top:0">About storage</h3><p class="mini">The question bank is loaded from Supabase when connected, with GitHub as fallback. Signed-in student progress and exam history are stored in Supabase and follow the account across devices. AI questions and chat history are also stored only in this browser. AI requests are relayed through this site's own server-side function — no personal API key is ever stored in or sent from your browser.</p></div>`;
+  <div class="card" style="margin-top:16px"><h3 style="margin-top:0">About storage</h3><p class="mini">The question bank is loaded from Supabase when connected. Content is filtered by your selected semester. Signed-in student progress and exam history are stored in Supabase and follow the account across devices. AI questions and chat history are also stored only in this browser. AI requests are relayed through this site's own server-side function — no personal API key is ever stored in or sent from your browser.</p></div>`;
   document.getElementById('app').innerHTML=layout('Settings','Personal browser settings and backups.',body);
 }
 function saveSettings(){
   settings.showAnswerImmediately=document.getElementById('sImmediate').checked;
   settings.autoSubmit=document.getElementById('sAuto').checked;
   settings.dailyGoal=Math.min(200,Math.max(1,Math.round(Number(document.getElementById('sDailyGoal')?.value)||20)));
-  saveState();toast('Settings saved.','ok');
+  const sem=Number(document.getElementById('sSemester')?.value);if(Number.isInteger(sem)&&sem>=1&&sem<=10)settings.semester=sem;
+  saveState();applyModuleVisibility();render();toast('Settings saved.','ok');
 }
 function exportProgress(){downloadBlob(JSON.stringify({exportedAt:new Date().toISOString(),progress},null,2),'med64-progress.json','application/json');}
 function exportBank(){ if(!isAdmin){toast('Admin access required.','error');return;} downloadBlob(JSON.stringify(allQuestionBank.length?allQuestionBank:bank,null,2),'med64-current-question-bank.json','application/json');}
@@ -5600,6 +6043,7 @@ async function uploadAIQuestionsToSupabase(){
   const rows=aiQuestions.map(q=>({
     id:q.id,
     module:q.module,
+    semester:q.semester??null,
     subject:q.subject,
     lecture:q.lecture,
     question:q.question,
@@ -5755,7 +6199,7 @@ if('serviceWorker' in navigator){
 if('serviceWorker' in navigator){
   window.addEventListener('load',async()=>{
     try{
-      const registration=await navigator.serviceWorker.register(new URL('./sw.js?v=42.1',document.baseURI),{scope:new URL('./',document.baseURI).pathname});
+      const registration=await navigator.serviceWorker.register(new URL('./sw.js?v=42.6',document.baseURI),{scope:new URL('./',document.baseURI).pathname});
       watchPWARegistration(registration);
       registration.update().catch(()=>{});
     }catch(e){ console.warn('PWA service worker:',e); }
@@ -5880,5 +6324,750 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
 });
 </script>
+<script id="medex-ui-polish-js">
+/* UI polish helper (visual only): keeps the current question's number visible inside a scrollable question navigator. */
+(function(){
+  var raf=0;
+  function sync(){
+    raf=0;
+    try{
+      var nav=document.querySelector('.quiz .question-nav'); if(!nav)return;
+      var cur=nav.querySelector('.qnav-btn.current'); if(!cur)return;
+      var top=cur.offsetTop-nav.offsetTop, bottom=top+cur.offsetHeight;
+      if(top<nav.scrollTop+34) nav.scrollTop=Math.max(0,top-40);
+      else if(bottom>nav.scrollTop+nav.clientHeight) nav.scrollTop=bottom-nav.clientHeight+8;
+    }catch(e){}
+  }
+  var app=document.getElementById('app'); if(!app||!window.MutationObserver)return;
+  new MutationObserver(function(){ if(!raf)raf=requestAnimationFrame(sync); }).observe(app,{childList:true,subtree:false});
+})();
+</script>
+<script id="medex-nav-js">
+/* Navigation organisation (no feature logic): groups the sidebar, adds section tabs and a phone bottom bar.
+   Existing buttons are MOVED, never recreated, so every id, handler and admin show/hide rule keeps working. */
+(function(){
+  try{
+    var nav=document.querySelector('.nav'); if(!nav)return;
+    var by=function(v){return nav.querySelector(':scope > button[data-view="'+v+'"]');};
+    var groups=[
+      {id:'practice',label:'Practice',views:['exam','mistakes','favorites','library']},
+      {id:'learn',label:'Learn',views:['flashcards','tools','ai','materials']},
+      {id:'track',label:'Track progress',views:['progress','history','leaderboard']},
+      {id:'account',label:'Account',views:['settings','account']},
+      {id:'admin',label:'Admin',views:['bank','import','aiquestions','semesters','flashadmin','analytics','reports','replies','notifications','weeklynotifications']}
+    ];
+    var frag=document.createDocumentFragment(), home=by('dashboard');
+    if(home)frag.appendChild(home);
+    groups.forEach(function(g){
+      var lab=document.createElement('div'); lab.className='nav-group-label'; lab.setAttribute('data-group',g.id); lab.textContent=g.label; frag.appendChild(lab);
+      g.views.forEach(function(v){var b=by(v); if(b)frag.appendChild(b);});
+    });
+    Array.prototype.slice.call(nav.children).forEach(function(el){ if(el.tagName==='BUTTON')frag.appendChild(el); }); // anything unlisted keeps working
+    nav.appendChild(frag);
+
+    function syncLabels(){
+      var labs=nav.querySelectorAll('.nav-group-label');
+      Array.prototype.forEach.call(labs,function(lab){
+        var any=false, el=lab.nextElementSibling;
+        while(el&&!el.classList.contains('nav-group-label')){ if(el.tagName==='BUTTON'&&el.style.display!=='none')any=true; el=el.nextElementSibling; }
+        lab.hidden=!any;
+      });
+    }
+    syncLabels();
+    if(window.MutationObserver)new MutationObserver(syncLabels).observe(nav,{attributes:true,attributeFilter:['style'],subtree:true});
+
+    /* ---- section tabs ---- */
+    var SECTIONS={
+      practice:[['exam','Start exam'],['mistakes','Mistakes'],['favorites','Favourites'],['library','Library']],
+      learn:[['flashcards','Flashcards'],['tools','Study tools'],['ai','AI assistant']],
+      track:[['progress','Progress'],['history','History'],['leaderboard','Top users']]
+    };
+    var LABEL={practice:'Practice',learn:'Learn',track:'Track progress'};
+    var VIEW_SECTION={exam:'practice',mistakes:'practice',favorites:'practice',library:'practice',flashcards:'learn',tools:'learn',ai:'learn',progress:'track',history:'track',leaderboard:'track',results:'track'};
+    var CHIP={results:'history'};
+    var view=function(){return location.hash.replace('#','')||'dashboard';};
+    var go=function(v){ if(typeof window.go==='function')window.go(v); else location.hash=v; };
+
+    function syncTabs(){
+      var app=document.getElementById('app'); if(!app)return;
+      var v=view(), sec=VIEW_SECTION[v];
+      var old=app.querySelector(':scope > .section-tabs'), top=app.querySelector(':scope > .top');
+      if(!sec||!top||app.querySelector('.quiz')||app.querySelector('#visitorStartName')){ if(old)old.remove(); return; }
+      var active=CHIP[v]||v, key=sec+':'+active;
+      if(old&&old.getAttribute('data-key')===key&&old.previousElementSibling===top)return;
+      if(old)old.remove();
+      var bar=document.createElement('nav'); bar.className='section-tabs'; bar.setAttribute('data-key',key); bar.setAttribute('aria-label',LABEL[sec]+' pages');
+      SECTIONS[sec].forEach(function(it){
+        var b=document.createElement('button'); b.type='button'; b.textContent=it[1]; b.setAttribute('data-view',it[0]);
+        if(it[0]===active)b.setAttribute('aria-current','page');
+        b.addEventListener('click',function(){ if(it[0]!==view())go(it[0]); });
+        bar.appendChild(b);
+      });
+      top.insertAdjacentElement('afterend',bar);
+    }
+
+    /* ---- phone bottom bar ---- */
+    var icon=function(v){var s=nav.querySelector('button[data-view="'+v+'"] svg'); return s?s.outerHTML:'';};
+    var MORE='<svg viewBox="0 0 20 20" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="4.5" cy="10" r="1.2"/><circle cx="10" cy="10" r="1.2"/><circle cx="15.5" cy="10" r="1.2"/></svg>';
+    var TABS=[['dashboard','Home',icon('dashboard')],['exam','Practice',icon('exam')],['flashcards','Learn',icon('flashcards')],['progress','Progress',icon('progress')],['more','More',MORE]];
+    var tabs=document.createElement('nav'); tabs.className='bottom-tabs'; tabs.id='bottomTabs'; tabs.setAttribute('aria-label','Main navigation');
+    TABS.forEach(function(t){
+      var b=document.createElement('button'); b.type='button'; b.setAttribute('data-tab',t[0]); b.innerHTML=t[2]+'<span>'+t[1]+'</span>';
+      b.addEventListener('click',function(){
+        if(t[0]==='more'){ if(typeof window.setSidebar==='function')window.setSidebar(true); return; }
+        if(view()!==t[0])go(t[0]);
+      });
+      tabs.appendChild(b);
+    });
+    document.body.appendChild(tabs);
+    function tabFor(v){ if(v==='dashboard')return 'dashboard'; var s=VIEW_SECTION[v]; if(s==='practice')return 'exam'; if(s==='learn')return 'flashcards'; if(s==='track')return 'progress'; return 'more'; }
+    function syncBar(){
+      var cur=tabFor(view());
+      Array.prototype.forEach.call(tabs.children,function(b){ if(b.getAttribute('data-tab')===cur)b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
+    }
+
+    function syncAll(){ syncTabs(); syncBar(); }
+    syncAll();
+    window.addEventListener('hashchange',syncAll);
+    var app=document.getElementById('app');
+    if(app&&window.MutationObserver)new MutationObserver(syncAll).observe(app,{childList:true});
+  }catch(e){ console.warn('Navigation enhancement skipped:',e&&e.message); }
+})();
+</script>
+<script id="medex-simple-js">
+/* Progressive disclosure (no feature logic): moves secondary sections into collapsible "More" panels.
+   Nodes are MOVED, never recreated, so ids, inline handlers and admin rules keep working. */
+(function(){
+  try{
+    var app=document.getElementById('app'); if(!app)return;
+    var ALWAYS=['#toast','.support-floating-btn','.top','.section-tabs','.more-details'];
+    var RULES={
+      dashboard:{host:null,marker:'dash-main',label:'More from your dashboard',hint:'Performance, modules, leaderboard and recent exams',
+        keep:['.dashboard-smart-section','.dashboard-quick-section','.study-goal-card']},
+      progress:{host:null,label:'Detailed breakdown & analytics',hint:'Daily analytics, lecture and difficulty performance, reset',
+        keep:['.study-goal-card','.dashboard-spaced-review','.grid.stats']},
+      flashcards:{host:'.study-tools-page',label:'Create, import & manage flashcards',hint:'Card builder and your full card list',
+        keep:['.study-tools-hero','.fc-cloud-status','.study-phase2-grid']},
+      tools:{host:'.study-tools-page',label:'Study plans & achievements',hint:'Exam countdown, plans and badges',
+        keep:['.study-tools-hero','.study-phase2-grid']}
+    };
+    var openState={};
+    var view=function(){return location.hash.replace('#','')||'dashboard';};
+    var matchesAny=function(el,list){for(var i=0;i<list.length;i++){if(el.matches(list[i]))return true;}return false;};
+
+    function simplify(){
+      var v=view(); if(v!=='dashboard')app.classList.remove('dash-main'); var rule=RULES[v]; if(!rule)return;
+      if(app.querySelector('.quiz')||app.querySelector('#visitorStartName'))return;
+      var host=rule.host?app.querySelector(rule.host):app; if(!host)return;
+      if(host.querySelector(':scope > details.more-details'))return;          // already simplified
+      if(v==='dashboard'&&!app.querySelector('.dashboard-quick-section'))return; // not rendered yet
+      var keep=rule.keep.slice();
+      if(v==='dashboard'){
+        var n=app.querySelector(':scope > .site-notifications-card');
+        if(n){
+          if(/no site notifications/i.test(n.textContent||'')&&!n.querySelector('.notification-item,.site-notification-item,article'))n.hidden=true; // empty: nothing to show
+          else keep.push('.site-notifications-card');
+        }
+        host.classList.add('dash-main');
+        // the visitor-name card repeats the greeting; it lives in the More panel
+      }
+      var movable=Array.prototype.filter.call(host.children,function(el){
+        return !matchesAny(el,ALWAYS)&&!matchesAny(el,keep)&&!el.hidden&&el.getAttribute('aria-hidden')!=='true';
+      });
+      if(!movable.length)return;
+      var d=document.createElement('details'); d.className='more-details';
+      var s=document.createElement('summary');
+      var t=document.createElement('span'); t.textContent=rule.label;
+      var h=document.createElement('span'); h.className='more-hint'; h.textContent=rule.hint;
+      var box=document.createElement('span'); box.appendChild(t); box.appendChild(h); s.appendChild(box); d.appendChild(s);
+      movable.forEach(function(el){d.appendChild(el);});
+      d.open=!!openState[v];
+      d.addEventListener('toggle',function(){openState[v]=d.open;});
+      host.appendChild(d);
+      // keep floating chat button last in DOM order (it is position:fixed, order is cosmetic)
+      var fab=host.querySelector(':scope > .support-floating-btn'); if(fab)host.appendChild(fab);
+    }
+
+    function all(){ simplify(); }
+    all();
+    window.addEventListener('hashchange',all);
+    if(window.MutationObserver){
+      new MutationObserver(all).observe(app,{childList:true});
+    }
+  }catch(e){ console.warn('Simplification skipped:',e&&e.message); }
+})();
+</script>
+<script id="medex-focus-js">
+/* Focus timer upgrade. Reuses the existing timer state/functions; adds a quick-start panel, break mode,
+   progress bar, today's stats, sound/vibration/title alert, and fixes the "frozen after reload" bug. */
+(function(){
+  try{
+    if(typeof focusTimerState==='undefined'||typeof updateTopbarControls!=='function')return;
+    var PREFS='medex_focus_prefs_v1', STATS='medex_focus_stats_v1';
+    var load=function(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v&&typeof v==='object'?v:d;}catch(e){return d;}};
+    var store=function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+    var prefs=load(PREFS,{sound:true}), stats=load(STATS,{});
+    var popOpen=false, audio=null, baseTitle=document.title, titleTimer=0;
+    var S=function(){return focusTimerState;};              // never cache: the original replaces this object on reset
+    var day=function(){return typeof localDayKey==='function'?localDayKey():new Date().toISOString().slice(0,10);};
+    var fmt=function(s){return typeof formatTime==='function'?formatTime(s):Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+    var onTools=function(){return location.hash.replace('#','')==='tools';};
+    var refresh=function(){updateTopbarControls(); if(onTools()&&typeof renderStudyTools==='function')renderStudyTools();};
+
+    /* ---------- stats ---------- */
+    function addStats(min){
+      var d=day(), e=stats[d]||{sessions:0,minutes:0}; e.sessions++; e.minutes+=min; stats[d]=e;
+      Object.keys(stats).sort().slice(0,-60).forEach(function(k){delete stats[k];});
+      store(STATS,stats);
+    }
+    function today(){return stats[day()]||{sessions:0,minutes:0};}
+
+    /* ---------- alerts ---------- */
+    function unlockAudio(){
+      try{ var AC=window.AudioContext||window.webkitAudioContext; if(!AC)return; if(!audio)audio=new AC(); if(audio.state==='suspended')audio.resume(); }catch(e){}
+    }
+    function beep(){
+      if(!prefs.sound||!audio)return;
+      try{
+        [660,880,1100].forEach(function(f,i){
+          var o=audio.createOscillator(), g=audio.createGain(), t=audio.currentTime+i*0.22;
+          o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.25,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+0.2);
+          o.connect(g); g.connect(audio.destination); o.start(t); o.stop(t+0.22);
+        });
+      }catch(e){}
+    }
+    function flashTitle(msg){
+      clearInterval(titleTimer); var on=false, n=0;
+      titleTimer=setInterval(function(){ on=!on; document.title=on?msg:baseTitle; if(++n>40||!document.hidden&&n>6){clearInterval(titleTimer);document.title=baseTitle;} },1000);
+    }
+    function restoreTitle(){ clearInterval(titleTimer); document.title=baseTitle; }
+
+    /* ---------- core ---------- */
+    function paint(remain){
+      var s=S(), total=Number(s.total||s.preset||remain)||remain, pct=total>0?Math.min(100,Math.max(0,(1-remain/total)*100)):0;
+      document.querySelectorAll('.global-focus-timer-display').forEach(function(x){x.textContent=fmt(remain);});
+      var big=document.getElementById('focusTimerDisplay'); if(big)big.textContent=fmt(remain);
+      document.querySelectorAll('.global-focus-timer').forEach(function(x){x.style.setProperty('--fp',pct.toFixed(1)+'%');});
+      if(s.running)document.title=fmt(remain)+' · '+(s.mode==='break'?'Break':'Focus')+' · MedEx';
+    }
+    function finish(late){
+      var s=S(), wasBreak=s.mode==='break', total=Number(s.total||s.preset||0);
+      s.running=false; s.endTime=0; s.startedAt=0; s.remaining=0; s.done=true; s.paused=false;
+      saveFocusState(); clearInterval(focusTimerId); focusTimerId=null;
+      if(!wasBreak&&total>=60)addStats(Math.round(total/60));
+      var msg=wasBreak?'Break over. Ready for the next focus session?':(late?'Your focus session finished while you were away.':'Focus session complete. Nice work — take a short break.');
+      if(typeof toast==='function')toast(msg,'ok');
+      if(!late){ beep(); try{navigator.vibrate&&navigator.vibrate([200,100,200]);}catch(e){} if(document.hidden)flashTitle('✔ Time is up · MedEx'); else restoreTitle(); }
+      else restoreTitle();
+      if('Notification' in window&&Notification.permission==='granted'&&navigator.serviceWorker)navigator.serviceWorker.ready.then(function(r){r.showNotification(wasBreak?'MedEx break over':'MedEx focus complete',{body:msg});}).catch(function(){});
+      refresh();
+    }
+    window.runFocusTimer=function(){
+      clearInterval(focusTimerId); if(!S().running)return;
+      var tick=function(){
+        var s=S(); if(!s.running){clearInterval(focusTimerId);focusTimerId=null;restoreTitle();return;}
+        var remain=Math.max(0,Math.ceil((Number(s.endTime||Date.now())-Date.now())/1000));
+        s.remaining=remain; paint(remain);
+        if(remain<=0)finish(false); else if(remain%5===0)saveFocusState();
+      };
+      tick(); if(S().running)focusTimerId=setInterval(tick,1000);
+    };
+
+    var _start=window.startFocusTimer, _pause=window.pauseFocusTimer, _reset=window.resetFocusTimer, _preset=window.focusPreset;
+    window.startFocusTimer=function(){
+      unlockAudio(); var s=S(); if(s.running)return;
+      if(!Number(s.remaining||0)){                              // finished: play starts the NEXT session
+        var wasBreak=s.mode==='break', next=wasBreak?Number(s.returnPreset||1500):Number(s.preset||1500), label=s.label;
+        _reset(next); S().label=label||S().label; S().mode='focus';
+      }
+      s=S(); var resuming=!!(s.paused&&s.total&&s.remaining>0&&s.remaining<s.total);
+      if(!resuming)s.total=Number(s.remaining); s.paused=false; s.done=false; if(!s.mode)s.mode='focus';
+      _start();
+    };
+    window.pauseFocusTimer=function(){ _pause(); var s=S(); s.paused=true; saveFocusState(); restoreTitle(); refresh(); };
+    window.resetFocusTimer=function(sec){
+      var m=S().mode, rp=S().returnPreset; restoreTitle();
+      _reset.apply(null,sec===undefined?[]:[sec]);
+      if(m==='break'){ var s=S(); s.mode='break'; s.returnPreset=rp; saveFocusState(); updateTopbarControls(); }
+    };
+    window.focusPreset=function(sec){ _preset(sec); var s=S(); delete s.total; delete s.paused; s.done=false; s.mode='focus'; saveFocusState(); refresh(); };
+
+    /* quick actions used by the panel */
+    window.focusQuickStart=function(sec,mode){
+      unlockAudio(); clearInterval(focusTimerId); focusTimerId=null; restoreTitle();
+      var old=S(), isBreak=mode==='break';
+      var next={remaining:sec,running:false,endTime:0,startedAt:0,label:old.label||'Focused study',preset:isBreak?(old.preset||1500):sec,mode:isBreak?'break':'focus'};
+      if(isBreak)next.returnPreset=old.mode==='break'?old.returnPreset:old.preset;
+      focusTimerState=next; saveFocusState(); popOpen=false; window.startFocusTimer();
+    };
+    window.focusCustomStart=function(){
+      var el=document.getElementById('focusCustomMin'), m=Math.round(Number(el&&el.value));
+      if(!m||m<1||m>180){ if(typeof toast==='function')toast('Enter a number of minutes between 1 and 180.','error'); if(el)el.focus(); return; }
+      window.focusQuickStart(m*60,'focus');
+    };
+    window.focusExtend=function(min){
+      var s=S(), add=min*60; if(!add)return;
+      if(s.running){ s.endTime=Number(s.endTime)+add*1000; s.total=Number(s.total||s.remaining)+add; s.remaining+=add; }
+      else { s.remaining=Math.max(60,Number(s.remaining||0)+add); s.total=Number(s.remaining); s.paused=false; s.done=false; }
+      saveFocusState(); paint(s.remaining); refresh();
+    };
+    window.focusToggleSound=function(on){ prefs.sound=!!on; store(PREFS,prefs); if(on){unlockAudio();beep();} };
+    window.focusDismissDone=function(){ var s=S(); s.done=false; saveFocusState(); refresh(); };
+    window.toggleFocusPopover=function(e){ if(e)e.stopPropagation(); popOpen=!popOpen; updateTopbarControls(); };
+    window.closeFocusPopover=function(){ popOpen=false; updateTopbarControls(); };
+
+    /* ---------- top-bar markup ---------- */
+    function popoverHTML(){
+      var s=S(), isBreak=s.mode==='break', running=!!s.running, t=today(), esc2=typeof esc==='function'?esc:function(x){return String(x);};
+      var done='';
+      if(s.done){
+        done='<div class="focus-done-box"><b>'+(isBreak?'Break over — ready to focus?':'Session complete — nice work!')+'</b><div class="focus-pop-row">'
+          +(isBreak?'<button class="focus-chip solid" onclick="startFocusTimer();closeFocusPopover()">Start focus</button>'
+                   :'<button class="focus-chip solid break" onclick="focusQuickStart(300,\'break\')">5-min break</button><button class="focus-chip" onclick="startFocusTimer();closeFocusPopover()">Another session</button>')
+          +'<button class="focus-chip" onclick="focusDismissDone()">Dismiss</button></div></div>';
+      }
+      var mins=[15,25,45,60].map(function(m){return '<button class="focus-chip" onclick="focusQuickStart('+m*60+')">'+m+' min</button>';}).join('');
+      var brk=[5,10,15].map(function(m){return '<button class="focus-chip break" onclick="focusQuickStart('+m*60+',\'break\')">'+m+' min</button>';}).join('');
+      var ctl=(running||Number(s.remaining)>0&&s.paused)?'<div class="focus-pop-sec"><div class="focus-pop-row"><button class="focus-chip" onclick="focusExtend(5)">+ 5 min</button>'
+          +(running?'<button class="focus-chip" onclick="pauseFocusTimer()">Pause</button>':'<button class="focus-chip solid" onclick="startFocusTimer()">Resume</button>')
+          +'<button class="focus-chip" onclick="resetFocusTimer()">Reset</button></div></div>':'';
+      return '<div class="focus-popover" role="dialog" aria-label="Focus timer" onclick="event.stopPropagation()">'
+        +'<div class="focus-pop-head"><strong>'+(isBreak?'Break time':'Focus timer')+'</strong><button class="focus-pop-x" onclick="closeFocusPopover()" aria-label="Close">✕</button></div>'
+        +done
+        +'<div class="focus-pop-sec"><span class="mini">What are you studying?</span><input class="focus-pop-input" maxlength="60" value="'+esc2(s.label||'Focused study')+'" onchange="focusLabelChanged(this.value)" aria-label="Session label"></div>'
+        +'<div class="focus-pop-sec"><span class="mini">Start a focus session</span><div class="focus-pop-row">'+mins+'</div></div>'
+        +'<div class="focus-pop-sec"><div class="focus-pop-custom"><input class="focus-pop-input" id="focusCustomMin" type="number" inputmode="numeric" min="1" max="180" placeholder="Custom minutes" onkeydown="if(event.key===\'Enter\')focusCustomStart()"><button class="focus-chip solid" onclick="focusCustomStart()">Start</button></div></div>'
+        +'<div class="focus-pop-sec"><span class="mini">Take a break</span><div class="focus-pop-row">'+brk+'</div></div>'
+        +ctl
+        +'<div class="focus-pop-foot"><span>Today: <b>'+t.sessions+'</b> session'+(t.sessions===1?'':'s')+' · <b>'+t.minutes+'</b> min</span><label><input type="checkbox" '+(prefs.sound?'checked':'')+' onchange="focusToggleSound(this.checked)"> Sound</label></div>'
+        +'</div>';
+    }
+    window.globalFocusTimerHTML=function(){
+      var s=S(), remain=Math.max(0,Number(s.remaining||0)), isBreak=s.mode==='break', running=!!s.running, done=!!s.done;
+      var total=Number(s.total||s.preset||remain)||remain, pct=running||s.paused?Math.min(100,Math.max(0,(1-remain/total)*100)):(done?100:0);
+      var icon=running?'<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="3.2" height="12" rx="1"/><rect x="11.8" y="4" width="3.2" height="12" rx="1"/></svg>'
+                      :'<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><polygon points="7,4 16,10 7,16"/></svg>';
+      var label=done?'Done':(isBreak?'Break':'Focus');
+      return '<div class="global-focus-timer'+(isBreak?' break':'')+(running?' running':'')+(done?' done':'')+'" style="--fp:'+pct.toFixed(1)+'%" title="'+(isBreak?'Break':'Focus')+' timer — tap the time for options">'
+        +'<span class="focus-global-label">'+label+'</span>'
+        +'<button class="focus-time-btn global-focus-timer-display" onclick="toggleFocusPopover(event)" aria-haspopup="dialog" aria-expanded="'+popOpen+'" aria-label="Timer '+fmt(remain)+'. Open timer options">'+fmt(remain)+'</button>'
+        +'<button class="global-focus-control" onclick="event.stopPropagation();'+(running?'pauseFocusTimer()':'startFocusTimer()')+'" aria-label="'+(running?'Pause focus timer':'Start focus timer')+'">'+icon+'</button>'
+        +'<button class="global-focus-control" onclick="event.stopPropagation();resetFocusTimer()" aria-label="Reset focus timer">↺</button>'
+        +'<span class="focus-progress" aria-hidden="true"><i></i></span></div>'+(popOpen?popoverHTML():'');
+    };
+
+    /* close on outside click / Esc */
+    document.addEventListener('click',function(e){ if(popOpen&&!e.target.closest('.focus-popover,.focus-time-btn'))window.closeFocusPopover(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&popOpen)window.closeFocusPopover(); });
+    document.addEventListener('visibilitychange',function(){ if(!document.hidden){ if(S().running)window.runFocusTimer(); if(S().done||!S().running)restoreTitle(); } });
+
+    /* ---------- startup: resume a running timer (was frozen after reload) / report a session that ended while away ---------- */
+    var s0=S();
+    if(s0.running){ window.runFocusTimer(); }
+    else if(!s0.done&&Number(s0.remaining)===0&&Number(s0.total)>0){ finish(true); }
+    updateTopbarControls();
+  }catch(e){ console.warn('Focus timer upgrade skipped:',e&&e.message); }
+})();
+</script>
+<style id="medex-fc2-css">
+/* ===== Flashcards v2 — "Study now" flow ===== */
+.fc2-page{max-width:920px;margin:0 auto;display:grid;gap:14px}
+.fc2-hero{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:22px;border:1px solid rgba(var(--primary-rgb),.3);border-radius:18px;background:linear-gradient(135deg,var(--primary-soft),var(--card) 70%);box-shadow:var(--shadow-sm)}
+.fc2-eyebrow{font:700 10.5px var(--font-sans);letter-spacing:.13em;color:var(--primary);text-transform:uppercase}
+.fc2-hero h2{font-size:clamp(22px,4.2vw,30px);line-height:1.2;margin:6px 0 4px}
+.fc2-hero p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.5;max-width:520px}
+.fc2-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.fc2-stat{padding:8px 13px;border:1px solid var(--line);border-radius:12px;background:var(--card);min-width:78px}
+.fc2-stat b{display:block;font:700 21px var(--font-mono)}
+.fc2-stat span{font-size:11px;color:var(--muted)}
+.fc2-stat.due b{color:var(--danger)}.fc2-stat.new b{color:var(--primary)}.fc2-stat.learn b{color:var(--warn)}.fc2-stat.done b{color:var(--ok)}
+.fc2-hero-actions{display:flex;flex-direction:column;gap:8px;align-items:stretch;flex:0 0 auto}
+.fc2-go{min-width:200px;min-height:56px;font-size:16px}
+.fc2-chips{display:flex;gap:8px;flex-wrap:wrap}
+.fc2-chip{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600;min-height:40px;transition:border-color .15s,background .15s}
+.fc2-chip:hover:not(:disabled){border-color:var(--primary);background:var(--primary-soft)}
+.fc2-chip:disabled{opacity:.45;cursor:not-allowed}
+.fc2-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:6px}
+.fc2-section-head h3{font-size:19px}
+.fc2-search{max-width:230px;width:100%}
+.fc2-decks{display:grid;gap:10px}
+.fc2-deck{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:14px 16px;box-shadow:var(--shadow-sm)}
+.fc2-deck-head{display:flex;align-items:center;gap:12px}
+.fc2-deck-title{flex:1;min-width:0}
+.fc2-deck-title b{display:block;font-size:15px;overflow-wrap:anywhere}
+.fc2-deck-title span{font-size:11.5px;color:var(--muted)}
+.fc2-deck-counts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.fc2-deck-counts span{font:700 11.5px var(--font-mono);padding:4px 9px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.fc2-deck-counts .due.on{background:var(--danger-soft);border-color:transparent;color:var(--danger)}
+.fc2-deck-counts .new.on{background:var(--primary-soft);border-color:transparent;color:var(--primary)}
+.fc2-deck .bar{margin-top:11px;height:6px}
+.fc2-sub{margin-top:9px}
+.fc2-sub>summary{cursor:pointer;font-size:12px;color:var(--muted);list-style:none;padding:4px 0}
+.fc2-sub>summary::-webkit-details-marker{display:none}
+.fc2-sub>summary:before{content:'▸ '}
+.fc2-sub[open]>summary:before{content:'▾ '}
+.fc2-sub-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.fc2-sub-row>span:first-child{flex:1;min-width:0;overflow-wrap:anywhere}
+.fc2-sub-row .mini{white-space:nowrap}
+.fc2-sub-row .btn{padding:6px 11px;font-size:12px}
+.fc2-empty{text-align:center;padding:30px 18px;border:1px dashed var(--line);border-radius:16px;color:var(--muted)}
+.fc2-empty b{display:block;color:var(--text);font-size:16px;margin-bottom:6px}
+.fc2-bar{height:5px;border-radius:99px;background:var(--panel2);overflow:hidden;max-width:900px;margin:0 auto 10px}
+.fc2-bar i{display:block;height:100%;background:var(--primary);border-radius:99px;transition:width .25s ease}
+.fc2-howto{font-size:12px;color:var(--muted);text-align:center}
+@media(max-width:700px){
+  .fc2-hero{flex-direction:column;align-items:stretch;padding:18px}
+  .fc2-hero-actions{width:100%}.fc2-go{width:100%}
+  .fc2-deck-head{flex-wrap:wrap}.fc2-deck-counts{justify-content:flex-start;order:3;width:100%}
+  .fc2-search{max-width:none}
+}
+
+/* ===== Guide v3 — spotlight tour that follows the user across pages ===== */
+.mt-root{position:fixed;inset:0;z-index:10060;font-family:var(--font-sans)}
+.mt-shield{position:absolute;inset:0;background:transparent}
+.mt-root.mt-center .mt-shield{background:rgba(8,18,38,.58)}
+.mt-hole{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(8,18,38,.58),0 0 0 3px var(--primary),0 0 22px 4px rgba(var(--primary-rgb),.55);transition:top .3s ease,left .3s ease,width .3s ease,height .3s ease;pointer-events:none;animation:mtPulse 2s ease-in-out infinite}
+@keyframes mtPulse{50%{box-shadow:0 0 0 9999px rgba(8,18,38,.58),0 0 0 3px var(--primary),0 0 30px 8px rgba(var(--primary-rgb),.35)}}
+.mt-card{position:fixed;width:min(370px,calc(100vw - 24px));background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 24px 70px rgba(0,0,0,.4);transition:top .3s ease,left .3s ease}
+.mt-root.mt-center .mt-card{left:50%!important;top:50%!important;transform:translate(-50%,-50%)}
+.mt-kicker{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--primary);text-transform:uppercase;margin-bottom:9px}
+.mt-page{color:var(--muted);letter-spacing:0;text-transform:none;font-weight:600}
+.mt-progress{height:4px;border-radius:9px;background:var(--line);overflow:hidden;margin-bottom:12px}
+.mt-progress i{display:block;height:100%;background:var(--primary);border-radius:9px;transition:width .3s ease}
+.mt-card h2{font-size:19px;line-height:1.25;margin:0 0 7px}
+.mt-card p{font-size:14px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.mt-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.mt-sp{flex:1}
+.mt-actions .btn{min-height:40px}
+.mt-next{margin-top:10px;font-size:11.5px;color:var(--muted)}
+.mt-help{position:fixed;left:16px;bottom:16px;z-index:1190;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--primary);font:800 19px var(--font-sans);box-shadow:0 6px 20px rgba(0,0,0,.2);display:grid;place-items:center;cursor:pointer}
+.mt-help:hover{border-color:var(--primary)}
+.mt-menu{position:fixed;left:16px;bottom:68px;z-index:1191;width:min(260px,calc(100vw - 32px));background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:6px}
+.mt-menu button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:0;background:transparent;color:var(--text);padding:11px 12px;border-radius:10px;font-size:13.5px;font-weight:600;min-height:44px}
+.mt-menu button:hover{background:var(--primary-soft)}
+.mt-tip{position:fixed;left:16px;bottom:72px;z-index:1185;width:min(340px,calc(100vw - 32px));background:var(--card);color:var(--text);border:1px solid rgba(var(--primary-rgb),.45);border-left:4px solid var(--primary);border-radius:14px;padding:13px 14px;box-shadow:var(--shadow);animation:mtIn .25s ease}
+@keyframes mtIn{from{opacity:0;transform:translateY(8px)}}
+.mt-tip b{display:block;font-size:13.5px;margin-bottom:4px}
+.mt-tip p{margin:0 0 9px;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.mt-tip .btn{padding:6px 12px;font-size:12px}
+body:has(.quiz) .mt-help,body:has(#visitorStartName) .mt-help,body:has(.quiz) .mt-tip{display:none}
+@media(max-width:880px){
+  .mt-help{bottom:calc(76px + env(safe-area-inset-bottom))}
+  .mt-menu{bottom:calc(128px + env(safe-area-inset-bottom))}
+  .mt-tip{left:12px;right:12px;width:auto;bottom:calc(132px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){.mt-hole,.mt-card,.mt-tip{animation:none;transition:none}}
+</style>
+
+<script id="medex-fc2-js">
+/* Flashcards v2: one-tap "Study now", deck cards, advanced tools folded away.
+   Reuses the existing scheduling engine (flashcardRecord / flashcardRatingSchedule / renderFlashcardSession). */
+(function(){
+  try{
+    if(typeof renderFlashcards!=='function'||typeof flashcardRecord!=='function')return;
+    var NEW_PER_DAY=20, SESSION_CAP=50;
+    var openFold={custom:false,manage:false}, deckQuery='';
+    var plural=function(n,w){return n+' '+w+(n===1?'':'s');};
+    var deckOf=function(c){return String(c.module||'').trim()||'General';};
+    var subjOf=function(c){return String(c.subject||'').trim()||'General';};
+    function allCards(){return flashcardScopeCards({module:'',subject:'',lecture:''});}
+    function counts(cards){
+      var now=Date.now(),r={due:0,nw:0,learning:0,total:cards.length};
+      cards.forEach(function(c){var p=flashcardRecord(c);if(p.suspended)return;
+        if(p.state==='new')r.nw++;
+        else{if(Number(p.due||0)<=now)r.due++;if(p.state==='learning'||p.state==='relearning')r.learning++;}});
+      return r;
+    }
+    function allowance(){return Math.max(0,NEW_PER_DAY-Number(flashcardDailyStats().row.newCards||0));}
+    function queue(cards,kind){
+      var now=Date.now(),live=cards.filter(function(c){return !flashcardRecord(c).suspended;});
+      var due=live.filter(function(c){var p=flashcardRecord(c);return p.state!=='new'&&Number(p.due||0)<=now;})
+        .sort(function(a,b){var pa=flashcardRecord(a),pb=flashcardRecord(b);if(!!pa.difficult!==!!pb.difficult)return pa.difficult?-1:1;return Number(pa.due||0)-Number(pb.due||0);});
+      var fresh=live.filter(function(c){return flashcardRecord(c).state==='new';});
+      if(kind==='difficult')return live.filter(function(c){return flashcardRecord(c).difficult;});
+      if(kind==='favourite')return live.filter(function(c){return flashcardRecord(c).favorite;});
+      if(kind==='all')return shuffle(live.slice()).slice(0,SESSION_CAP);
+      var room=allowance();if(!room&&!due.length)room=10; // never a dead end: offer a small extra batch
+      return due.concat(fresh.slice(0,room)).slice(0,SESSION_CAP);
+    }
+    window.fc2Fold=function(k,v){openFold[k]=!!v;};
+    window.fc2FilterDecks=function(v){
+      deckQuery=String(v||'').toLowerCase().trim();
+      document.querySelectorAll('[data-deck-name]').forEach(function(el){el.classList.toggle('hidden',!!deckQuery&&el.getAttribute('data-deck-name').indexOf(deckQuery)<0);});
+    };
+    window.fc2Start=function(kind,deck,subject){
+      var cards=allCards();
+      if(deck)cards=cards.filter(function(c){return deckOf(c)===deck;});
+      if(subject)cards=cards.filter(function(c){return subjOf(c)===subject;});
+      var list=queue(cards,kind);
+      if(!list.length){toast('No cards are ready here yet.','error');return;}
+      flashcardSession={list:list,index:0,revealed:false,ratings:{again:0,hard:0,good:0,easy:0},startedAt:Date.now(),drawingOpen:false};
+      renderFlashcardSession();
+    };
+    function decks(){
+      var map=new Map();
+      allCards().forEach(function(c){
+        var m=deckOf(c),s=subjOf(c);
+        if(!map.has(m))map.set(m,{name:m,cards:[],subjects:new Map()});
+        var d=map.get(m);d.cards.push(c);
+        if(!d.subjects.has(s))d.subjects.set(s,[]);
+        d.subjects.get(s).push(c);
+      });
+      return Array.from(map.values()).map(function(d){d.c=counts(d.cards);return d;})
+        .sort(function(a,b){return (b.c.due-a.c.due)||a.name.localeCompare(b.name);});
+    }
+    function deckHTML(d){
+      var learned=d.c.total?Math.round((d.c.total-d.c.nw)/d.c.total*100):0;
+      var ready=queue(d.cards,'mixed').length;
+      var subs='';
+      if(d.subjects.size>1){
+        subs='<details class="fc2-sub"><summary>'+plural(d.subjects.size,'subject')+'</summary>'+
+          Array.from(d.subjects.entries()).sort(function(a,b){return a[0].localeCompare(b[0]);}).map(function(e){
+            var sc=counts(e[1]),sr=queue(e[1],'mixed').length;
+            return '<div class="fc2-sub-row"><span>'+esc(e[0])+'</span><span class="mini">'+sc.due+' due · '+sc.nw+' new</span><button class="btn" '+(sr?'':'disabled')+' onclick="fc2Start(\'mixed\',\''+attrJs(d.name)+'\',\''+attrJs(e[0])+'\')">Study</button></div>';
+          }).join('')+'</details>';
+      }
+      return '<article class="fc2-deck" data-deck-name="'+esc(d.name.toLowerCase())+'"><div class="fc2-deck-head"><div class="fc2-deck-title"><b>'+esc(d.name)+'</b><span>'+plural(d.c.total,'card')+' · '+learned+'% started</span></div>'+
+        '<div class="fc2-deck-counts"><span class="due'+(d.c.due?' on':'')+'">'+d.c.due+' due</span><span class="new'+(d.c.nw?' on':'')+'">'+d.c.nw+' new</span></div>'+
+        '<button class="btn primary" '+(ready?'':'disabled')+' onclick="fc2Start(\'mixed\',\''+attrJs(d.name)+'\')">Study</button></div>'+
+        '<div class="bar"><i style="width:'+learned+'%"></i></div>'+subs+'</article>';
+    }
+    window.renderFlashcards=function(){
+      if(flashcardSession){renderFlashcardSession();return;}
+      if(SUPABASE_ENABLED&&!publicFlashcardsLoaded&&!publicFlashcardsLoading&&Date.now()-publicFlashcardsLastAttempt>30000){loadPublicFlashcards();}
+      var cards=allCards(),all=counts(cards),n=queue(cards,'mixed').length;
+      var today=Number(flashcardDailyStats().row.reviews||0);
+      var difficult=queue(cards,'difficult').length,fav=queue(cards,'favourite').length;
+      var head=!cards.length?'No flashcards yet':all.due?plural(all.due,'card')+' to review':n?'Ready to learn something new':'You are all caught up';
+      var sub=!cards.length?'Published MedEx decks appear here automatically. You can also create your own cards below.'
+        :all.due?'Review due cards first. That is what keeps them in your long-term memory.'
+        :n?'New cards are waiting. Read the question, answer in your head, then reveal and rate honestly.'
+        :'Nothing is due right now. Come back later, or review ahead from any deck.';
+      var dl=decks();
+      var deckBlock=dl.length?
+        '<div class="fc2-decks">'+dl.map(deckHTML).join('')+'</div>':
+        '<div class="fc2-empty"><b>No decks to show</b>Cards you create, import or receive from MedEx will be grouped into decks by module.</div>';
+      var body='<div class="fc2-page">'+flashcardCloudStatusHTML()+
+        '<section class="fc2-hero" id="fcStudyNow"><div><span class="fc2-eyebrow">Today</span><h2>'+esc(head)+'</h2><p>'+esc(sub)+'</p>'+
+        '<div class="fc2-stats"><div class="fc2-stat due"><b>'+all.due+'</b><span>Due</span></div><div class="fc2-stat new"><b>'+all.nw+'</b><span>New</span></div><div class="fc2-stat learn"><b>'+all.learning+'</b><span>Learning</span></div><div class="fc2-stat done"><b>'+today+'</b><span>Reviewed today</span></div></div></div>'+
+        '<div class="fc2-hero-actions"><button class="btn primary fc2-go" '+(n?'':'disabled')+' onclick="fc2Start(\'mixed\')">Study now'+(n?' · '+n:'')+'</button>'+
+        (!n&&cards.length?'<button class="btn" onclick="fc2Start(\'all\')">Review ahead</button>':'')+
+        '<button class="btn" onclick="enableMedExPhoneNotifications()">Enable reminders</button></div></section>'+
+        '<div class="fc2-chips"><button class="fc2-chip" '+(difficult?'':'disabled')+' onclick="fc2Start(\'difficult\')">⚑ Difficult · '+difficult+'</button><button class="fc2-chip" '+(fav?'':'disabled')+' onclick="fc2Start(\'favourite\')">♥ Favourites · '+fav+'</button><button class="fc2-chip" '+(cards.length?'':'disabled')+' onclick="fc2Start(\'all\')">↻ Random mix</button></div>'+
+        '<div class="fc2-section-head"><h3>Your decks</h3>'+(dl.length>6?'<input class="fc2-search" type="search" placeholder="Search decks…" value="'+esc(deckQuery)+'" oninput="fc2FilterDecks(this.value)" aria-label="Search decks">':'')+'</div>'+
+        '<div id="fcDecks">'+deckBlock+'</div>'+
+        '<div class="fc2-howto">In a session: Space reveals · 1 Again · 2 Hard · 3 Good · 4 Easy</div>'+
+        '<details class="more-details" '+(openFold.custom?'open':'')+' ontoggle="fc2Fold(\'custom\',this.open)"><summary><span>Custom session<span class="more-hint">Pick an exact module, subject or lecture</span></span></summary>'+renderFlashcardSetup()+'</details>'+
+        '<details class="more-details" '+(openFold.manage?'open':'')+' ontoggle="fc2Fold(\'manage\',this.open)"><summary><span>Create, import &amp; manage cards<span class="more-hint">Card builder, CSV import, AI generation, your full list</span></span></summary>'+renderFlashcardLibrary()+'</details></div>';
+      document.getElementById('app').innerHTML=layout('Flashcards','',body);
+      if(deckQuery)fc2FilterDecks(deckQuery);
+    };
+    // thin progress bar above the card during a session
+    var _rs=window.renderFlashcardSession;
+    window.renderFlashcardSession=function(){
+      _rs();
+      var s=flashcardSession,card=document.querySelector('.study-flashcard-card');
+      if(s&&card&&s.index<s.list.length&&!document.querySelector('.fc2-bar')){
+        card.insertAdjacentHTML('beforebegin','<div class="fc2-bar" aria-hidden="true"><i style="width:'+Math.round(s.index/s.list.length*100)+'%"></i></div>');
+      }
+    };
+    if(location.hash.replace('#','')==='flashcards')window.renderFlashcards();
+  }catch(e){console.warn('Flashcards v2 skipped:',e&&e.message);}
+})();
+</script>
+
+<script id="medex-tour-js">
+/* Guide v3: a spotlight tour that navigates between pages with the user, plus once-per-page tips
+   and a persistent "?" help button. Overrides the old single-window guide. */
+(function(){
+  'use strict';
+  try{
+    var KEY='medex_tour_v3',TIPKEY='medex_tips_seen_v1';
+    var load=function(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v&&typeof v==='object'?v:d;}catch(e){return d;}};
+    var store=function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+    var st=load(KEY,{i:0,active:false,done:false}),seen=load(TIPKEY,{});
+    var root=null,token=0,raf=0,started=false,tipT=0,placeT=0;
+    var viewNow=function(){return location.hash.replace('#','')||'dashboard';};
+    var PAGE={dashboard:'Dashboard',exam:'Start Exam',flashcards:'Flashcards',mistakes:'Mistakes',library:'Study Library',tools:'Study Tools',progress:'Progress',ai:'AI Assistant'};
+    var STEPS=[
+      {view:'dashboard',target:'.dashboard-smart-section',icon:'✦',title:'Your next best step',body:'MedEx reads your progress and tells you what to study next: due flashcards, past mistakes or a weak topic. One tap and you are in.'},
+      {view:'dashboard',target:'.study-goal-card',icon:'🔥',title:'Daily goal and streak',body:'Answer your daily number of questions to keep your streak alive. You can change the goal in Settings.'},
+      {view:'exam',target:'#simpleExamBuilder',icon:'📝',title:'Build your own exam',body:'Choose a module, subject and lecture, set how many questions you want, then start. Questions you already answered correctly are retired, so you only see what you still need.'},
+      {view:'exam',target:'.answer-mode-list',icon:'🎯',title:'Learning mode or exam mode',body:'"Show answer immediately" is best for learning. "After submitting" simulates a real exam. During a question, use the pen on the right to draw and the flag to mark it for review.'},
+      {view:'flashcards',target:'#fcStudyNow',icon:'🗂️',title:'Flashcards: one tap to study',body:'"Study now" gives you due cards first, then a few new ones. Think of the answer, reveal it, then rate yourself: Again, Hard, Good or Easy. Honest ratings schedule the next review at the right time.'},
+      {view:'flashcards',target:'#fcDecks',icon:'📚',title:'Study by deck',body:'Each module is a deck with its due and new counts. Open a deck to study one subject at a time.'},
+      {view:'mistakes',target:'#app .card',icon:'🔍',title:'Learn from your mistakes',body:'Every wrong answer is saved here and ranked by weakest topic. Practise them until they stop appearing.'},
+      {view:'library',target:'#librarySearch',icon:'🔎',title:'Search everything',body:'Search any question or concept, save questions to your own folders and attach personal notes.'},
+      {view:'tools',target:'.focus-timer-card',icon:'⏱️',title:'Focus sessions and plans',body:'Start a focus timer here or from the top bar at any time. You can also set a study plan with an exam countdown.'},
+      {view:'progress',target:'.grid.stats',icon:'📈',title:'Track your accuracy',body:'See accuracy and progress by module, subject and lecture, and spot the lectures that need more practice.'},
+      {view:'ai',target:'#chatInput',icon:'✨',title:'Ask AI',body:'Stuck on a concept? Ask for an explanation. During an exam you can also tap Ask AI under any question.'},
+      {view:'dashboard',target:'#medexHelpBtn',icon:'👍',title:'You are ready',body:'Tap the ? button any time to replay this tour or see tips for the page you are on.'}
+    ];
+    var TIPS={
+      dashboard:['Your dashboard','Start with "Your next best step". Quick actions jump straight into an exam, flashcards, mistakes or the library.'],
+      exam:['Build an exam','Pick module, subject and lecture, choose a count, and start. Use "Advanced Smart Exam Builder" to mix several lectures.'],
+      flashcards:['Flashcards','Tap "Study now": due cards come first. Space reveals the answer, then press 1 Again, 2 Hard, 3 Good or 4 Easy.'],
+      mistakes:['Mistakes','Wrong answers are collected here, ranked by weakest topic. Use "Practice Mistakes" for a focused session.'],
+      library:['Study Library','Search questions, group them in folders and add personal notes. Notes also appear in exam reviews.'],
+      tools:['Study Tools','Start a focus session, then build a study plan with an exam date to count down to.'],
+      progress:['Progress','Open a module to see subjects and lectures. Low-accuracy lectures are the best place to practise next.'],
+      ai:['Ask AI','Ask about any concept in plain language. Short, specific questions get the clearest answers.'],
+      history:['Exam history','Review any past exam in full or retake it with the same questions.'],
+      leaderboard:['Top users','Each correct answer earns 1 XP. Tied XP shares a rank.'],
+      favorites:['Favourites','Star a question during an exam to keep it here for quick review.'],
+      settings:['Settings','Set your daily goal, change semester and switch dark mode here.'],
+      results:['Exam results','Use the topic cards to practise just the lectures you missed.']
+    };
+    function vis(el){return !!el&&el.getClientRects().length>0;}
+    function find(sel){try{var el=document.querySelector(sel);return vis(el)?el:null;}catch(e){return null;}}
+
+    function ensureRoot(){
+      if(root&&document.body.contains(root))return;
+      root=document.createElement('div');root.id='medexTour';root.className='mt-root mt-center';
+      root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','MedEx guided tour');
+      root.innerHTML='<div class="mt-shield"></div><div class="mt-hole" style="display:none"></div><section class="mt-card" aria-live="polite"></section>';
+      root.addEventListener('click',function(e){
+        var b=e.target.closest('[data-mt]');if(!b)return;
+        var a=b.getAttribute('data-mt');
+        if(a==='next')(st.i>=STEPS.length-1)?finish(true):show(st.i+1);
+        else if(a==='back')show(st.i-1);
+        else if(a==='skip')finish(false);
+      });
+      document.body.appendChild(root);
+      if(window.innerWidth<=880&&typeof setSidebar==='function')setSidebar(false);
+    }
+    function drawCard(){
+      var s=STEPS[st.i],n=STEPS.length,next=STEPS[st.i+1];
+      var hint=next&&next.view!==s.view?'<div class="mt-next">Next: '+(PAGE[next.view]||'')+' page</div>':'';
+      root.querySelector('.mt-card').innerHTML=
+        '<div class="mt-kicker"><span>'+s.icon+' Step '+(st.i+1)+' of '+n+'</span><span class="mt-page">📍 '+(PAGE[s.view]||'')+'</span></div>'+
+        '<div class="mt-progress"><i style="width:'+Math.round((st.i+1)/n*100)+'%"></i></div><h2>'+s.title+'</h2><p>'+s.body+'</p>'+
+        '<div class="mt-actions"><button class="btn" data-mt="skip">Skip tour</button><span class="mt-sp"></span>'+(st.i>0?'<button class="btn" data-mt="back">Back</button>':'')+
+        '<button class="btn primary" data-mt="next">'+(st.i===n-1?'Finish':'Next')+'</button></div>'+hint;
+      var nb=root.querySelector('[data-mt="next"]');if(nb)try{nb.focus({preventScroll:true});}catch(e){}
+    }
+    function place(){
+      if(!root||!st.active)return;
+      var s=STEPS[st.i];if(!s)return;
+      var el=viewNow()===s.view?find(s.target):null;
+      var hole=root.querySelector('.mt-hole'),card=root.querySelector('.mt-card');
+      var vw=window.innerWidth,vh=window.innerHeight;
+      if(!el){hole.style.display='none';root.classList.add('mt-center');return;}
+      root.classList.remove('mt-center');hole.style.display='block';
+      var r=el.getBoundingClientRect(),pad=8;
+      var top=Math.max(r.top-pad,6),left=Math.max(r.left-pad,6),bottom=Math.min(r.bottom+pad,vh-6),right=Math.min(r.right+pad,vw-6);
+      hole.style.top=top+'px';hole.style.left=left+'px';hole.style.width=Math.max(0,right-left)+'px';hole.style.height=Math.max(0,bottom-top)+'px';
+      var cw=card.offsetWidth,ch=card.offsetHeight,x,y;
+      if(vw<=700){
+        x=(vw-cw)/2;
+        y=((top+bottom)/2>vh*0.5)?12:(vh-ch-84);
+      }else{
+        x=Math.min(Math.max(left,12),vw-cw-12);
+        if(vh-bottom>=ch+18)y=bottom+14;
+        else if(top>=ch+18)y=top-ch-14;
+        else y=vh-ch-16;
+      }
+      card.style.left=Math.max(8,x)+'px';card.style.top=Math.max(8,y)+'px';
+    }
+    function schedulePlace(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;place();});}
+    function show(i){
+      st.i=Math.max(0,Math.min(STEPS.length-1,i));st.active=true;store(KEY,st);
+      var my=++token;ensureRoot();drawCard();root.classList.add('mt-center');
+      var s=STEPS[st.i];
+      if(viewNow()!==s.view)location.hash=s.view;
+      var t0=Date.now();
+      (function poll(){
+        if(my!==token)return;
+        var el=viewNow()===s.view?find(s.target):null;
+        if(el||Date.now()-t0>2800){
+          if(el){var r=el.getBoundingClientRect();if(r.top<70||r.bottom>window.innerHeight-70){try{el.scrollIntoView({block:'center',behavior:'smooth'});}catch(e){}}}
+          place();clearTimeout(placeT);placeT=setTimeout(place,380);return;
+        }
+        setTimeout(poll,110);
+      })();
+    }
+    function close(){token++;if(root){root.remove();root=null;}st.active=false;store(KEY,st);}
+    function finish(completed){
+      if(completed){STEPS.forEach(function(s){seen[s.view]=1;});store(TIPKEY,seen);}
+      st.done=true;close();
+      if(typeof toast==='function')toast(completed?'Tour complete. Tap ? any time for tips.':'Tour skipped. Tap ? to replay it or see page tips.','ok');
+    }
+    function restart(){hideMenu();hideTip();st={i:0,active:true,done:false};started=true;store(KEY,st);show(0);}
+
+    /* ---- once-per-page tips ---- */
+    function hideTip(){clearTimeout(tipT);var t=document.getElementById('medexTip');if(t)t.remove();}
+    function showTip(v,force){
+      var t=TIPS[v];hideTip();
+      var d=document.createElement('aside');d.id='medexTip';d.className='mt-tip';d.setAttribute('role','status');
+      var data=t||['Tip','Use the menu button (top left) to move between sections. Tap ? to replay the tour.'];
+      d.innerHTML='<b>💡 '+data[0]+'</b><p>'+data[1]+'</p><button class="btn primary" type="button">Got it</button>';
+      d.querySelector('button').addEventListener('click',hideTip);
+      document.body.appendChild(d);
+      seen[v]=1;store(TIPKEY,seen);
+      if(!force)tipT=setTimeout(hideTip,15000);
+    }
+    function maybeTip(v){
+      if(!TIPS[v]||seen[v]||v==='dashboard')return;
+      clearTimeout(tipT);
+      tipT=setTimeout(function(){if(viewNow()===v&&!st.active&&!document.querySelector('.quiz')&&!document.getElementById('medexTip'))showTip(v,false);},900);
+    }
+
+    /* ---- help button ---- */
+    function hideMenu(){var m=document.getElementById('medexHelpMenu');if(m)m.remove();}
+    function ensureHelp(){
+      if(document.getElementById('medexHelpBtn'))return;
+      var b=document.createElement('button');b.id='medexHelpBtn';b.type='button';b.className='mt-help';
+      b.setAttribute('aria-label','Guide and tips');b.setAttribute('aria-haspopup','menu');b.textContent='?';
+      b.addEventListener('click',function(e){
+        e.stopPropagation();
+        if(document.getElementById('medexHelpMenu')){hideMenu();return;}
+        var m=document.createElement('div');m.id='medexHelpMenu';m.className='mt-menu';m.setAttribute('role','menu');
+        m.innerHTML='<button role="menuitem" data-h="tip">💡 Tips for this page</button><button role="menuitem" data-h="tour">🧭 Replay the full tour</button><button role="menuitem" data-h="reset">↺ Show all tips again</button>';
+        m.addEventListener('click',function(ev){
+          var h=ev.target.closest('[data-h]');if(!h)return;ev.stopPropagation();
+          var a=h.getAttribute('data-h');hideMenu();
+          if(a==='tip')showTip(viewNow(),true);
+          else if(a==='tour')restart();
+          else{seen={};store(TIPKEY,seen);if(typeof toast==='function')toast('Page tips will appear again as you visit each page.','ok');}
+        });
+        document.body.appendChild(m);
+      });
+      document.body.appendChild(b);
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('#medexHelpMenu,#medexHelpBtn'))hideMenu();});
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape')hideMenu();
+      if(!st.active||!root)return;
+      if(e.key==='Escape'){finish(false);}
+      else if(e.key==='ArrowRight'){e.preventDefault();(st.i>=STEPS.length-1)?finish(true):show(st.i+1);}
+      else if(e.key==='ArrowLeft'&&st.i>0){e.preventDefault();show(st.i-1);}
+    });
+    window.addEventListener('resize',schedulePlace);
+    window.addEventListener('scroll',schedulePlace,true);
+    var app=document.getElementById('app');
+    if(app&&window.MutationObserver)new MutationObserver(function(){if(st.active){clearTimeout(placeT);placeT=setTimeout(place,60);}}).observe(app,{childList:true});
+
+    /* ---- hooks the main script already calls ---- */
+    window.closeVisitorGuide=function(){finish(false);};
+    window.maybeShowVisitorGuide=function(v){
+      try{
+        var old=document.getElementById('medexVisitorGuide');if(old)old.remove();
+        document.querySelectorAll('.medex-guide-target').forEach(function(x){x.classList.remove('medex-guide-target');});
+        if(typeof exam!=='undefined'&&exam&&!exam.submitted){if(root)close();return;}
+        if(!currentUser&&(!getVisitorName()||!getSelectedSemester()))return;
+        ensureHelp();
+        if(st.active){if(!root)show(st.i);else{clearTimeout(placeT);placeT=setTimeout(place,60);}return;}
+        if(!st.done){
+          if(!started&&v==='dashboard'){started=true;setTimeout(function(){if(!st.done&&!st.active&&viewNow()==='dashboard')show(0);},500);}
+          return;
+        }
+        maybeTip(v);
+      }catch(e){console.warn('Guide error:',e&&e.message);}
+    };
+    window.openMedExGuide=restart;
+    ensureHelp();
+  }catch(e){console.warn('Guide v3 skipped:',e&&e.message);}
+})();
+</script>
+
 </body>
 </html>
