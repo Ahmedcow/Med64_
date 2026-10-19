@@ -3893,10 +3893,25 @@ async function loadPublicFlashcards(force=false){
   if(publicFlashcardsLoading)return false;
   publicFlashcardsLoading=true;publicFlashcardsLastAttempt=Date.now();publicFlashcardsError='';
   try{
-    const {data,error}=await supabaseClient.from('flashcards_public')
-      .select('id,front,back,module,subject,lecture,tags,deck,semester,created_at,updated_at')
-      .eq('active',true).order('created_at',{ascending:true});
-    if(error){publicFlashcardsError=error.message||'Supabase query failed.';console.warn('Public flashcards load failed:',error);return false;}
+    // Page through the table (Supabase returns at most ~1000 rows per request) and treat active=null as active.
+    const data=[],FC_PAGE=500;
+    for(let from=0,guard=0;guard<200;guard++,from+=FC_PAGE){
+      let res=null;
+      for(let t=0;t<3;t++){
+        res=await supabaseClient.from('flashcards_public')
+          .select('id,front,back,module,subject,lecture,tags,deck,semester,created_at,updated_at')
+          .or('active.eq.true,active.is.null')
+          .order('created_at',{ascending:true}).order('id',{ascending:true})
+          .range(from,from+FC_PAGE-1);
+        if(!res.error)break;
+        await new Promise(r=>setTimeout(r,400*(t+1)));
+      }
+      if(res.error){publicFlashcardsError=res.error.message||'Supabase query failed.';console.warn('Public flashcards load failed:',res.error);return false;}
+      const rows=res.data||[];
+      data.push(...rows);
+      if(rows.length<FC_PAGE)break;
+    }
+    window.__medexFlashcardLoadInfo={fetched:data.length};
     const remote=(data||[]).map(c=>({id:String(c.id),front:String(c.front||''),back:String(c.back||''),module:String(c.module||''),subject:String(c.subject||''),lecture:String(c.lecture||''),tags:Array.isArray(c.tags)?c.tags.join(', '):String(c.tags||''),deck:String(c.deck||''),semester:c.semester==null?null:Number(c.semester),source:'public',createdAt:c.created_at?Date.parse(c.created_at):Date.now(),updatedAt:c.updated_at?Date.parse(c.updated_at):Date.now()})).filter(c=>c.front&&c.back);
     const locals=flashcardCards.filter(c=>c.source!=='public');
     const byId=new Map(remote.map(c=>[c.id,c]));
@@ -4044,7 +4059,7 @@ function saveFlashcardState(){try{safeSetItem(CONFIG.flashcardStateKey,JSON.stri
 function flashcardScopeCards(filters=flashcardFilter){
   let list=flashcardCards.filter(c=>c&&c.front&&c.back);
   const sem=getSelectedSemester();
-  if(sem&&!isAdmin)list=list.filter(c=>c.source==='public'?Number(c.semester)===Number(sem):(!c.semester||Number(c.semester)===Number(sem)));
+  if(sem&&!isAdmin)list=list.filter(c=>(!c.semester||Number(c.semester)===Number(sem)));
   if(filters.module)list=list.filter(c=>String(c.module||'')===String(filters.module));
   if(filters.subject)list=list.filter(c=>String(c.subject||'')===String(filters.subject));
   if(filters.lecture)list=list.filter(c=>String(c.lecture||'')===String(filters.lecture));
