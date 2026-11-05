@@ -1,11 +1,10 @@
-/* MedEx service worker — v42.8
- * Fixes vs v41.62:
- *  - Runtime trimming no longer evicts the app shell (separate caches).
- *  - cdnjs.cloudflare.com (pdf.js / pdf-lib) is now cached for offline reading.
- *  - Manifest + icons are precached; offline navigation falls back to the shell.
- *  - Cache name is a single constant to bump on release.
+/* MedEx service worker — v46.1
+ * v46.1: 3D heart section removed from the app (view, nav button, styles, scripts, heart-bp3d.bin); old caches are dropped on activate.
+ *
+ * Changes vs v43.0:
+ *  - Previous behaviour kept: separate shell/runtime caches, CDN caching, offline navigation fallback.
  */
-const VERSION='v42.8';
+const VERSION='v46.1';
 const SHELL_CACHE='medex-shell-'+VERSION;
 const RUNTIME_CACHE='medex-runtime-'+VERSION;
 const SHELL=['./','./index.html','./manifest.webmanifest','./icons/medex-192.png','./icons/medex-512.png'];

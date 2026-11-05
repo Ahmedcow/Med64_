@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/medex-192.png">
 <link rel="apple-touch-icon" href="./icons/medex-512.png">
 <title>MedEX — Medical Examination Platform</title>
-<meta name="medex-build" content="v42.6-flashcards-tour">
+<meta name="medex-build" content="v43.2-no-3d-heart">
 
 <!-- Vercel Web Analytics: enabled when deployed on Vercel -->
 <script>
@@ -3559,7 +3559,7 @@ function examAIHTML(q, answered){
     ? `<button class="btn" onclick="examAIQuick('explain-answer')">Explain my answer</button><button class="btn" onclick="examAIQuick('explain-correct')">Explain the correct answer</button>`
     : `<button class="btn" onclick="examAIQuick('explain-without-answer')">Explain without giving the answer</button><button class="btn" onclick="examAIQuick('hint')">Give me a hint</button>`;
   const log=examAI.messages.length
-    ? examAI.messages.map(m=>`<div class="chat-msg ${m.role==='ai'?'ai':m.role==='error'?'error':'user'}">${esc(m.text)}</div>`).join('')
+    ? examAI.messages.map(m=>`<div class="chat-msg ${m.role==='ai'?'ai':m.role==='error'?'error':'user'}">${esc(m.role==='ai'?plainAIText(m.text):m.text)}</div>`).join('')
     : `<div class="empty" style="padding:22px 8px">Ask about this question before or after answering. Before you answer, AI can explain the concept or give a hint without revealing the answer.</div>`;
   return `<div class="exam-ai-wrap" id="examAI">
     <div class="exam-ai-trigger"><div><strong>AI explanation for this question</strong><div class="mini">${answered?'You have answered — ask AI to explain your reasoning or the correct answer.':'Not answered yet — ask for a concept explanation or hint without revealing the answer.'}</div></div>${examAIButtonForPanel()}</div>
@@ -3626,7 +3626,7 @@ async function sendExamAIPrompt(prompt){
   examAIBusy=true;
   renderQuiz();
   try{
-    const contents=[{role:'user',parts:[{text:`Answer in ordinary readable text. Do not return JSON or code. Use short paragraphs or bullets when useful.\n\n${prompt}`}]}];
+    const contents=[{role:'user',parts:[{text:`Answer in plain readable text like a friendly tutor. Do NOT use markdown or special symbols: no asterisks, no # headings, no tables, no backticks, no LaTeX or backslash notation, no parenthesised formulas. Write normal sentences and short paragraphs, and use simple lines starting with a dash when a list helps. Do not return JSON or code.\n\n${prompt}`}]}];
     const reply=await callAI(contents,{maxOutputTokens:1800,responseMimeType:'text/plain'},{provider:'groq',model:'openai/gpt-oss-120b',accessCode:aiSettings.accessCode||''});
     examAIPush('ai',formatAIChatReply(reply));
   }catch(e){
@@ -5878,7 +5878,7 @@ function updateAIGeneratorSourceUI(){
 function aiChatTabHTML(){
   return `<div class="card">
     <div class="category-head"><strong>Ask AI anything</strong>${aiChat.length?'<button class="btn" onclick="clearAIChat()">Clear chat</button>':''}</div>
-    <div class="chat-log" id="chatLog" style="margin-top:12px">${aiChat.length?aiChat.map(m=>`<div class="chat-msg ${m.role==='ai'?'ai':m.role==='error'?'error':'user'}">${esc(m.text)}</div>`).join(''):'<div class="empty">Ask a medical or exam-prep question to get started.</div>'}</div>
+    <div class="chat-log" id="chatLog" style="margin-top:12px">${aiChat.length?aiChat.map(m=>`<div class="chat-msg ${m.role==='ai'?'ai':m.role==='error'?'error':'user'}">${esc(m.role==='ai'?plainAIText(m.text):m.text)}</div>`).join(''):'<div class="empty">Ask a medical or exam-prep question to get started.</div>'}</div>
     <div class="chat-input-row">
       <textarea id="chatInput" placeholder="Ask anything…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAIChat();}"></textarea>
       <button class="btn primary" id="chatSendBtn" onclick="sendAIChat()">Send</button>
@@ -5894,7 +5894,27 @@ function saveAISettings(){
   toast(`AI provider saved: ${aiProviderLabel(aiSettings.provider)}.`,'ok');
 }
 
-function formatAIChatReply(reply){
+function plainAIText(input){
+  let t=String(input==null?'':input).replace(/\r\n?/g,'\n');
+  t=t.replace(/```[a-z]*\n?([\s\S]*?)```/gi,'$1');                       // code fences
+  t=t.replace(/\\\[([\s\S]*?)\\\]/g,'$1').replace(/\\\(([\s\S]*?)\\\)/g,'$1').replace(/\$\$([\s\S]*?)\$\$/g,'$1'); // LaTeX delimiters
+  t=t.replace(/\\text\{([^}]*)\}/g,'$1').replace(/\\mathrm\{([^}]*)\}/g,'$1').replace(/\\(?:rightarrow|to|Rightarrow)\b/g,'→').replace(/\\leftarrow\b/g,'←').replace(/\\uparrow\b/g,'↑').replace(/\\downarrow\b/g,'↓').replace(/\\(?:times|cdot)\b/g,'×').replace(/\\(?:geq?|ge)\b/g,'≥').replace(/\\(?:leq?|le)\b/g,'≤').replace(/\\approx\b/g,'≈').replace(/\\%/g,'%').replace(/\\_/g,'_').replace(/\\,|\;|\\!|\\ /g,' ');
+  t=t.replace(/\^\{([^}]*)\}/g,'^$1').replace(/_\{([^}]*)\}/g,'_$1');
+  t=t.replace(/!\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g,'$1 ($2)'); // images, links
+  t=t.replace(/^\s{0,3}#{1,6}\s*(.+?)\s*#*\s*$/gm,'$1');                 // headings
+  t=t.replace(/^[ \t]*([-*_])(?:[ \t]*\1){2,}[ \t]*$/gm,'');                      // horizontal rules
+  t=t.replace(/^\s*>\s?/gm,'');                                          // quotes
+  t=t.replace(/^(\s*)[*+-]\s+/gm,'$1• ');                                // bullets
+  t=t.replace(/\*\*\*([^*\n]+)\*\*\*/g,'$1').replace(/\*\*([^*\n]+)\*\*/g,'$1').replace(/__([^_\n]+)__/g,'$1');   // bold
+  t=t.replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,;:!?]|$)/g,'$1$2').replace(/(^|[\s(])_([^_\n]+)_(?=[\s).,;:!?]|$)/g,'$1$2'); // italics
+  t=t.replace(/`([^`\n]+)`/g,'$1').replace(/~~([^~\n]+)~~/g,'$1');
+  // tables: drop separator rows, turn pipes into separators
+  t=t.replace(/^[ \t]*\|?[ \t]*:?-{2,}:?[ \t]*(\|[ \t]*:?-{2,}:?[ \t]*)*\|?[ \t]*$/gm,'');
+  t=t.replace(/^[ \t]*\|(.+)\|[ \t]*$/gm,(m,r)=>r.split('|').map(c=>c.trim()).filter(Boolean).join(' – '));
+  t=t.replace(/\*\*/g,'').replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n');
+  return t.trim();
+}
+function formatAIChatReplyRaw(reply){
   let text=String(reply||'').trim();
   if(!text)return text;
   // Remove accidental markdown code fences around a response.
@@ -5925,6 +5945,8 @@ function formatAIChatReply(reply){
   }catch(e){}
   return text;
 }
+
+function formatAIChatReply(reply){return plainAIText(formatAIChatReplyRaw(reply));}
 
 function parseAIQuestionJSON(text){
   let cleaned=String(text||'').trim();
@@ -6112,7 +6134,7 @@ async function sendAIChat(){
     const contents=aiChat.filter(m=>m.role==='user'||m.role==='ai').map(m=>({
       role:m.role==='ai'?'model':'user',
       parts:[{text:m.role==='user'
-        ? `Answer the user's message in ordinary, readable text. Do NOT return JSON, JSON arrays, code blocks, or a machine-readable object. Use normal sentences, short paragraphs, and bullet points when useful. If the user asks for an explanation, explain it clearly rather than formatting it as JSON.\n\nUser message:\n${m.text}`
+        ? `Answer the user's message in plain, readable text like a friendly tutor, with no markdown or special symbols (no asterisks, no # headings, no tables, no backticks, no LaTeX or backslash notation). Do NOT return JSON, JSON arrays, code blocks, or a machine-readable object. Use normal sentences, short paragraphs, and bullet points when useful. If the user asks for an explanation, explain it clearly rather than formatting it as JSON.\n\nUser message:\n${m.text}`
         : m.text}]
     }));
     const previousProvider=aiSettings.provider, previousModel=aiSettings.model; aiSettings.provider='groq'; aiSettings.model='openai/gpt-oss-120b'; const reply=await callAI(contents,{maxOutputTokens:4096,responseMimeType:'text/plain'}); aiSettings.provider=previousProvider; aiSettings.model=previousModel;
@@ -6385,7 +6407,7 @@ if('serviceWorker' in navigator){
 if('serviceWorker' in navigator){
   window.addEventListener('load',async()=>{
     try{
-      const registration=await navigator.serviceWorker.register(new URL('./sw.js?v=42.6',document.baseURI),{scope:new URL('./',document.baseURI).pathname});
+      const registration=await navigator.serviceWorker.register(new URL('./sw.js?v=44.0',document.baseURI),{scope:new URL('./',document.baseURI).pathname});
       watchPWARegistration(registration);
       registration.update().catch(()=>{});
     }catch(e){ console.warn('PWA service worker:',e); }
@@ -7334,6 +7356,7 @@ body:has(.quiz) .mt-help,body:has(#visitorStartName) .mt-help,body:has(.quiz) .m
   }catch(e){console.warn('Guide v3 skipped:',e&&e.message);}
 })();
 </script>
+
 
 </body>
 </html>
